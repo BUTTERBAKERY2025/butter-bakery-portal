@@ -24,6 +24,8 @@
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-primary-border: var(--primary-border);
 
+  --color-dark-section: hsl(var(--dark-section));
+
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-secondary-border: var(--secondary-border);
@@ -52,7 +54,8 @@
 
 :root {
   --background: 40 40% 98%;
-  --foreground: 20 46% 12%;
+  --foreground: 20 15% 10%;
+  --dark-section: 20 80% 18%;
   --border: 35 30% 85%;
   --input: 35 30% 85%;
   --ring: 22 90% 52%;

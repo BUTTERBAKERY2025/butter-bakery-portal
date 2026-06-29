@@ -3,7 +3,7 @@ import logoBb from "@/assets/real/logo-bb.jpg";
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background py-24 border-t border-white/10" id="contact">
+    <footer className="bg-dark-section text-background py-24 border-t border-white/10" id="contact">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
 

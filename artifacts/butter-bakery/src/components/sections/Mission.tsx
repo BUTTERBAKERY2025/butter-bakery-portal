@@ -11,7 +11,7 @@ export function Mission() {
           alt="Butter Bakery — signature berry basket pastry"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-foreground/85" />
+        <div className="absolute inset-0 bg-dark-section/90" />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/85 to-foreground/95" />
       </div>
 
