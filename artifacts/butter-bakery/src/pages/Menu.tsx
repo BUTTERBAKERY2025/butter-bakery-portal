@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
 import logoBb from "@/assets/real/logo-bb.jpg";
@@ -19,7 +19,6 @@ interface MenuCategory {
   en: string;
   descAr: string;
   descEn: string;
-  dark?: boolean;
   items: MenuItem[];
 }
 
@@ -28,12 +27,12 @@ const MENU: MenuCategory[] = [
     idKey: "hot",
     ar: "المشروبات الحارة",
     en: "Hot Drinks",
-    descAr: "قهوة مختصة محضّرة يومياً بحبوب كولومبية مختارة",
-    descEn: "Specialty coffee prepared daily with selected Colombian beans",
+    descAr: "قهوة مختصة بحبوب كولومبية مختارة",
+    descEn: "Specialty coffee with selected Colombian beans",
     items: [
       { ar: "اسبريسو", en: "Espresso", price: 11 },
       { ar: "أمريكانو", en: "Americano", price: 12 },
-      { ar: "كوفي داي", en: "Coffee Day", price: 12.73, note: "Colombian beans" },
+      { ar: "كوفي داي", en: "Coffee Day", price: 12.73, note: "Colombian" },
       { ar: "V60 بور أوفر", en: "V60 Pour-Over", price: 19, signature: true },
       { ar: "التيه", en: "Latte", price: 16 },
       { ar: "فلت وايت", en: "Flat White", price: 15.90 },
@@ -50,11 +49,10 @@ const MENU: MenuCategory[] = [
     idKey: "cold",
     ar: "المشروبات الباردة",
     en: "Cold Drinks",
-    descAr: "مشروبات منعشة بمكونات طازجة كل يوم",
-    descEn: "Refreshing beverages made with fresh daily ingredients",
-    dark: true,
+    descAr: "مشروبات طازجة منعشة",
+    descEn: "Refreshing beverages made fresh daily",
     items: [
-      { ar: "سبشيال أيس أمريكانو", en: "Special Iced Americano", price: 17.91 },
+      { ar: "أيس أمريكانو", en: "Iced Americano", price: 17.91 },
       { ar: "أيس V60", en: "Ice V60", price: 21, signature: true },
       { ar: "أيس V60 وتوت أحمر", en: "Ice V60 & Raspberry", price: 22 },
       { ar: "مشروب الصيف", en: "Summer Drink", price: 21.99 },
@@ -73,8 +71,8 @@ const MENU: MenuCategory[] = [
     idKey: "breakfast",
     ar: "الإفطار",
     en: "Breakfast",
-    descAr: "وجبات إفطار مُعدّة بعناية تستحق لحظة هدوء",
-    descEn: "Carefully crafted breakfast plates worth taking your time over",
+    descAr: "وجبات مُعدّة بعناية تستحق لحظة هدوء",
+    descEn: "Thoughtfully crafted plates worth savouring",
     items: [
       { ar: "جرانوال", en: "Granola Bowl", price: 33 },
       { ar: "اسكرمبل البيض والأفوكادو", en: "Scrambled Eggs & Avocado", price: 37 },
@@ -101,9 +99,8 @@ const MENU: MenuCategory[] = [
     idKey: "salads",
     ar: "السلطات",
     en: "Salads",
-    descAr: "خضروات طازجة بتوليفات متوسطية وعربية",
-    descEn: "Fresh greens in Mediterranean and regional blends",
-    dark: true,
+    descAr: "خضروات طازجة بتوليفات متوسطية",
+    descEn: "Fresh greens in Mediterranean blends",
     items: [
       { ar: "سلطة شمندر", en: "Beetroot Salad", price: 16 },
       { ar: "سلطة باربكيو الحلومي", en: "Halloumi BBQ Salad", price: 35, signature: true },
@@ -114,8 +111,8 @@ const MENU: MenuCategory[] = [
     idKey: "pastries",
     ar: "المخبوزات",
     en: "Pastries",
-    descAr: "معجنات تُخبز يومياً بزبدة فرنسية وعجائن طازجة",
-    descEn: "Baked fresh daily with French butter and housemade doughs",
+    descAr: "معجنات تُخبز يومياً بزبدة فرنسية",
+    descEn: "Baked fresh daily with French butter",
     items: [
       { ar: "كرواسون سادة", en: "Plain Croissant", price: 17 },
       { ar: "كرواسون شوكوالته", en: "Chocolate Croissant", price: 22 },
@@ -128,7 +125,7 @@ const MENU: MenuCategory[] = [
       { ar: "دانش كريمة فرنسية", en: "French Cream Danish", price: 27 },
       { ar: "دانش التيني", en: "Fig Danish", price: 26 },
       { ar: "دانش بيستو", en: "Pesto Danish", price: 21.56 },
-      { ar: "دانش شمر تشيز وطماطم مجففة", en: "Fennel Cheese Danish", price: 21.56 },
+      { ar: "دانش شمر تشيز", en: "Fennel Cheese Danish", price: 21.56 },
       { ar: "مفن الشوكوالته", en: "Chocolate Muffin", price: 19.90 },
       { ar: "مفن القهوة", en: "Coffee Muffin", price: 19.90 },
       { ar: "دونت بيكان", en: "Pecan Donut", price: 11.90 },
@@ -142,8 +139,7 @@ const MENU: MenuCategory[] = [
     ar: "الخبز",
     en: "Artisan Bread",
     descAr: "خبز حرفي يُعجن ويُخبز في المخبز كل صباح",
-    descEn: "Artisan loaves kneaded and baked in-house every morning",
-    dark: true,
+    descEn: "Kneaded and baked in-house every morning",
     items: [
       { ar: "الباجيت الفرنسي", en: "French Baguette", price: 14 },
       { ar: "قالب خبز الساوردو", en: "Sourdough Loaf", price: 37, signature: true },
@@ -158,8 +154,8 @@ const MENU: MenuCategory[] = [
     idKey: "desserts",
     ar: "الحلا",
     en: "Desserts",
-    descAr: "حلويات فاخرة تُصنع بأجود الشوكولاتة والكريمة الفرنسية",
-    descEn: "Decadent sweets crafted with premium chocolate and French cream",
+    descAr: "حلويات فاخرة بأجود الشوكولاتة والكريمة الفرنسية",
+    descEn: "Indulgent sweets crafted with premium chocolate and cream",
     items: [
       { ar: "بي بي كيك", en: "B.B Signature Cake", price: 27.90, signature: true },
       { ar: "كيكة العسل", en: "Honey Cake", price: 27.90, signature: true },
@@ -181,9 +177,8 @@ const MENU: MenuCategory[] = [
     idKey: "pizza",
     ar: "البتزا النابولية",
     en: "Neapolitan Pizza",
-    descAr: "عجينة نابولية أصيلة تُفرد وتُشوى في فرن الحجر",
-    descEn: "Authentic Neapolitan dough stretched thin and stone-baked",
-    dark: true,
+    descAr: "عجينة نابولية أصيلة تُشوى في فرن الحجر",
+    descEn: "Authentic dough stretched thin and stone-baked",
     items: [
       { ar: "مارجريتا", en: "Margherita", price: 55 },
       { ar: "سبشيال هوت تشكن", en: "Special Hot Chicken", price: 63 },
@@ -198,8 +193,8 @@ const MENU: MenuCategory[] = [
     idKey: "gathering",
     ar: "طلبات المجموعات",
     en: "Gathering",
-    descAr: "طقوس البتر بيكري للقاءات الخاصة وجلسات الأحبة",
-    descEn: "Butter Bakery rituals for special gatherings and intimate moments",
+    descAr: "طقوس بتر بيكري للقاءات الخاصة وجلسات الأحبة",
+    descEn: "Butter Bakery rituals for special gatherings",
     items: [
       { ar: "ماتيلدا كرواسون", en: "Matilda Croissant", price: 54, signature: true },
       { ar: "كيكة العسل مع القهوة", en: "Honey Cake & Coffee", price: 89, signature: true },
@@ -209,15 +204,52 @@ const MENU: MenuCategory[] = [
   },
 ];
 
-const SIGNATURE_PICKS = [
-  { ar: "V60 بور أوفر", en: "V60 Pour-Over", price: 19, cat: "hot" },
-  { ar: "كوكيز كرواسون", en: "Cookie Croissant", price: 27, cat: "pastries" },
-  { ar: "بيض ترافل", en: "Truffle Eggs", price: 31.90, cat: "breakfast" },
-  { ar: "بي بي كيك", en: "B.B Signature Cake", price: 27.90, cat: "desserts" },
-  { ar: "ترافل بيتزا", en: "Truffle Pizza", price: 69, cat: "pizza" },
-  { ar: "سبانش التيه", en: "Spanish Latte", price: 18.90, cat: "hot" },
-  { ar: "كيكة العسل مع القهوة", en: "Honey Cake & Coffee", price: 89, cat: "gathering" },
-];
+function ItemRow({ item, isAr, isLast }: { item: MenuItem; isAr: boolean; isLast: boolean }) {
+  const price = Number.isInteger(item.price) ? `${item.price}` : item.price.toFixed(2);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-4%" }}
+      transition={{ duration: 0.35 }}
+      className={`group flex items-center gap-3 py-4 ${!isLast ? "border-b border-[#e8e3db]" : ""}`}
+    >
+      {/* Signature dot */}
+      <div className="shrink-0 w-4 flex justify-center">
+        {item.signature && (
+          <div className="w-1 h-1 rounded-full bg-primary mt-0.5" />
+        )}
+      </div>
+
+      {/* Name block */}
+      <div className="flex-1 min-w-0">
+        <div className={`flex items-baseline gap-2.5 ${isAr ? "flex-row" : "flex-row"}`}>
+          <span className="text-[15px] font-medium text-[#1a1009] group-hover:text-primary transition-colors duration-200 leading-snug">
+            {isAr ? item.ar : item.en}
+          </span>
+          <span className="text-xs text-[#b5a898] font-light shrink-0">
+            {isAr ? item.en : item.ar}
+          </span>
+          {item.note && (
+            <span className="text-[10px] px-1.5 py-0.5 bg-primary/8 text-primary/70 rounded font-light shrink-0">
+              {item.note}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Leader */}
+      <div className="hidden sm:block flex-1 max-w-24 border-b border-dotted border-[#d5cec5]" />
+
+      {/* Price */}
+      <div className="shrink-0 flex items-baseline gap-1 tabular-nums">
+        <span className="font-serif text-[22px] font-medium text-primary leading-none">{price}</span>
+        <span className="text-[10px] text-[#b5a898]">ر.س</span>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Menu() {
   const { lang, toggleLang, isAr } = useLang();
@@ -236,7 +268,7 @@ export default function Menu() {
       if (!el) return;
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveId(idKey); },
-        { rootMargin: "-25% 0px -65% 0px" }
+        { rootMargin: "-20% 0px -70% 0px" }
       );
       obs.observe(el);
       observers.push(obs);
@@ -247,130 +279,104 @@ export default function Menu() {
   const scrollTo = (idKey: string) => {
     const el = sectionRefs.current[idKey];
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: "smooth" });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: "smooth" });
   };
 
   const BackArrow = isAr ? ArrowRight : ArrowLeft;
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] text-foreground" dir={isAr ? "rtl" : "ltr"}>
+    <div className="min-h-screen" style={{ background: "#faf9f7", color: "#1a1009" }} dir={isAr ? "rtl" : "ltr"}>
 
-      {/* ─── Top bar ─── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#faf8f5]/95 backdrop-blur-sm border-b border-border/30">
-        <div className="px-6 md:px-10 py-3.5 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group text-foreground/40 hover:text-primary transition-colors text-xs uppercase tracking-widest">
-            <BackArrow className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+      {/* ── Top bar ── */}
+      <header style={{ background: "rgba(250,249,247,0.96)" }} className="fixed top-0 inset-x-0 z-50 backdrop-blur-sm border-b border-[#ebe5dc]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#9e8f82] hover:text-primary transition-colors duration-200">
+            <BackArrow className="w-3.5 h-3.5" />
             {isAr ? "الرئيسية" : "Home"}
           </Link>
           <Link href="/" className="flex items-center gap-2.5 absolute left-1/2 -translate-x-1/2">
-            <div className="w-8 h-8 overflow-hidden rounded-sm ring-1 ring-border/60">
-              <img src={logoBb} alt="Butter Bakery" className="w-full h-full object-cover" />
-            </div>
-            <span className="font-serif text-sm font-bold tracking-wider text-foreground/80 hidden sm:block">BUTTER BAKERY</span>
+            <img src={logoBb} alt="Butter Bakery" className="w-8 h-8 object-cover rounded-sm" />
+            <span className="font-serif text-[13px] font-semibold tracking-widest text-[#2d1a0e] hidden sm:block">BUTTER BAKERY</span>
           </Link>
-          <button onClick={toggleLang} className="text-[10px] font-medium tracking-widest px-3 py-1.5 border border-border/50 text-foreground/40 hover:border-primary hover:text-primary transition-all duration-300">
+          <button onClick={toggleLang} className="text-[10px] font-medium tracking-widest px-3 py-1.5 border border-[#d5cec5] text-[#9e8f82] hover:border-primary hover:text-primary transition-all duration-300 rounded-sm">
             {lang === "en" ? "عربي" : "EN"}
           </button>
         </div>
       </header>
 
-      {/* ─── Hero ─── */}
-      <section className="relative pt-16 bg-dark-section text-background overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)", backgroundSize: "32px 32px" }} />
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col md:flex-row items-end justify-between gap-0 container mx-auto px-6 md:px-10 pt-20 pb-0">
-          <div className="pb-16">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <p className="text-primary text-[10px] font-semibold uppercase tracking-[0.45em] mb-6">
-                {isAr ? "بتر بيكري — القائمة الكاملة" : "Butter Bakery — Full Menu"}
-              </p>
-              <h1 className="font-serif text-7xl md:text-[9rem] font-medium text-white leading-none mb-6">
-                {isAr ? "القائمة" : "Menu"}
-              </h1>
-              <p className="text-background/45 font-light text-sm max-w-xs leading-relaxed">
+      {/* ── Hero ── */}
+      <section className="pt-14 bg-[#2d1a0e] text-white relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,95,30,0.12) 0%, transparent 70%)" }} />
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
+            <p className="text-primary text-[10px] font-semibold uppercase tracking-[0.45em] mb-8">
+              {isAr ? "بتر بيكري — القائمة الكاملة" : "Butter Bakery — Full Menu"}
+            </p>
+            <h1 className="font-serif font-medium leading-none mb-8" style={{ fontSize: "clamp(64px, 12vw, 144px)" }}>
+              {isAr ? "القائمة" : "Menu"}
+            </h1>
+            <div className="flex flex-wrap gap-6 items-center">
+              <p className="text-white/40 text-sm font-light max-w-xs leading-relaxed">
                 {isAr
-                  ? "كل ما في القائمة يُخبز ويُحضَّر يومياً بأيدي متخصصة ومواد خام مختارة"
-                  : "Everything here is freshly prepared daily with specialist hands and carefully selected ingredients"}
+                  ? "يُخبز ويُحضَّر يومياً بأيدي متخصصة ومواد خام مختارة"
+                  : "Freshly prepared daily with specialist hands and selected ingredients"}
               </p>
-            </motion.div>
-          </div>
-
-          {/* Signature picks scroll */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="w-full md:w-auto pb-0 overflow-x-auto scrollbar-hide"
-          >
-            <div className="flex md:flex-col gap-px min-w-max md:min-w-0 border-t md:border-t-0 md:border-l border-white/10">
-              <div className="px-6 py-3 md:py-2">
-                <p className="text-[9px] uppercase tracking-[0.35em] text-white/25">
-                  {isAr ? "اختيارات مميزة" : "Signature picks"}
-                </p>
+              <div className="flex items-center gap-3 text-[10px] text-white/20 uppercase tracking-[0.25em]">
+                <span className="w-1 h-1 rounded-full bg-primary inline-block" />
+                {isAr ? "النقطة الذهبية = صنف مميز" : "Gold dot = Signature item"}
               </div>
-              {SIGNATURE_PICKS.map((pick, i) => (
-                <button
-                  key={i}
-                  onClick={() => scrollTo(pick.cat)}
-                  className="flex items-center justify-between gap-8 px-6 py-2.5 md:py-3 hover:bg-white/5 transition-colors group text-left border-t border-white/5"
-                >
-                  <span className="text-xs text-white/60 group-hover:text-white transition-colors whitespace-nowrap">
-                    {isAr ? pick.ar : pick.en}
-                  </span>
-                  <span className="font-serif text-sm text-primary/80 group-hover:text-primary transition-colors shrink-0">
-                    {pick.price} <span className="text-[10px] text-white/20">SAR</span>
-                  </span>
-                </button>
-              ))}
             </div>
           </motion.div>
         </div>
+        {/* Wave bottom */}
+        <div className="h-10 bg-[#faf9f7]" style={{ clipPath: "ellipse(55% 100% at 50% 100%)" }} />
       </section>
 
-      {/* ─── Main layout ─── */}
-      <div className="flex min-h-screen">
+      {/* ── Body ── */}
+      <div className="max-w-7xl mx-auto flex gap-0 pt-6 pb-24">
 
-        {/* Sidebar — desktop only */}
-        <aside className="hidden lg:flex flex-col w-52 shrink-0 sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto border-e border-border/40 bg-[#faf8f5] py-8">
-          <p className="px-6 text-[9px] uppercase tracking-[0.4em] text-foreground/25 mb-5">
-            {isAr ? "الأقسام" : "Sections"}
-          </p>
-          <nav className="flex flex-col">
-            {MENU.map((cat, i) => (
-              <button
-                key={cat.idKey}
-                onClick={() => scrollTo(cat.idKey)}
-                className={`group flex items-center gap-3 px-6 py-3 text-left transition-all duration-200 border-e-2 ${
-                  activeId === cat.idKey
-                    ? "border-primary text-primary bg-primary/4"
-                    : "border-transparent text-foreground/40 hover:text-foreground/70 hover:bg-foreground/3"
-                }`}
-              >
-                <span className={`text-[10px] font-mono tabular-nums transition-colors ${activeId === cat.idKey ? "text-primary" : "text-foreground/20"}`}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-xs font-medium tracking-wide">
-                  {isAr ? cat.ar : cat.en}
-                </span>
-              </button>
-            ))}
-          </nav>
+        {/* Sidebar */}
+        <aside className="hidden lg:block w-52 shrink-0">
+          <div className="sticky top-20 py-4">
+            <p className="px-6 text-[9px] uppercase tracking-[0.4em] text-[#c0b5a8] mb-4">
+              {isAr ? "الأقسام" : "Sections"}
+            </p>
+            <nav>
+              {MENU.map((cat, i) => (
+                <button
+                  key={cat.idKey}
+                  onClick={() => scrollTo(cat.idKey)}
+                  className={`w-full flex items-center gap-3 px-6 py-2.5 text-left transition-all duration-200 group ${
+                    activeId === cat.idKey ? "text-primary" : "text-[#9e8f82] hover:text-[#4a3020]"
+                  }`}
+                >
+                  <span className={`text-[10px] font-mono tabular-nums transition-colors ${activeId === cat.idKey ? "text-primary" : "text-[#c0b5a8] group-hover:text-[#9e8f82]"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className={`text-xs font-medium tracking-wide border-b transition-all duration-200 ${activeId === cat.idKey ? "border-primary pb-0.5" : "border-transparent"}`}>
+                    {isAr ? cat.ar : cat.en}
+                  </span>
+                </button>
+              ))}
+            </nav>
+          </div>
         </aside>
 
-        {/* Content */}
-        <main className="flex-1 min-w-0">
+        {/* Vertical divider */}
+        <div className="hidden lg:block w-px bg-[#ebe5dc] mx-0 shrink-0 self-stretch" />
 
-          {/* Mobile category tabs */}
-          <div className="lg:hidden sticky top-[57px] z-40 bg-[#faf8f5]/95 backdrop-blur-sm border-b border-border/30 overflow-x-auto scrollbar-hide">
-            <div className="flex min-w-max px-4">
+        {/* Content */}
+        <main className="flex-1 min-w-0 px-0 lg:ps-12 lg:pe-4">
+
+          {/* Mobile tabs */}
+          <div className="lg:hidden sticky top-14 z-40 -mx-6 px-4 bg-[#faf9f7]/96 backdrop-blur-sm border-b border-[#ebe5dc] overflow-x-auto scrollbar-hide mb-8">
+            <div className="flex min-w-max">
               {MENU.map((cat) => (
                 <button
                   key={cat.idKey}
                   onClick={() => scrollTo(cat.idKey)}
-                  className={`px-3.5 py-3.5 text-[10px] font-medium uppercase tracking-widest whitespace-nowrap transition-all border-b-2 ${
-                    activeId === cat.idKey ? "border-primary text-primary" : "border-transparent text-foreground/35 hover:text-foreground/60"
+                  className={`px-3 py-3.5 text-[10px] font-medium uppercase tracking-widest whitespace-nowrap transition-all border-b-2 ${
+                    activeId === cat.idKey ? "border-primary text-primary" : "border-transparent text-[#9e8f82]"
                   }`}
                 >
                   {isAr ? cat.ar : cat.en}
@@ -384,106 +390,72 @@ export default function Menu() {
               key={cat.idKey}
               id={cat.idKey}
               ref={(el) => { sectionRefs.current[cat.idKey] = el; }}
-              className={cat.dark ? "bg-dark-section text-background" : "bg-[#faf8f5] text-foreground"}
+              className="mb-20"
             >
               {/* Category header */}
-              <div className="relative overflow-hidden px-8 md:px-14 pt-16 pb-10">
-                {/* Ghost number watermark */}
-                <span className={`absolute -top-4 ${isAr ? "right-6" : "left-6"} font-serif text-[10rem] md:text-[14rem] font-bold leading-none select-none pointer-events-none ${cat.dark ? "text-white/3" : "text-foreground/4"}`}>
-                  {String(catIdx + 1).padStart(2, "0")}
-                </span>
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between gap-4 flex-wrap mb-2">
-                    <div>
-                      <p className="text-primary text-[10px] font-semibold uppercase tracking-[0.4em] mb-3">
-                        {String(catIdx + 1).padStart(2, "0")} / {cat.en}
-                      </p>
-                      <h2 className="font-serif text-4xl md:text-5xl font-medium leading-none">
-                        {isAr ? cat.ar : cat.en}
-                      </h2>
-                    </div>
-                  </div>
-                  <p className={`text-sm font-light mt-4 max-w-sm leading-relaxed ${cat.dark ? "text-background/40" : "text-foreground/40"}`}>
-                    {isAr ? cat.descAr : cat.descEn}
-                  </p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="mb-8"
+              >
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="h-px flex-1 bg-[#ebe5dc]" />
+                  <span className="text-[10px] font-mono text-[#c0b5a8] uppercase tracking-[0.3em]">
+                    {String(catIdx + 1).padStart(2, "0")}
+                  </span>
+                  <div className="h-px w-6 bg-primary/40" />
                 </div>
-                <div className={`absolute bottom-0 left-8 right-8 h-px ${cat.dark ? "bg-white/8" : "bg-foreground/8"}`} />
-              </div>
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#2d1a0e] leading-none mb-3">
+                  {isAr ? cat.ar : cat.en}
+                </h2>
+                {isAr && (
+                  <p className="text-[12px] text-[#c0b5a8] tracking-wider mb-1">{cat.en}</p>
+                )}
+                <p className="text-sm text-[#9e8f82] font-light mt-2">
+                  {isAr ? cat.descAr : cat.descEn}
+                </p>
+              </motion.div>
 
-              {/* Items */}
-              <div className="px-8 md:px-14 py-6 pb-14">
-                <AnimatePresence>
-                  <div className="divide-y divide-current/5" style={{ '--tw-divide-opacity': '0.06' } as React.CSSProperties}>
-                    {cat.items.map((item, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: isAr ? 12 : -12 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-5%" }}
-                        transition={{ duration: 0.4, delay: Math.min(i * 0.04, 0.3) }}
-                        className={`group flex items-center gap-4 py-4 transition-colors duration-200 ${
-                          cat.dark ? "hover:bg-white/4" : "hover:bg-foreground/3"
-                        } -mx-3 px-3 rounded-sm`}
-                      >
-                        {/* Signature dot */}
-                        <div className="shrink-0 w-1.5 h-1.5">
-                          {item.signature && (
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                          )}
-                        </div>
-
-                        {/* Name */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline gap-3 flex-wrap">
-                            <span className={`font-medium text-base leading-snug transition-colors group-hover:text-primary ${cat.dark ? "text-background/90" : "text-foreground/90"}`}>
-                              {isAr ? item.ar : item.en}
-                            </span>
-                            <span className={`text-xs font-light ${cat.dark ? "text-background/30" : "text-foreground/30"}`}>
-                              {isAr ? item.en : item.ar}
-                            </span>
-                            {item.note && (
-                              <span className={`text-[10px] px-2 py-0.5 border rounded-full ${cat.dark ? "border-white/10 text-white/25" : "border-foreground/10 text-foreground/25"}`}>
-                                {item.note}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Dotted leader */}
-                        <div className={`hidden md:block flex-1 max-w-32 border-b border-dashed ${cat.dark ? "border-white/10" : "border-foreground/10"}`} />
-
-                        {/* Price */}
-                        <div className="shrink-0 text-right">
-                          <span className="font-serif text-2xl font-medium text-primary">
-                            {Number.isInteger(item.price) ? item.price : item.price.toFixed(2)}
-                          </span>
-                          <span className={`text-[10px] ms-1 ${cat.dark ? "text-background/25" : "text-foreground/25"}`}>
-                            ر.س
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </AnimatePresence>
+              {/* Items — 2 columns on wide screens */}
+              <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-x-16">
+                {cat.items.map((item, i) => {
+                  const col = Math.floor(i / Math.ceil(cat.items.length / 2));
+                  const isInFirstCol = col === 0;
+                  const isLastInCol = i === Math.ceil(cat.items.length / 2) - 1 ||
+                    i === cat.items.length - 1;
+                  return (
+                    <ItemRow
+                      key={i}
+                      item={item}
+                      isAr={isAr}
+                      isLast={isLastInCol || i === cat.items.length - 1}
+                    />
+                  );
+                })}
               </div>
             </section>
           ))}
-
-          {/* Footer note */}
-          <div className="bg-dark-section py-12 text-center">
-            <p className="text-background/25 text-[10px] uppercase tracking-[0.4em] mb-2">
-              {isAr ? "جميع الأسعار بالريال السعودي · تشمل الضريبة" : "All prices in Saudi Riyals · VAT included"}
-            </p>
-            <p className="text-background/15 text-[9px] tracking-wider">
-              {isAr ? "الأسعار قابلة للتغيير · قد تختلف الأصناف بين الفروع" : "Prices subject to change · Items may vary by branch"}
-            </p>
-            <div className="mt-8">
-              <Link href="/" className="text-[10px] uppercase tracking-widest text-background/20 hover:text-primary transition-colors">
-                {isAr ? "← الرئيسية" : "← Back to Home"}
-              </Link>
-            </div>
-          </div>
         </main>
+      </div>
+
+      {/* ── Footer ── */}
+      <div className="bg-[#2d1a0e] py-12 text-center">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="h-px w-12 bg-white/10" />
+          <img src={logoBb} alt="" className="w-6 h-6 rounded-sm opacity-40" />
+          <div className="h-px w-12 bg-white/10" />
+        </div>
+        <p className="text-white/25 text-[10px] uppercase tracking-[0.4em] mb-2">
+          {isAr ? "جميع الأسعار بالريال السعودي · تشمل الضريبة" : "All prices in Saudi Riyals · VAT included"}
+        </p>
+        <p className="text-white/15 text-[9px] tracking-wider mb-8">
+          {isAr ? "الأسعار قابلة للتغيير · قد تختلف الأصناف بين الفروع" : "Prices subject to change · Items may vary by branch"}
+        </p>
+        <Link href="/" className="text-[10px] uppercase tracking-widest text-white/20 hover:text-primary transition-colors duration-300">
+          {isAr ? "العودة للرئيسية" : "Back to Home"}
+        </Link>
       </div>
     </div>
   );
