@@ -1,14 +1,15 @@
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50);
-  });
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header
@@ -35,9 +36,9 @@ export function Navbar() {
             { label: "Products", href: "#products" },
             { label: "Locations", href: "#locations" },
           ].map((item) => (
-            <a 
-              key={item.label} 
-              href={item.href} 
+            <a
+              key={item.label}
+              href={item.href}
               className={`text-sm tracking-wide transition-colors duration-300 hover:text-primary ${
                 isScrolled ? "text-foreground/80" : "text-white/90"
               }`}
@@ -48,11 +49,11 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <a 
-            href="#invest" 
+          <a
+            href="#invest"
             className={`text-xs uppercase tracking-widest px-5 py-2.5 border transition-all duration-300 ${
-              isScrolled 
-                ? "border-primary text-primary hover:bg-primary hover:text-white" 
+              isScrolled
+                ? "border-primary text-primary hover:bg-primary hover:text-white"
                 : "border-white/50 text-white hover:bg-white hover:text-foreground"
             }`}
           >
