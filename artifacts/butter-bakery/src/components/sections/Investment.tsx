@@ -27,6 +27,14 @@ const pillars = [
     title: "Strong Brand Identity",
     body: "From the charming streets of Paris to the traditions of Ukraine to the mountains of Asir — a brand built on experience, craft, and emotion. Our customers don't just buy product; they buy identity.",
   },
+  {
+    title: "Ministry of Tourism Partner",
+    body: "Butter Bakery is an active partner of Saudi Arabia's Ministry of Tourism and the 'Spirit of Saudi Arabia' (روح السعودية) program — participating in delivering a premium hospitality experience that expresses the renewed Saudi identity on a national stage.",
+  },
+  {
+    title: "International Chef Team",
+    body: "Quality is no coincidence — it's the result of teamwork led by world-class chefs from France, Italy, Turkey, Asia, and Latin America. They've come together under one roof to innovate, not repeat, every recipe we serve.",
+  },
 ];
 
 export function Investment() {

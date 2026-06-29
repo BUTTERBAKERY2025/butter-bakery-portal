@@ -41,6 +41,7 @@ export function Navbar() {
             { label: "Story", href: "#story" },
             { label: "Products", href: "#products" },
             { label: "Locations", href: "#locations" },
+            { label: "Gallery", href: "#gallery" },
           ].map((item) => (
             <a
               key={item.label}

@@ -116,6 +116,29 @@ export function Story() {
             </div>
           </FadeIn>
         </div>
+
+        {/* International Chef Team */}
+        <FadeIn delay={0.2} direction="up">
+          <div className="mt-16 lg:mt-24 border border-border/40 p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+            <div className="relative z-10">
+              <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">Crafted by the World's Best</p>
+              <h4 className="font-serif text-3xl md:text-4xl text-foreground mb-6">
+                "We don't repeat recipes… we innovate them."
+              </h4>
+              <p className="text-foreground/60 font-light leading-relaxed max-w-3xl mb-8">
+                Quality at Butter Bakery is no coincidence. It's the result of teamwork led by a select group of the world's most skilled chefs — who hail from prestigious kitchens around the globe, bringing with them their expertise, craftsmanship, and passion for detail. Every item we serve carries the signature of a specialist who masters the art of bread and tasting, and translates the culture of their country in the finest way.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {["France 🇫🇷", "Italy 🇮🇹", "Turkey 🇹🇷", "Asia 🌏", "Latin America 🌎", "Ukraine 🇺🇦"].map((origin) => (
+                  <span key={origin} className="text-xs uppercase tracking-[0.15em] px-4 py-2 border border-border/50 text-foreground/50 font-light">
+                    {origin}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

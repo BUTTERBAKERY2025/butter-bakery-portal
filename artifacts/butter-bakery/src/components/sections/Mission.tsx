@@ -1,11 +1,23 @@
 import { FadeIn } from "@/components/ui/fade-in";
+import branchRiyadhCounterImg from "@/assets/real/branch-riyadh-counter.jpg";
 
 export function Mission() {
   return (
-    <section className="py-32 bg-foreground text-background relative overflow-hidden flex items-center justify-center min-h-[70vh]">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+    <section className="relative py-32 text-background overflow-hidden flex items-center justify-center min-h-[70vh]">
+      {/* Real photo background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={branchRiyadhCounterImg}
+          alt="Butter Bakery — Riyadh branch pastry counter"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-foreground/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/85 to-foreground/95" />
+      </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[500px] bg-primary/8 rounded-full blur-[120px] pointer-events-none z-10" />
+
+      <div className="container mx-auto px-6 text-center relative z-20">
         <FadeIn direction="up">
           <div className="inline-flex items-center justify-center mb-10">
             <div className="h-[1px] w-12 bg-primary/50" />
@@ -27,10 +39,10 @@ export function Mission() {
         </FadeIn>
 
         <FadeIn delay={0.4} direction="up">
-          <p className="max-w-2xl mx-auto text-background/70 font-light text-lg md:text-xl leading-relaxed mb-8">
+          <p className="max-w-2xl mx-auto text-background/80 font-light text-lg md:text-xl leading-relaxed mb-8">
             Since its establishment with Ukrainian roots, Butter Bakery's mission has been the same: bring fresh bakeries to your everyday life. We have served customers with passion across Europe, with the goal of expanding into the Middle East — with the same mission and values.
           </p>
-          <p className="max-w-2xl mx-auto text-background/50 font-light text-base md:text-lg leading-relaxed">
+          <p className="max-w-2xl mx-auto text-background/55 font-light text-base md:text-lg leading-relaxed">
             Butter Bakery represents a transformation in the concept of bakeries and cafés in Saudi Arabia — combining advanced European techniques with authentic Saudi taste to create a unique experience aligned with Vision 2030's spirit of development and openness. We employ global expertise in the art of baking to deliver products that stand out in quality, innovative flavors, and meet the aspirations of an evolving Saudi society.
           </p>
         </FadeIn>
