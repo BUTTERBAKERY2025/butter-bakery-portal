@@ -194,6 +194,7 @@ export const translations = {
       branchesTitle: "Our Branches",
       vision: "Proudly aligned with Saudi Arabia's Vision 2030 — contributing to a vibrant society through culinary excellence.",
       copyright: "All rights reserved.",
+      investorRelations: "Investor Relations",
       navLinks: [
         { label: "Our Story", href: "#story" },
         { label: "Products", href: "#products" },
@@ -405,6 +406,7 @@ export const translations = {
       branchesTitle: "فروعنا",
       vision: "نسير بفخر مع رؤية المملكة 2030 — نساهم في مجتمع حيوي من خلال التميز في فن الطهي.",
       copyright: "جميع الحقوق محفوظة.",
+      investorRelations: "علاقات المستثمرين",
       navLinks: [
         { label: "قصتنا", href: "#story" },
         { label: "منتجاتنا", href: "#products" },
