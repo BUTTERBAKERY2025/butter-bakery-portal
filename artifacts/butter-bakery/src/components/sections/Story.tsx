@@ -1,5 +1,6 @@
 import { FadeIn } from "@/components/ui/fade-in";
-import storyImg from "@/assets/story.png";
+import foundersImg from "@/assets/real/founders.jpg";
+import eiffelImg from "@/assets/real/eiffel.jpg";
 
 export function Story() {
   return (
@@ -11,13 +12,27 @@ export function Story() {
             <FadeIn direction="right">
               <div className="aspect-[4/5] md:aspect-square lg:aspect-[4/5] relative w-full max-w-lg mx-auto overflow-hidden">
                 <img
-                  src={storyImg}
-                  alt="Two friends over coffee — the birth of Butter Bakery"
+                  src={foundersImg}
+                  alt="The two founders of Butter Bakery"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 border border-primary/20 m-4 pointer-events-none" />
               </div>
             </FadeIn>
+
+            {/* Small eiffel accent */}
+            <FadeIn direction="right" delay={0.3}>
+              <div className="absolute -bottom-8 -right-4 w-36 h-24 overflow-hidden border border-primary/20 hidden lg:block">
+                <img
+                  src={eiffelImg}
+                  alt="European roots"
+                  className="w-full h-full object-cover object-top opacity-70"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-2 left-0 right-0 text-center text-[8px] uppercase tracking-widest text-white/60">European Roots</span>
+              </div>
+            </FadeIn>
+
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
           </div>
 

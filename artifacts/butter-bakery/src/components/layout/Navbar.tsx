@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import logoBb from "@/assets/real/logo-bb.jpg";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,13 +22,18 @@ export function Navbar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className="group flex flex-col items-start">
-          <span className={`font-serif text-2xl font-bold tracking-wider transition-colors duration-500 ${isScrolled ? "text-foreground" : "text-white"}`}>
-            BUTTER
-          </span>
-          <span className={`text-[0.6rem] uppercase tracking-[0.3em] font-medium transition-colors duration-500 ${isScrolled ? "text-primary" : "text-white/80"}`}>
-            BAKERY
-          </span>
+        <Link href="/" className="group flex items-center gap-3">
+          <div className={`w-10 h-10 overflow-hidden rounded-sm transition-all duration-500 ${isScrolled ? "ring-1 ring-border" : "ring-1 ring-white/20"}`}>
+            <img src={logoBb} alt="Butter Bakery Logo" className="w-full h-full object-cover" />
+          </div>
+          <div className="flex flex-col items-start">
+            <span className={`font-serif text-lg font-bold tracking-wider transition-colors duration-500 leading-none ${isScrolled ? "text-foreground" : "text-white"}`}>
+              BUTTER
+            </span>
+            <span className={`text-[0.55rem] uppercase tracking-[0.3em] font-medium transition-colors duration-500 ${isScrolled ? "text-primary" : "text-white/80"}`}>
+              BAKERY
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
