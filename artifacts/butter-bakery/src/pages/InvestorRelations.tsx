@@ -1,18 +1,29 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, TrendingUp, Users, Building2, Globe, ChevronRight, Mail } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
-import { useLang } from "@/contexts/LanguageContext";
+import { useState } from "react";
 import { useEffect } from "react";
+import { ArrowLeft, ArrowRight, TrendingUp, Users, Building2, Globe, ChevronRight, Send } from "lucide-react";
+import { FadeIn } from "@/components/ui/fade-in";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { useLang } from "@/contexts/LanguageContext";
 import logoBb from "@/assets/real/logo-bb.jpg";
-import branchRiyadhImg from "@/assets/real/branch-riyadh-interior.jpg";
 import airlineBbImg from "@/assets/real/airline-bb.jpg";
 
 const pillarIcons = [Building2, TrendingUp, Globe, Users, ChevronRight, ChevronRight];
 
+interface FormState {
+  name: string;
+  company: string;
+  email: string;
+  type: string;
+  message: string;
+}
+
 export default function InvestorRelations() {
   const { t, lang, toggleLang, isAr } = useLang();
   const inv = t.investment;
+  const [form, setForm] = useState<FormState>({ name: "", company: "", email: "", type: "", message: "" });
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -22,6 +33,29 @@ export default function InvestorRelations() {
   }, [isAr]);
 
   const BackArrow = isAr ? ArrowRight : ArrowLeft;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = isAr
+      ? `استفسار استثماري — ${form.company || form.name}`
+      : `Investment Inquiry — ${form.company || form.name}`;
+    const body = [
+      `${isAr ? "الاسم" : "Name"}: ${form.name}`,
+      `${isAr ? "الشركة" : "Company"}: ${form.company}`,
+      `${isAr ? "الإيميل" : "Email"}: ${form.email}`,
+      `${isAr ? "نوع الاستفسار" : "Inquiry Type"}: ${form.type}`,
+      "",
+      form.message,
+    ].join("\n");
+    window.open(`mailto:info@butterbakery.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    setSent(true);
+  };
+
+  const field = "w-full px-4 py-3 border border-border bg-transparent text-foreground text-sm placeholder:text-foreground/30 focus:outline-none focus:border-primary transition-colors duration-300";
+
+  const inquiryTypes = isAr
+    ? ["استثمار مباشر", "شراكة استراتيجية", "عقد توريد B2B", "استفسار عام"]
+    : ["Direct Investment", "Strategic Partnership", "B2B Supply Contract", "General Inquiry"];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -64,7 +98,7 @@ export default function InvestorRelations() {
             <p className="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-6">
               {isAr ? "بتر بيكري — علاقات المستثمرين" : "Butter Bakery — Investor Relations"}
             </p>
-            <h1 className="font-serif text-5xl md:text-7xl font-medium text-white mb-8 leading-tight max-w-3xl">
+            <h1 className="font-serif text-5xl md:text-7xl font-medium text-white mb-8 leading-tight max-w-3xl whitespace-pre-line">
               {isAr ? "علاقات\nالمستثمرين" : "Investor\nRelations"}
             </h1>
             <p className="text-background/60 max-w-xl leading-relaxed text-lg font-light">
@@ -81,7 +115,9 @@ export default function InvestorRelations() {
             {inv.stats.map((stat, i) => (
               <FadeIn key={i} delay={i * 0.1} direction="up">
                 <div className="text-center md:text-start">
-                  <p className="font-serif text-4xl md:text-5xl font-medium text-primary mb-2">{stat.value}</p>
+                  <p className="font-serif text-4xl md:text-5xl font-medium text-primary mb-2">
+                    <AnimatedCounter value={stat.value} />
+                  </p>
                   <p className="text-sm font-semibold text-foreground mb-1">{stat.label}</p>
                   <p className="text-xs text-foreground/50 font-light leading-relaxed">{stat.sub}</p>
                 </div>
@@ -91,12 +127,12 @@ export default function InvestorRelations() {
         </div>
       </section>
 
-      {/* Why Butter Bakery */}
+      {/* Why */}
       <section className="py-24">
         <div className="container mx-auto px-6 md:px-12">
           <FadeIn>
             <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{inv.whyEyebrow}</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-16 max-w-lg">
+            <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-16 max-w-lg whitespace-pre-line">
               {isAr ? "لماذا تستثمر\nمع بتر بيكري؟" : "Why Invest\nWith Butter Bakery?"}
             </h2>
           </FadeIn>
@@ -138,7 +174,7 @@ export default function InvestorRelations() {
         </div>
       </section>
 
-      {/* Feature image + B2G */}
+      {/* Airline image */}
       <section className="py-24">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -160,37 +196,143 @@ export default function InvestorRelations() {
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="py-24 bg-secondary/50 border-t border-border/50">
-        <div className="container mx-auto px-6 md:px-12 max-w-2xl text-center">
-          <FadeIn>
-            <div className="w-12 h-12 flex items-center justify-center border border-primary/30 text-primary mx-auto mb-8">
-              <Mail className="w-5 h-5" />
-            </div>
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">
-              {isAr ? "تواصل مع فريق الاستثمار" : "Contact Our Investment Team"}
-            </h2>
-            <p className="text-foreground/60 mb-10 font-light leading-relaxed">
-              {inv.contactLine}
-            </p>
-            <a
-              href="mailto:info@butterbakery.co"
-              className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-white text-sm uppercase tracking-widest hover:bg-primary/80 transition-colors duration-300"
-            >
-              <Mail className="w-4 h-4" />
-              info@butterbakery.co
-            </a>
-            <div className="mt-8">
-              <a
-                href="https://www.butterbakery.co"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-foreground/40 hover:text-primary transition-colors tracking-widest uppercase"
-              >
-                www.butterbakery.co
-              </a>
-            </div>
-          </FadeIn>
+      {/* Contact Form */}
+      <section className="py-24 bg-secondary/40 border-t border-border/50">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
+
+            {/* Left: heading */}
+            <FadeIn direction={isAr ? "right" : "left"}>
+              <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">
+                {isAr ? "تواصل معنا" : "Get In Touch"}
+              </p>
+              <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+                {isAr ? "أرسل\nاستفسارك" : "Send Your\nInquiry"}
+              </h2>
+              <p className="text-foreground/60 font-light leading-relaxed mb-10">
+                {inv.contactLine}
+              </p>
+              <div className="space-y-4">
+                <a href="mailto:info@butterbakery.co" className="flex items-center gap-3 text-sm text-foreground/60 hover:text-primary transition-colors">
+                  <div className="w-8 h-8 border border-border flex items-center justify-center text-primary shrink-0">
+                    <Send className="w-3.5 h-3.5" />
+                  </div>
+                  info@butterbakery.co
+                </a>
+                <a href="https://www.butterbakery.co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-foreground/60 hover:text-primary transition-colors">
+                  <div className="w-8 h-8 border border-border flex items-center justify-center text-primary shrink-0">
+                    <Globe className="w-3.5 h-3.5" />
+                  </div>
+                  www.butterbakery.co
+                </a>
+              </div>
+            </FadeIn>
+
+            {/* Right: form */}
+            <FadeIn direction={isAr ? "left" : "right"} delay={0.1}>
+              {sent ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-16 border border-primary/20 bg-primary/5"
+                >
+                  <div className="w-14 h-14 border border-primary text-primary flex items-center justify-center mx-auto mb-6">
+                    <Send className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-serif text-2xl text-foreground mb-3">
+                    {isAr ? "تم إرسال استفسارك" : "Inquiry Sent"}
+                  </h3>
+                  <p className="text-foreground/60 text-sm font-light mb-6">
+                    {isAr ? "سيتواصل معك فريقنا قريباً على إيميلك." : "Our team will reach out to you soon."}
+                  </p>
+                  <button
+                    onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", type: "", message: "" }); }}
+                    className="text-xs uppercase tracking-widest text-primary hover:underline"
+                  >
+                    {isAr ? "إرسال آخر" : "Send Another"}
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs uppercase tracking-widest text-foreground/40 mb-2">
+                        {isAr ? "الاسم *" : "Name *"}
+                      </label>
+                      <input
+                        required
+                        value={form.name}
+                        onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                        placeholder={isAr ? "اسمك الكريم" : "Your name"}
+                        className={field}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs uppercase tracking-widest text-foreground/40 mb-2">
+                        {isAr ? "الشركة / المنظمة" : "Company / Organization"}
+                      </label>
+                      <input
+                        value={form.company}
+                        onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                        placeholder={isAr ? "اسم شركتك" : "Your company"}
+                        className={field}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-foreground/40 mb-2">
+                      {isAr ? "البريد الإلكتروني *" : "Email Address *"}
+                    </label>
+                    <input
+                      required
+                      type="email"
+                      value={form.email}
+                      onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                      placeholder={isAr ? "بريدك الإلكتروني" : "your@email.com"}
+                      className={field}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-foreground/40 mb-2">
+                      {isAr ? "نوع الاستفسار" : "Inquiry Type"}
+                    </label>
+                    <select
+                      value={form.type}
+                      onChange={e => setForm(f => ({ ...f, type: e.target.value }))}
+                      className={`${field} appearance-none cursor-pointer`}
+                    >
+                      <option value="">{isAr ? "اختر النوع..." : "Select type..."}</option>
+                      {inquiryTypes.map(o => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-foreground/40 mb-2">
+                      {isAr ? "رسالتك" : "Message"}
+                    </label>
+                    <textarea
+                      rows={5}
+                      value={form.message}
+                      onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                      placeholder={isAr ? "اكتب رسالتك هنا..." : "Tell us about your interest..."}
+                      className={`${field} resize-none`}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-3 py-4 bg-primary text-white text-sm uppercase tracking-widest hover:bg-primary/80 transition-colors duration-300"
+                  >
+                    <Send className="w-4 h-4" />
+                    {isAr ? "إرسال الاستفسار" : "Send Inquiry"}
+                  </button>
+                </form>
+              )}
+            </FadeIn>
+
+          </div>
         </div>
       </section>
 

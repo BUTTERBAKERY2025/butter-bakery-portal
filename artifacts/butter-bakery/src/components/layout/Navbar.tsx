@@ -8,12 +8,29 @@ import { useLang } from "@/contexts/LanguageContext";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { t, lang, toggleLang, isAr } = useLang();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids = ["story", "products", "locations", "gallery"];
+    const observers: IntersectionObserver[] = [];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-40% 0px -50% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   useEffect(() => {
@@ -60,17 +77,28 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={`text-sm tracking-wide transition-colors duration-300 hover:text-primary ${
-                  isScrolled ? "text-foreground/80" : "text-white/90"
-                } ${isAr ? "font-medium" : ""}`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const sectionId = item.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={`text-sm tracking-wide transition-all duration-300 relative ${isAr ? "font-medium" : ""} ${
+                    isActive
+                      ? "text-primary"
+                      : isScrolled
+                      ? "text-foreground/80 hover:text-primary"
+                      : "text-white/90 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-primary" />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Right controls */}

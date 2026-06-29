@@ -1,4 +1,5 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import brandBagImg from "@/assets/real/brand-bag.jpg";
 import airlineBbImg from "@/assets/real/airline-bb.jpg";
 import customerCupImg from "@/assets/real/customer-cup.jpg";
@@ -42,7 +43,9 @@ export function Investment() {
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {inv.stats.map((stat, i) => (
                 <StaggerItem key={i} direction="up" className="bg-background/5 border border-white/10 p-8 hover:border-primary/50 transition-colors duration-500">
-                  <div className="font-serif text-4xl md:text-5xl text-primary mb-3">{stat.value}</div>
+                  <div className="font-serif text-4xl md:text-5xl text-primary mb-3">
+                    <AnimatedCounter value={stat.value} />
+                  </div>
                   <div className="text-sm uppercase tracking-widest text-white/90 leading-snug mb-2">{stat.label}</div>
                   <div className="text-xs text-background/50 font-light leading-relaxed">{stat.sub}</div>
                 </StaggerItem>
