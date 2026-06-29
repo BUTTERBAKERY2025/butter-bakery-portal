@@ -1,5 +1,5 @@
 import { FadeIn } from "@/components/ui/fade-in";
-import branchRiyadhCounterImg from "@/assets/real/branch-riyadh-counter.jpg";
+import berryBasketImg from "@assets/684696860_18069942209651984_7097828562111979045_n_1782725587615.jpg";
 
 export function Mission() {
   return (
@@ -7,8 +7,8 @@ export function Mission() {
       {/* Real photo background */}
       <div className="absolute inset-0 z-0">
         <img
-          src={branchRiyadhCounterImg}
-          alt="Butter Bakery — Riyadh branch pastry counter"
+          src={berryBasketImg}
+          alt="Butter Bakery — signature berry basket pastry"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-foreground/85" />

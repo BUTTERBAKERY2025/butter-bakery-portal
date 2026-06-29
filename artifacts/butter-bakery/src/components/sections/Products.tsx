@@ -1,8 +1,11 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
-import staffPastriesImg from "@/assets/real/staff-pastries.jpg";
 import breadImg from "@/assets/real/bread.jpg";
 import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
+import elegantCroissantImg from "@assets/714264474_18074789993651984_4074190906897943917_n_1782725587614.jpg";
+import icedDrinksImg from "@assets/729991710_18077978093651984_6256621253351937329_n_1782725587615.jpg";
+import kitkatImg from "@assets/657449736_18066694193651984_1084959272242316940_n_1782725587614.jpg";
+import purpleCakeImg from "@assets/671127843_18069038726651984_6161635621041742339_n_(1)_1782725587614.jpg";
 import { useState } from "react";
 
 const coffeeMenu = {
@@ -123,8 +126,8 @@ export function Products() {
             <FadeIn direction="up" delay={0.2}>
               <div className="aspect-[4/3] w-full overflow-hidden mb-8 relative">
                 <img
-                  src={staffPastriesImg}
-                  alt="Butter Bakery French Pastry — Staff serving pastries"
+                  src={elegantCroissantImg}
+                  alt="Butter Bakery French Pastry — Elegant croissant"
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />

@@ -8,6 +8,7 @@ import { Branches } from "@/components/sections/Branches";
 import { Gallery } from "@/components/sections/Gallery";
 import { Investment } from "@/components/sections/Investment";
 import { FollowUs } from "@/components/sections/FollowUs";
+import { BrandMarquee } from "@/components/ui/BrandMarquee";
 
 export default function LandingPage() {
   return (
@@ -16,6 +17,7 @@ export default function LandingPage() {
 
       <main>
         <Hero />
+        <BrandMarquee />
         <Story />
         <Mission />
         <Products />
