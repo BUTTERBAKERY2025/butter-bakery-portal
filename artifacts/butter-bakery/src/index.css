@@ -55,10 +55,10 @@
 :root {
   --background: 40 40% 98%;
   --foreground: 20 15% 10%;
-  --dark-section: 20 80% 18%;
+  --dark-section: 26 82% 16%;
   --border: 35 30% 85%;
   --input: 35 30% 85%;
-  --ring: 22 90% 52%;
+  --ring: 26 81% 46%;
 
   --card: 40 40% 98%;
   --card-foreground: 20 46% 12%;
@@ -68,7 +68,7 @@
   --popover-foreground: 20 46% 12%;
   --popover-border: 35 30% 85%;
 
-  --primary: 22 90% 52%;
+  --primary: 26 81% 46%;
   --primary-foreground: 0 0% 100%;
   
   --secondary: 38 41% 93%;
