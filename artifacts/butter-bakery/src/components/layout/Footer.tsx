@@ -3,7 +3,7 @@ import logoBb from "@/assets/real/logo-bb.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 export function Footer() {
-  const { t } = useLang();
+  const { t, isAr } = useLang();
   const f = t.footer;
 
   return (
@@ -84,6 +84,16 @@ export function Footer() {
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-background/30 uppercase tracking-wider">
           <p>© {new Date().getFullYear()} Butter Bakery. {f.copyright}</p>
           <div className="flex gap-6 items-center">
+            <a
+              href="/menu"
+              className="hover:text-primary transition-colors flex items-center gap-2 group"
+            >
+              <svg className="w-3.5 h-3.5 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+              {isAr ? "القائمة" : "Menu"}
+            </a>
+            <span className="text-white/10">|</span>
             <a
               href="/investor-relations"
               className="hover:text-primary transition-colors flex items-center gap-2 group"

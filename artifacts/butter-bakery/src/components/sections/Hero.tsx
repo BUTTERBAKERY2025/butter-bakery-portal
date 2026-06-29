@@ -61,7 +61,7 @@ export function Hero() {
               </svg>
             </a>
             <a
-              href="#products"
+              href="/menu"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/25 text-white text-sm uppercase tracking-widest font-light hover:border-primary hover:text-primary transition-all duration-300"
             >
               {t.hero.cta2}
