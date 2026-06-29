@@ -11,6 +11,7 @@ import berryBasketImg from "@assets/684696860_18069942209651984_7097828562111979
 import branchSketchImg from "@assets/720075317_18075485447651984_8219368285733091191_n_1782725587615.jpg";
 import yellowCarDrinkImg from "@assets/732596791_18078285596651984_5771152655997056836_n_1782725587615.jpg";
 import icedDrinksImg from "@assets/729991710_18077978093651984_6256621253351937329_n_1782725587615.jpg";
+import { useLang } from "@/contexts/LanguageContext";
 
 const INSTA_URL = "https://www.instagram.com/butterbakery_sa/";
 
@@ -36,6 +37,9 @@ const IgIcon = ({ className }: { className?: string }) => (
 );
 
 export function FollowUs() {
+  const { t } = useLang();
+  const f = t.followUs;
+
   return (
     <section className="py-24 bg-background border-t border-border/30">
       <div className="container mx-auto px-6 md:px-12">
@@ -43,20 +47,19 @@ export function FollowUs() {
         <FadeIn className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-6">
             <IgIcon className="w-6 h-6 text-primary" />
-            <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Follow Us</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">{f.eyebrow}</span>
           </div>
           <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-4">
-            @butterbakery_sa
+            {f.handle}
           </h3>
           <p className="text-foreground/50 font-light max-w-md mx-auto">
-            Stay with us daily — fresh moments, new launches, and behind-the-scenes from our world of baking.
+            {f.sub}
           </p>
           <p className="text-foreground/30 font-light text-sm mt-2">
-            تابعونا يومياً — لحظات طازجة، إطلاقات جديدة، وكواليس عالمنا في الخبز
+            {f.subAr}
           </p>
         </FadeIn>
 
-        {/* 12-post Instagram grid — 4 cols desktop, 3 cols mobile */}
         <div className="grid grid-cols-3 md:grid-cols-4 gap-1 mb-10">
           {instaPosts.map((post, i) => (
             <FadeIn key={i} delay={i * 0.04} direction="up">
@@ -79,7 +82,6 @@ export function FollowUs() {
           ))}
         </div>
 
-        {/* CTA */}
         <FadeIn delay={0.3} className="text-center">
           <a
             href={INSTA_URL}
@@ -88,7 +90,7 @@ export function FollowUs() {
             className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground hover:border-primary hover:text-primary transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium"
           >
             <IgIcon className="w-4 h-4" />
-            Follow on Instagram
+            {f.cta}
           </a>
         </FadeIn>
 

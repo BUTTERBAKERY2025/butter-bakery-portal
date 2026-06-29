@@ -1,12 +1,10 @@
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
+import { FadeIn } from "@/components/ui/fade-in";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
 import breadImg from "@/assets/real/bread.jpg";
 import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
 import elegantCroissantImg from "@assets/714264474_18074789993651984_4074190906897943917_n_1782725587614.jpg";
-import icedDrinksImg from "@assets/729991710_18077978093651984_6256621253351937329_n_1782725587615.jpg";
-import kitkatImg from "@assets/657449736_18066694193651984_1084959272242316940_n_1782725587614.jpg";
-import purpleCakeImg from "@assets/671127843_18069038726651984_6161635621041742339_n_(1)_1782725587614.jpg";
 import { useState } from "react";
+import { useLang } from "@/contexts/LanguageContext";
 
 const coffeeMenu = {
   drip: ["V60", "Japanese Pro Drip", "Coffee Day"],
@@ -60,15 +58,6 @@ const breadMenu = [
   "French-Style Bread", "International Breads",
 ];
 
-const categories = [
-  { id: "coffee", label: "Specialty Coffee", labelAr: "القهوة المختصة" },
-  { id: "pastry", label: "French Pastry", labelAr: "الباستري الفرنسي" },
-  { id: "chimney", label: "Chimney Cake", labelAr: "الشمسي كيك" },
-  { id: "pizza", label: "Pizza & Sourdough", labelAr: "البيتزا والعجين المخمر" },
-  { id: "salads", label: "Salads & Snacks", labelAr: "السلطات والسناكس" },
-  { id: "bread", label: "Traditional Bread", labelAr: "الخبز العالمي" },
-];
-
 function MenuList({ items, title }: { items: string[]; title?: string }) {
   return (
     <div className="mb-6">
@@ -87,19 +76,30 @@ function MenuList({ items, title }: { items: string[]; title?: string }) {
 
 export function Products() {
   const [activeTab, setActiveTab] = useState("coffee");
+  const { t } = useLang();
+  const p = t.products;
+
+  const categories = [
+    { id: "coffee",  label: p.cats.coffee },
+    { id: "pastry",  label: p.cats.pastry },
+    { id: "chimney", label: p.cats.chimney },
+    { id: "pizza",   label: p.cats.pizza },
+    { id: "salads",  label: p.cats.salads },
+    { id: "bread",   label: p.cats.bread },
+  ];
 
   return (
     <section id="products" className="py-32 md:py-48 bg-background relative">
       <div className="container mx-auto px-6 md:px-12">
         <FadeIn className="text-center mb-20 md:mb-28">
-          <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">Our Craft</h2>
-          <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-6">Exquisite Offerings</h3>
+          <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{p.eyebrow}</h2>
+          <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-6">{p.title}</h3>
           <p className="text-foreground/60 font-light max-w-2xl mx-auto text-lg leading-relaxed">
-            Everything that falls under the name of baked goods and pastries, prepared daily fresh — all international items in French and European tradition.
+            {p.subtitle}
           </p>
         </FadeIn>
 
-        {/* Hero Feature: Coffee + Pastry — real photos */}
+        {/* Hero Feature: Coffee + Pastry */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-32">
           <div className="group">
             <FadeIn direction="up">
@@ -114,7 +114,7 @@ export function Products() {
                   <p className="text-[10px] uppercase tracking-widest text-foreground/60">Coffee Bar — Riyadh Branch</p>
                 </div>
               </div>
-              <h4 className="font-serif text-3xl text-foreground mb-3">Specialty Coffee</h4>
+              <h4 className="font-serif text-3xl text-foreground mb-3">{p.cats.coffee}</h4>
               <p className="text-foreground/70 font-light leading-relaxed mb-4">
                 We have a special coffee crop and distinctive varieties prepared and roasted in a uniquely specialized way for Butter Bakery — offering drip, hot, and cold selections across V60, Japanese Pro, Espresso, Latte, Cappuccino, Pistachio Latte, Spanish Latte, and more.
               </p>
@@ -135,7 +135,7 @@ export function Products() {
                   <p className="text-[10px] uppercase tracking-widest text-foreground/60">French Pastry — Daily Fresh</p>
                 </div>
               </div>
-              <h4 className="font-serif text-3xl text-foreground mb-3">French Pastry</h4>
+              <h4 className="font-serif text-3xl text-foreground mb-3">{p.cats.pastry}</h4>
               <p className="text-foreground/70 font-light leading-relaxed mb-4">
                 From the classic art of French pâtisserie — buttery croissants, delicate macarons, elegant tarts (lemon meringue, pistachio, chocolate), and signature individual cakes: Raspberry Vanilla, Gianduja Hazelnut, Exotic Cheesecake, and Opera. More than a pride — it is an art form.
               </p>
@@ -144,18 +144,14 @@ export function Products() {
           </div>
         </div>
 
-        {/* Bread + Outdoor — real photos strip */}
+        {/* Bread + Outdoor strip */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           <FadeIn direction="up">
             <div className="aspect-[16/7] overflow-hidden relative group">
-              <img
-                src={breadImg}
-                alt="Artisan Bread — Traditional Baked Daily"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              <img src={breadImg} alt="Artisan Bread — Traditional Baked Daily" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-end p-6">
                 <div>
-                  <p className="font-serif text-xl text-white">Traditional Bread</p>
+                  <p className="font-serif text-xl text-white">{p.cats.bread}</p>
                   <p className="text-white/60 text-xs uppercase tracking-widest mt-1">Baked fresh daily</p>
                 </div>
               </div>
@@ -163,11 +159,7 @@ export function Products() {
           </FadeIn>
           <FadeIn direction="up" delay={0.15}>
             <div className="aspect-[16/7] overflow-hidden relative group">
-              <img
-                src={outdoorStandImg}
-                alt="Butter Bakery Outdoor Coffee Stand"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              <img src={outdoorStandImg} alt="Butter Bakery Outdoor Coffee Stand" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-end p-6">
                 <div>
                   <p className="font-serif text-xl text-white">Seasonal Events</p>
@@ -182,7 +174,7 @@ export function Products() {
         <FadeIn>
           <div className="border border-border/50 rounded-sm overflow-hidden">
             <div className="bg-secondary/50 px-6 py-4 border-b border-border/50">
-              <p className="text-xs uppercase tracking-[0.3em] text-foreground/50 font-medium mb-4">Browse Full Menu</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-foreground/50 font-medium mb-4">{p.browseMenu}</p>
               <div className="flex flex-wrap gap-2">
                 {categories.map((cat) => (
                   <button
@@ -271,15 +263,15 @@ export function Products() {
         {/* Catering CTA */}
         <FadeIn delay={0.2}>
           <div className="mt-16 p-10 md:p-14 border border-primary/20 text-center">
-            <h4 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Catering & Events</h4>
+            <h4 className="font-serif text-2xl md:text-3xl text-foreground mb-4">{p.catering}</h4>
             <p className="text-foreground/60 font-light leading-relaxed max-w-xl mx-auto mb-6">
-              Bringing the Butter Bakery experience to your most important gatherings. We work with individuals, companies, offices, restaurants, and government entities for bespoke catering and supply agreements.
+              {p.cateringBody}
             </p>
             <a
               href="mailto:info@butterbakery.co?subject=Catering Inquiry"
               className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-primary font-medium hover:text-foreground transition-colors"
             >
-              Inquire About Catering
+              {p.cateringCta}
               <span className="h-[1px] w-8 bg-current" />
             </a>
           </div>

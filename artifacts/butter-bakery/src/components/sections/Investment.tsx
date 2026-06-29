@@ -2,42 +2,12 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
 import brandBagImg from "@/assets/real/brand-bag.jpg";
 import airlineBbImg from "@/assets/real/airline-bb.jpg";
 import customerCupImg from "@/assets/real/customer-cup.jpg";
-
-const stats = [
-  { value: "98%", label: "Customer Return Rate", sub: "Certified by our recurring customer base" },
-  { value: "65%+", label: "Millennial Customers", sub: "The largest consumer group with significant spending power" },
-  { value: "94%", label: "Female Purchase Decisions", sub: "Women drive household and lifestyle spending" },
-  { value: "3", label: "Revenue Streams", sub: "B2C · B2B · B2G — individuals, companies & government" },
-];
-
-const pillars = [
-  {
-    title: "Proven Multi-City Concept",
-    body: "Operational branches in Abha (award-winning tourism project), Riyadh (Anas Bin Malik), and Tabuk — plus seasonal mobile branches at Namas, Taif, winter festivals, and national events.",
-  },
-  {
-    title: "B2C + B2B + B2G Revenue",
-    body: "We serve individual end-customers directly through our branches, supply companies, offices, restaurants, and cafés on regular contracts, and engage in government tenders and institutional catering — including airline partnerships.",
-  },
-  {
-    title: "Vision 2030 Aligned",
-    body: "Positioned at the heart of Saudi Arabia's F&B transformation — combining European baking excellence with authentic Saudi taste, serving an evolving, sophisticated society.",
-  },
-  {
-    title: "Strong Brand Identity",
-    body: "From the charming streets of Paris to the traditions of Ukraine to the mountains of Asir — a brand built on experience, craft, and emotion. Our customers don't just buy product; they buy identity.",
-  },
-  {
-    title: "Ministry of Tourism Partner",
-    body: "Butter Bakery is an active partner of Saudi Arabia's Ministry of Tourism and the 'Spirit of Saudi Arabia' (روح السعودية) program — participating in delivering a premium hospitality experience that expresses the renewed Saudi identity on a national stage.",
-  },
-  {
-    title: "International Chef Team",
-    body: "Quality is no coincidence — it's the result of teamwork led by world-class chefs from France, Italy, Turkey, Asia, and Latin America. They've come together under one roof to innovate, not repeat, every recipe we serve.",
-  },
-];
+import { useLang } from "@/contexts/LanguageContext";
 
 export function Investment() {
+  const { t } = useLang();
+  const inv = t.investment;
+
   return (
     <section id="invest" className="py-32 md:py-48 bg-dark-section text-background relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
@@ -49,28 +19,28 @@ export function Investment() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-24">
           <div className="lg:col-span-5">
             <FadeIn>
-              <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">Partner With Us</h2>
-              <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-light leading-[1.1] mb-8">
-                A Scalable <br /> Premium Brand
+              <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{inv.eyebrow}</h2>
+              <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-light leading-[1.1] mb-8 whitespace-pre-line">
+                {inv.title}
               </h3>
               <p className="text-background/70 font-light text-lg leading-relaxed mb-10">
-                Butter Bakery is positioned at the intersection of luxury F&B and aggressive market growth. We have built a robust, culturally resonant brand that thrives in the rapidly expanding Saudi market — delivering consistent excellence across multiple cities with a proven concept, remarkable customer loyalty, and diversified revenue streams.
+                {inv.p1}
               </p>
               <p className="text-background/50 font-light text-sm leading-relaxed mb-10">
-                Our customers span businessmen and women, intellectuals, creatives, and globe-trotting travelers who have found at Butter Bakery the same taste they experienced in Europe's most famous culinary cities — but with a local flavor that adds warmth and identity.
+                {inv.p2}
               </p>
               <a
                 href="mailto:info@butterbakery.co?subject=Investment Inquiry"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-sm uppercase tracking-widest font-medium transition-all hover:bg-white hover:text-foreground"
               >
-                Invest With Us
+                {inv.cta}
               </a>
             </FadeIn>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {stats.map((stat, i) => (
+              {inv.stats.map((stat, i) => (
                 <StaggerItem key={i} direction="up" className="bg-background/5 border border-white/10 p-8 hover:border-primary/50 transition-colors duration-500">
                   <div className="font-serif text-4xl md:text-5xl text-primary mb-3">{stat.value}</div>
                   <div className="text-sm uppercase tracking-widest text-white/90 leading-snug mb-2">{stat.label}</div>
@@ -81,35 +51,23 @@ export function Investment() {
           </div>
         </div>
 
-        {/* Real photo strip — brand in action */}
+        {/* Photo strip */}
         <FadeIn>
           <div className="grid grid-cols-3 gap-3 mb-16 h-52">
             <div className="overflow-hidden relative group col-span-1">
-              <img
-                src={brandBagImg}
-                alt="Butter Bakery branded takeaway bag"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={brandBagImg} alt="Butter Bakery branded takeaway bag" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">Brand Identity</p>
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">{inv.brandIdentity}</p>
             </div>
             <div className="overflow-hidden relative group col-span-1">
-              <img
-                src={customerCupImg}
-                alt="Customer with Butter Bakery coffee cup"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={customerCupImg} alt="Customer with Butter Bakery coffee cup" className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">Customer Experience</p>
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">{inv.customerExp}</p>
             </div>
             <div className="overflow-hidden relative group col-span-1">
-              <img
-                src={airlineBbImg}
-                alt="Butter Bakery products on airline — B2G partnership"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={airlineBbImg} alt="Butter Bakery products on airline" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">B2G · Airline Partner</p>
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">{inv.b2gLabel}</p>
             </div>
           </div>
         </FadeIn>
@@ -117,9 +75,9 @@ export function Investment() {
         {/* Investment Pillars */}
         <FadeIn>
           <div className="border-t border-white/10 pt-16">
-            <p className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-12">Why Butter Bakery</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-12">{inv.whyEyebrow}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              {pillars.map((pillar, i) => (
+              {inv.pillars.map((pillar, i) => (
                 <FadeIn key={i} delay={i * 0.1} direction="up">
                   <div className="border-l border-primary/30 pl-6 hover:border-primary transition-colors duration-300">
                     <h4 className="font-serif text-xl text-white mb-3">{pillar.title}</h4>
@@ -131,23 +89,17 @@ export function Investment() {
           </div>
         </FadeIn>
 
-        {/* Customer Segmentation Note */}
+        {/* Customer Segmentation */}
         <FadeIn delay={0.3}>
           <div className="mt-16 p-8 md:p-12 bg-white/5 border border-white/10">
-            <p className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-6">Customer Segmentation</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-6">{inv.segmentationEyebrow}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
-                <p className="font-serif text-2xl text-white mb-2">B2C</p>
-                <p className="text-background/60 font-light text-sm leading-relaxed">Individual consumers purchasing directly at our branches or through delivery apps. Primarily millennials (65%+) with high spending power.</p>
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-white mb-2">B2B</p>
-                <p className="text-background/60 font-light text-sm leading-relaxed">Companies, offices, restaurants, and cafés requiring regular supply of baked goods and ready products on ongoing contracts.</p>
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-white mb-2">B2G</p>
-                <p className="text-background/60 font-light text-sm leading-relaxed">Government contracts and institutional tenders — including airline partnerships — for supplying bakery products at official events and to government departments.</p>
-              </div>
+              {[inv.b2c, inv.b2b, inv.b2g].map((seg) => (
+                <div key={seg.label}>
+                  <p className="font-serif text-2xl text-white mb-2">{seg.label}</p>
+                  <p className="text-background/60 font-light text-sm leading-relaxed">{seg.body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </FadeIn>
@@ -156,7 +108,7 @@ export function Investment() {
         <FadeIn delay={0.4}>
           <div className="mt-12 text-center">
             <p className="text-background/50 text-sm font-light mb-2">
-              For investment inquiries, partnership proposals, or supply agreements:
+              {inv.contactLine}
             </p>
             <a href="mailto:info@butterbakery.co" className="text-primary font-medium hover:text-white transition-colors">
               info@butterbakery.co

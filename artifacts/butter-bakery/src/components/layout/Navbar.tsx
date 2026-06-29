@@ -2,15 +2,24 @@ import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import logoBb from "@/assets/real/logo-bb.jpg";
+import { useLang } from "@/contexts/LanguageContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t, lang, toggleLang, isAr } = useLang();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navItems = [
+    { label: t.nav.story, href: "#story" },
+    { label: t.nav.products, href: "#products" },
+    { label: t.nav.locations, href: "#locations" },
+    { label: t.nav.gallery, href: "#gallery" },
+  ];
 
   return (
     <motion.header
@@ -37,34 +46,42 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Story", href: "#story" },
-            { label: "Products", href: "#products" },
-            { label: "Locations", href: "#locations" },
-            { label: "Gallery", href: "#gallery" },
-          ].map((item) => (
+          {navItems.map((item) => (
             <a
-              key={item.label}
+              key={item.href}
               href={item.href}
               className={`text-sm tracking-wide transition-colors duration-300 hover:text-primary ${
                 isScrolled ? "text-foreground/80" : "text-white/90"
-              }`}
+              } ${isAr ? "font-medium" : ""}`}
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Language Toggle */}
+          <button
+            onClick={toggleLang}
+            className={`text-xs font-medium tracking-widest px-3 py-2 border transition-all duration-300 ${
+              isScrolled
+                ? "border-border text-foreground/60 hover:border-primary hover:text-primary"
+                : "border-white/30 text-white/70 hover:border-white hover:text-white"
+            }`}
+            aria-label="Toggle language"
+          >
+            {lang === "en" ? "عربي" : "EN"}
+          </button>
+
           <a
             href="#invest"
-            className={`text-xs uppercase tracking-widest px-5 py-2.5 border transition-all duration-300 ${
+            className={`hidden sm:inline-flex text-xs uppercase tracking-widest px-5 py-2.5 border transition-all duration-300 ${
               isScrolled
                 ? "border-primary text-primary hover:bg-primary hover:text-white"
                 : "border-white/50 text-white hover:bg-white hover:text-foreground"
             }`}
           >
-            Invest With Us
+            {t.nav.invest}
           </a>
         </div>
       </div>
