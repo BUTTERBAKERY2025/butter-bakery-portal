@@ -5,7 +5,7 @@ export const translations = {
       products: "Products",
       locations: "Locations",
       gallery: "Gallery",
-      invest: "Invest With Us",
+      invest: "About Us",
     },
     hero: {
       eyebrow: "Freshly Baked Every Day",
@@ -216,7 +216,7 @@ export const translations = {
       products: "منتجاتنا",
       locations: "فروعنا",
       gallery: "المعرض",
-      invest: "استثمر معنا",
+      invest: "معلومات عنا",
     },
     hero: {
       eyebrow: "طازجة كل يوم",
