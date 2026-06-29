@@ -21,6 +21,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("bb-lang", lang);
     document.documentElement.dir = isAr ? "rtl" : "ltr";
     document.documentElement.lang = lang;
+    document.title = isAr
+      ? "بتر بيكري — رمز الفخامة والطعم الذي لا يُنسى"
+      : "Butter Bakery — A Symbol of Luxury & Unmistakable Taste";
   }, [lang, isAr]);
 
   const toggleLang = () => setLang((l) => (l === "en" ? "ar" : "en"));

@@ -131,4 +131,24 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Arabic font override — applied via lang attribute set by LanguageContext */
+:lang(ar) {
+  --app-font-sans: 'Noto Kufi Arabic', system-ui, sans-serif;
+  --app-font-serif: 'Noto Kufi Arabic', system-ui, sans-serif;
+}
+:lang(ar) h1,
+:lang(ar) h2,
+:lang(ar) h3,
+:lang(ar) h4,
+:lang(ar) h5,
+:lang(ar) h6 {
+  font-style: normal;
+}
+:lang(ar) .italic {
+  font-style: normal;
 }

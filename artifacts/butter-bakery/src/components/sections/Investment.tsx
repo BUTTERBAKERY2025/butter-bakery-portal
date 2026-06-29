@@ -5,7 +5,7 @@ import customerCupImg from "@/assets/real/customer-cup.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 export function Investment() {
-  const { t } = useLang();
+  const { t, isAr } = useLang();
   const inv = t.investment;
 
   return (
@@ -79,7 +79,7 @@ export function Investment() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
               {inv.pillars.map((pillar, i) => (
                 <FadeIn key={i} delay={i * 0.1} direction="up">
-                  <div className="border-l border-primary/30 pl-6 hover:border-primary transition-colors duration-300">
+                  <div className={`hover:border-primary transition-colors duration-300 ${isAr ? "border-r border-primary/30 pr-6" : "border-l border-primary/30 pl-6"}`}>
                     <h4 className="font-serif text-xl text-white mb-3">{pillar.title}</h4>
                     <p className="text-background/60 font-light text-sm leading-relaxed">{pillar.body}</p>
                   </div>

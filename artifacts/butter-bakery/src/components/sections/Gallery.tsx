@@ -1,4 +1,6 @@
+import { useState, useCallback } from "react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { Lightbox } from "@/components/ui/Lightbox";
 import { useLang } from "@/contexts/LanguageContext";
 
 import branchAbhaImg from "@/assets/real/branch-abha.jpg";
@@ -20,6 +22,7 @@ import deliveryBoxImg from "@assets/706982015_18073578548651984_6086752512590383
 export function Gallery() {
   const { t } = useLang();
   const g = t.gallery;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const photos = [
     { src: berryBasketImg,      caption: g.labels.berryBasket,       span: "col-span-1 row-span-2" },
@@ -38,6 +41,14 @@ export function Gallery() {
     { src: outdoorStandImg,     caption: g.labels.icedDrinks,        span: "col-span-2 row-span-1" },
   ];
 
+  const handleNavigate = useCallback((next: boolean) => {
+    setLightboxIndex((i) => {
+      if (i === null) return null;
+      if (next) return (i + 1) % photos.length;
+      return (i - 1 + photos.length) % photos.length;
+    });
+  }, [photos.length]);
+
   return (
     <section className="py-24 bg-secondary relative" id="gallery">
       <div className="container mx-auto px-6 md:px-12">
@@ -54,23 +65,35 @@ export function Gallery() {
           </div>
         </FadeIn>
 
+        {/* Masonry-style clickable grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px]">
           {photos.map((photo, i) => (
             <FadeIn
               key={i}
               delay={i * 0.04}
               direction="up"
-              className={`group overflow-hidden relative ${photo.span}`}
+              className={`group overflow-hidden relative cursor-pointer ${photo.span}`}
             >
-              <img
-                src={photo.src}
-                alt={photo.caption}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <p className="absolute bottom-0 left-0 right-0 px-4 py-3 text-white text-xs uppercase tracking-widest font-light translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                {photo.caption}
-              </p>
+              <div onClick={() => setLightboxIndex(i)} className="w-full h-full">
+                <img
+                  src={photo.src}
+                  alt={photo.caption}
+                  loading={i > 3 ? "lazy" : undefined}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Zoom icon */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <div className="w-10 h-10 border border-white/50 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="absolute bottom-0 left-0 right-0 px-4 py-3 text-white text-xs uppercase tracking-widest font-light translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  {photo.caption}
+                </p>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -82,8 +105,15 @@ export function Gallery() {
             </p>
           </div>
         </FadeIn>
-
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        photos={photos}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={handleNavigate}
+      />
     </section>
   );
 }

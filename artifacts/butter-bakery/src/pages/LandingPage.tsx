@@ -9,6 +9,7 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Investment } from "@/components/sections/Investment";
 import { FollowUs } from "@/components/sections/FollowUs";
 import { BrandMarquee } from "@/components/ui/BrandMarquee";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export default function LandingPage() {
   return (
@@ -28,6 +29,7 @@ export default function LandingPage() {
       </main>
 
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
