@@ -305,11 +305,11 @@ export default function Menu() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="pt-14 bg-[#2d1a0e] text-white relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,95,30,0.12) 0%, transparent 70%)" }} />
+      <section className="pt-14 text-white relative overflow-hidden" style={{ background: "#FF6B1A" }}>
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,0,0,0.12) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
-            <p className="text-primary text-[10px] font-semibold uppercase tracking-[0.45em] mb-8">
+            <p className="text-white/60 text-[10px] font-semibold uppercase tracking-[0.45em] mb-8">
               {isAr ? "بتر بيكري — القائمة الكاملة" : "Butter Bakery — Full Menu"}
             </p>
             <h1 className="font-serif font-medium leading-none mb-8" style={{ fontSize: "clamp(64px, 12vw, 144px)" }}>
@@ -321,15 +321,15 @@ export default function Menu() {
                   ? "يُخبز ويُحضَّر يومياً بأيدي متخصصة ومواد خام مختارة"
                   : "Freshly prepared daily with specialist hands and selected ingredients"}
               </p>
-              <div className="flex items-center gap-3 text-[10px] text-white/20 uppercase tracking-[0.25em]">
-                <span className="w-1 h-1 rounded-full bg-primary inline-block" />
+              <div className="flex items-center gap-3 text-[10px] text-white/50 uppercase tracking-[0.25em]">
+                <span className="w-1 h-1 rounded-full bg-white/70 inline-block" />
                 {isAr ? "النقطة الذهبية = صنف مميز" : "Gold dot = Signature item"}
               </div>
             </div>
           </motion.div>
         </div>
         {/* Wave bottom */}
-        <div className="h-10 bg-[#faf9f7]" style={{ clipPath: "ellipse(55% 100% at 50% 100%)" }} />
+        <div className="h-10" style={{ background: "#faf9f7", clipPath: "ellipse(55% 100% at 50% 100%)" }} />
       </section>
 
       {/* ── Body ── */}
@@ -441,19 +441,19 @@ export default function Menu() {
       </div>
 
       {/* ── Footer ── */}
-      <div className="bg-[#2d1a0e] py-12 text-center">
+      <div className="py-12 text-center" style={{ background: "#FF6B1A" }}>
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="h-px w-12 bg-white/10" />
           <img src={logoBb} alt="" className="w-6 h-6 rounded-sm opacity-40" />
           <div className="h-px w-12 bg-white/10" />
         </div>
-        <p className="text-white/25 text-[10px] uppercase tracking-[0.4em] mb-2">
+        <p className="text-white/70 text-[10px] uppercase tracking-[0.4em] mb-2">
           {isAr ? "جميع الأسعار بالريال السعودي · تشمل الضريبة" : "All prices in Saudi Riyals · VAT included"}
         </p>
-        <p className="text-white/15 text-[9px] tracking-wider mb-8">
+        <p className="text-white/50 text-[9px] tracking-wider mb-8">
           {isAr ? "الأسعار قابلة للتغيير · قد تختلف الأصناف بين الفروع" : "Prices subject to change · Items may vary by branch"}
         </p>
-        <Link href="/" className="text-[10px] uppercase tracking-widest text-white/20 hover:text-primary transition-colors duration-300">
+        <Link href="/" className="text-[10px] uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-300">
           {isAr ? "العودة للرئيسية" : "Back to Home"}
         </Link>
       </div>
