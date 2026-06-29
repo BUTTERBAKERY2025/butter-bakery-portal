@@ -305,8 +305,8 @@ export default function Menu() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="pt-14 text-white relative overflow-hidden" style={{ background: "#FF6B1A" }}>
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,0,0,0.12) 0%, transparent 70%)" }} />
+      <section className="pt-14 text-white relative overflow-hidden" style={{ background: "linear-gradient(145deg, #7A2E08 0%, #B84D18 55%, #CC6020 100%)" }}>
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 40%, rgba(255,160,60,0.18) 0%, transparent 65%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
             <p className="text-white/60 text-[10px] font-semibold uppercase tracking-[0.45em] mb-8">
@@ -441,7 +441,7 @@ export default function Menu() {
       </div>
 
       {/* ── Footer ── */}
-      <div className="py-12 text-center" style={{ background: "#FF6B1A" }}>
+      <div className="py-12 text-center" style={{ background: "linear-gradient(135deg, #7A2E08 0%, #B84D18 100%)" }}>
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="h-px w-12 bg-white/10" />
           <img src={logoBb} alt="" className="w-6 h-6 rounded-sm opacity-40" />
