@@ -7,6 +7,7 @@ import { Products } from "@/components/sections/Products";
 import { Branches } from "@/components/sections/Branches";
 import { Gallery } from "@/components/sections/Gallery";
 import { Investment } from "@/components/sections/Investment";
+import { FollowUs } from "@/components/sections/FollowUs";
 
 export default function LandingPage() {
   return (
@@ -21,6 +22,7 @@ export default function LandingPage() {
         <Branches />
         <Gallery />
         <Investment />
+        <FollowUs />
       </main>
 
       <Footer />
