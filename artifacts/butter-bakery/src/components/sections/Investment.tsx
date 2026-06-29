@@ -1,4 +1,7 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
+import brandBagImg from "@/assets/real/brand-bag.jpg";
+import airlineBbImg from "@/assets/real/airline-bb.jpg";
+import customerCupImg from "@/assets/real/customer-cup.jpg";
 
 const stats = [
   { value: "98%", label: "Customer Return Rate", sub: "Certified by our recurring customer base" },
@@ -14,7 +17,7 @@ const pillars = [
   },
   {
     title: "B2C + B2B + B2G Revenue",
-    body: "We serve individual end-customers directly through our branches, supply companies, offices, restaurants, and cafés on regular contracts, and engage in government tenders and institutional catering.",
+    body: "We serve individual end-customers directly through our branches, supply companies, offices, restaurants, and cafés on regular contracts, and engage in government tenders and institutional catering — including airline partnerships.",
   },
   {
     title: "Vision 2030 Aligned",
@@ -70,6 +73,39 @@ export function Investment() {
           </div>
         </div>
 
+        {/* Real photo strip — brand in action */}
+        <FadeIn>
+          <div className="grid grid-cols-3 gap-3 mb-16 h-52">
+            <div className="overflow-hidden relative group col-span-1">
+              <img
+                src={brandBagImg}
+                alt="Butter Bakery branded takeaway bag"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">Brand Identity</p>
+            </div>
+            <div className="overflow-hidden relative group col-span-1">
+              <img
+                src={customerCupImg}
+                alt="Customer with Butter Bakery coffee cup"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">Customer Experience</p>
+            </div>
+            <div className="overflow-hidden relative group col-span-1">
+              <img
+                src={airlineBbImg}
+                alt="Butter Bakery products on airline — B2G partnership"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              <p className="absolute bottom-3 left-3 text-[9px] uppercase tracking-widest text-white/70">B2G · Airline Partner</p>
+            </div>
+          </div>
+        </FadeIn>
+
         {/* Investment Pillars */}
         <FadeIn>
           <div className="border-t border-white/10 pt-16">
@@ -102,7 +138,7 @@ export function Investment() {
               </div>
               <div>
                 <p className="font-serif text-2xl text-white mb-2">B2G</p>
-                <p className="text-background/60 font-light text-sm leading-relaxed">Government contracts and institutional tenders for supplying bakery products at official events and for government departments.</p>
+                <p className="text-background/60 font-light text-sm leading-relaxed">Government contracts and institutional tenders — including airline partnerships — for supplying bakery products at official events and to government departments.</p>
               </div>
             </div>
           </div>

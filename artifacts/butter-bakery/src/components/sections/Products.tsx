@@ -1,6 +1,8 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/fade-in";
-import coffeeImg from "@/assets/coffee.png";
-import pastryImg from "@/assets/pastry.png";
+import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
+import staffPastriesImg from "@/assets/real/staff-pastries.jpg";
+import breadImg from "@/assets/real/bread.jpg";
+import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
 import { useState } from "react";
 
 const coffeeMenu = {
@@ -94,17 +96,20 @@ export function Products() {
           </p>
         </FadeIn>
 
-        {/* Hero Feature: Coffee + Pastry */}
+        {/* Hero Feature: Coffee + Pastry — real photos */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-32">
           <div className="group">
             <FadeIn direction="up">
               <div className="aspect-[4/3] w-full overflow-hidden mb-8 relative">
                 <img
-                  src={coffeeImg}
-                  alt="Specialty Coffee"
+                  src={coffeeBarImg}
+                  alt="Butter Bakery Coffee Bar — Specialty Coffee"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+                <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-sm px-4 py-2">
+                  <p className="text-[10px] uppercase tracking-widest text-foreground/60">Coffee Bar — Riyadh Branch</p>
+                </div>
               </div>
               <h4 className="font-serif text-3xl text-foreground mb-3">Specialty Coffee</h4>
               <p className="text-foreground/70 font-light leading-relaxed mb-4">
@@ -118,11 +123,14 @@ export function Products() {
             <FadeIn direction="up" delay={0.2}>
               <div className="aspect-[4/3] w-full overflow-hidden mb-8 relative">
                 <img
-                  src={pastryImg}
-                  alt="French Pastry"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  src={staffPastriesImg}
+                  alt="Butter Bakery French Pastry — Staff serving pastries"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+                <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-sm px-4 py-2">
+                  <p className="text-[10px] uppercase tracking-widest text-foreground/60">French Pastry — Daily Fresh</p>
+                </div>
               </div>
               <h4 className="font-serif text-3xl text-foreground mb-3">French Pastry</h4>
               <p className="text-foreground/70 font-light leading-relaxed mb-4">
@@ -131,6 +139,40 @@ export function Products() {
               <div className="h-[1px] w-full bg-border" />
             </FadeIn>
           </div>
+        </div>
+
+        {/* Bread + Outdoor — real photos strip */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          <FadeIn direction="up">
+            <div className="aspect-[16/7] overflow-hidden relative group">
+              <img
+                src={breadImg}
+                alt="Artisan Bread — Traditional Baked Daily"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-end p-6">
+                <div>
+                  <p className="font-serif text-xl text-white">Traditional Bread</p>
+                  <p className="text-white/60 text-xs uppercase tracking-widest mt-1">Baked fresh daily</p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn direction="up" delay={0.15}>
+            <div className="aspect-[16/7] overflow-hidden relative group">
+              <img
+                src={outdoorStandImg}
+                alt="Butter Bakery Outdoor Coffee Stand"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-end p-6">
+                <div>
+                  <p className="font-serif text-xl text-white">Seasonal Events</p>
+                  <p className="text-white/60 text-xs uppercase tracking-widest mt-1">We come to you</p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
         </div>
 
         {/* Full Menu Explorer */}
@@ -207,11 +249,16 @@ export function Products() {
                 </div>
               )}
               {activeTab === "bread" && (
-                <div className="max-w-md">
-                  <p className="text-foreground/50 font-light text-sm mb-6 leading-relaxed">
-                    Everything prepared fresh daily — international items crafted in French and European baking tradition, using part-baked and fully-baked techniques.
-                  </p>
-                  <MenuList items={breadMenu} title="Bread Varieties" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <p className="text-foreground/50 font-light text-sm mb-6 leading-relaxed">
+                      Everything prepared fresh daily — international items crafted in French and European baking tradition, using part-baked and fully-baked techniques.
+                    </p>
+                    <MenuList items={breadMenu} title="Bread Varieties" />
+                  </div>
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={breadImg} alt="Artisan Bread" className="w-full h-full object-cover rounded-sm" />
+                  </div>
                 </div>
               )}
             </div>

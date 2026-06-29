@@ -1,6 +1,8 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import foundersImg from "@/assets/real/founders.jpg";
 import eiffelImg from "@/assets/real/eiffel.jpg";
+import founderChefImg from "@/assets/real/founder-chef.jpg";
+import kidsBakingImg from "@/assets/real/kids-baking.jpg";
 
 export function Story() {
   return (
@@ -8,6 +10,7 @@ export function Story() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
+          {/* Left: Images */}
           <div className="order-2 lg:order-1 relative">
             <FadeIn direction="right">
               <div className="aspect-[4/5] md:aspect-square lg:aspect-[4/5] relative w-full max-w-lg mx-auto overflow-hidden">
@@ -20,8 +23,8 @@ export function Story() {
               </div>
             </FadeIn>
 
-            {/* Small eiffel accent */}
-            <FadeIn direction="right" delay={0.3}>
+            {/* Eiffel / European roots accent */}
+            <FadeIn direction="right" delay={0.25}>
               <div className="absolute -bottom-8 -right-4 w-36 h-24 overflow-hidden border border-primary/20 hidden lg:block">
                 <img
                   src={eiffelImg}
@@ -36,6 +39,7 @@ export function Story() {
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
           </div>
 
+          {/* Right: Text */}
           <div className="order-1 lg:order-2 flex flex-col justify-center">
             <FadeIn>
               <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">Our Heritage</h2>
@@ -68,9 +72,6 @@ export function Story() {
                 <p>
                   Vision met execution. Inspiration met planning. And Butter Bakery was born in Saudi Arabia — not just as a brand, but as a reflection of their shared passion. Their goal: a concept rooted in local authenticity but elevated with global sophistication.
                 </p>
-                <p>
-                  Today, Butter Bakery stands as the result of true friendship, shared belief, and a vision that transformed from a quiet café conversation into a signature destination for quality and culture.
-                </p>
               </div>
             </FadeIn>
 
@@ -82,7 +83,38 @@ export function Story() {
               </div>
             </FadeIn>
           </div>
+        </div>
 
+        {/* Second row: European expertise + Community */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20 lg:mt-28">
+          <FadeIn direction="up">
+            <div className="group overflow-hidden relative aspect-[4/3]">
+              <img
+                src={founderChefImg}
+                alt="Butter Bakery founder with European master chef — Pfahnl partnership"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="font-serif text-xl text-white">European Mastery</p>
+                <p className="text-white/60 text-xs uppercase tracking-widest mt-1">Collaboration with Pfahnl — Austrian Master Baker</p>
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn direction="up" delay={0.15}>
+            <div className="group overflow-hidden relative aspect-[4/3]">
+              <img
+                src={kidsBakingImg}
+                alt="Butter Bakery community kids baking workshop"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="font-serif text-xl text-white">Community & Culture</p>
+                <p className="text-white/60 text-xs uppercase tracking-widest mt-1">Baking workshops — passing on the craft</p>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>
