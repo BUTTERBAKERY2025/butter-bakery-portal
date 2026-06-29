@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Butter Bakery"
+version = "1.0.0"
+id = "artifacts/butter-bakery"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23056
+
+[services.development]
+run = "pnpm --filter @workspace/butter-bakery run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/butter-bakery", "run", "build" ]
+publicDir = "artifacts/butter-bakery/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23056"
+BASE_PATH = "/"
