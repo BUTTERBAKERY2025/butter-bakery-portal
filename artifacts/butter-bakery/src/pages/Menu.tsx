@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
 import logoBb from "@/assets/real/logo-bb.jpg";
+import doodleBread from "@/assets/real/doodle-bread.png";
+import doodleCoffee from "@/assets/real/doodle-coffee.png";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -555,6 +557,20 @@ export default function Menu() {
         <div className="h-12" style={{ background: "#faf9f7", clipPath: "ellipse(55% 100% at 50% 100%)" }} />
       </section>
 
+      {/* ── Bread doodle banner ── */}
+      <div className="overflow-hidden bg-[#faf9f7] border-b border-[#ece6dd]">
+        <motion.img
+          src={doodleBread}
+          alt=""
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="w-full max-w-4xl mx-auto block"
+          style={{ mixBlendMode: "multiply" }}
+          aria-hidden
+        />
+      </div>
+
       {/* ── Body ── */}
       <div className="max-w-7xl mx-auto flex pt-4 pb-24">
 
@@ -678,16 +694,20 @@ export default function Menu() {
         </main>
       </div>
 
+      {/* ── Coffee doodle banner ── */}
+      <div className="overflow-hidden bg-[#faf9f7]">
+        <img
+          src={doodleCoffee}
+          alt=""
+          className="w-full max-w-4xl mx-auto block"
+          style={{ mixBlendMode: "multiply" }}
+          aria-hidden
+        />
+      </div>
+
       {/* ── Footer ── */}
       <div className="py-14 text-center" style={{ background: "linear-gradient(135deg, #7A2E08 0%, #B84D18 100%)" }}>
-        {/* Footer doodle strip */}
-        <div className="flex items-center justify-center gap-8 mb-8 opacity-25">
-          <div className="text-white w-10 h-10"><DoodleCoffeeCup /></div>
-          <div className="text-white w-10 h-10"><DoodleCroissant /></div>
-          <div className="text-white w-10 h-10"><DoodleCake /></div>
-          <div className="text-white w-10 h-10"><DoodleBread /></div>
-          <div className="text-white w-10 h-10"><DoodlePizza /></div>
-        </div>
+
         <div className="flex items-center justify-center gap-4 mb-5">
           <div className="h-px w-10 bg-white/15" />
           <img src={logoBb} alt="" className="w-6 h-6 rounded-sm opacity-35" />
