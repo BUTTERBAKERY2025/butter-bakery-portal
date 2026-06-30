@@ -70,7 +70,7 @@ export function Gallery() {
         </FadeIn>
 
         {/* Masonry-style clickable grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[180px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[120px] sm:auto-rows-[140px] md:auto-rows-[185px]">
           {photos.map((photo, i) => (
             <FadeIn
               key={i}

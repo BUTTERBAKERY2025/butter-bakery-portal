@@ -248,6 +248,7 @@ export const translations = {
         { label: "Products", href: "#products" },
         { label: "Branches", href: "#locations" },
         { label: "Gallery", href: "#gallery" },
+        { label: "News", href: "/news" },
         { label: "Invest", href: "#invest" },
       ],
       branchList: [
@@ -511,6 +512,7 @@ export const translations = {
         { label: "منتجاتنا", href: "#products" },
         { label: "الفروع", href: "#locations" },
         { label: "المعرض", href: "#gallery" },
+        { label: "الأخبار", href: "/news" },
         { label: "استثمر", href: "#invest" },
       ],
       branchList: [

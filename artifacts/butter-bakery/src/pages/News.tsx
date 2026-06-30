@@ -28,6 +28,7 @@ interface NewsItem {
   dateAr: string;
   image: string;
   image2?: string;
+  imagePosition?: string;
   titleEn: string;
   titleAr: string;
   excerptEn: string;
@@ -46,6 +47,7 @@ const newsItems: NewsItem[] = [
     dateAr: "يونيو 2026",
     image: sevenSigningMain,
     image2: sevenSigningGroup,
+    imagePosition: "center bottom",
     featured: true,
     breaking: true,
     titleEn: "Historic Agreement: Butter Bakery Signs with Seven — PIF",
@@ -342,6 +344,7 @@ export default function News() {
                     src={featured.image}
                     alt={isAr ? featured.titleAr : featured.titleEn}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={featured.imagePosition ? { objectPosition: featured.imagePosition } : undefined}
                   />
                   {/* Breaking badge on image */}
                   {featured.breaking && (

@@ -18,9 +18,9 @@ export function Hero() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
-        <div className="absolute inset-0 bg-primary/8 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 sm:from-black/60 sm:via-black/30 sm:to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/10 sm:from-black/25" />
+        <div className="absolute inset-0 bg-primary/5 mix-blend-multiply" />
       </motion.div>
 
       <div className="container relative z-10 px-5 md:px-12 flex flex-col items-center justify-center text-center mt-16 md:mt-20">
@@ -36,7 +36,7 @@ export function Hero() {
         </FadeIn>
 
         <FadeIn delay={0.6}>
-          <h1 className={`font-serif text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-bold tracking-tight leading-[1.1] mb-5 md:mb-6 drop-shadow-lg ${isAr ? "leading-[1.35]" : ""}`}>
+          <h1 className={`font-serif text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-bold tracking-tight leading-[1.1] mb-5 md:mb-6 drop-shadow-2xl [text-shadow:0_2px_24px_rgba(0,0,0,0.7)] ${isAr ? "leading-[1.35]" : ""}`}>
             {t.hero.headline1}<br />
             <span className="italic font-light text-primary/90">{t.hero.headline2}</span>
           </h1>

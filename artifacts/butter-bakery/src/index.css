@@ -184,3 +184,17 @@ input, select, textarea {
 :lang(ar) blockquote {
   line-height: 1.9;
 }
+
+/* Hide scrollbar cross-browser */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Arabic font utility class */
+.font-arabic {
+  font-family: 'Noto Kufi Arabic', system-ui, sans-serif;
+}

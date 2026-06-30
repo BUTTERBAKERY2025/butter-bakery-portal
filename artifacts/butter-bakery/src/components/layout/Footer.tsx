@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { FadeIn } from "@/components/ui/fade-in";
 import logoBb from "@/assets/real/logo-bb.jpg";
 import { useLang } from "@/contexts/LanguageContext";
@@ -37,9 +38,15 @@ export function Footer() {
               <ul className="space-y-3 text-sm font-light">
                 {f.navLinks.map((item) => (
                   <li key={item.href}>
-                    <a href={item.href} className="text-background/60 hover:text-primary transition-colors duration-300">
-                      {item.label}
-                    </a>
+                    {item.href.startsWith("/") ? (
+                      <Link href={item.href} className="text-background/60 hover:text-primary transition-colors duration-300">
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <a href={item.href} className="text-background/60 hover:text-primary transition-colors duration-300">
+                        {item.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -77,7 +77,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = !item.isPage && activeSection === sectionId;
@@ -121,7 +121,7 @@ export function Navbar() {
             {/* Desktop: Invest */}
             <a
               href="/investor-relations"
-              className={`hidden md:inline-flex text-xs uppercase tracking-widest px-5 py-2.5 border transition-all duration-300 ${
+              className={`hidden lg:inline-flex text-xs uppercase tracking-widest px-4 py-2 xl:px-5 xl:py-2.5 border transition-all duration-300 ${
                 isScrolled
                   ? "border-primary text-primary hover:bg-primary hover:text-white"
                   : "border-white/50 text-white hover:bg-white hover:text-foreground"
@@ -132,7 +132,7 @@ export function Navbar() {
 
             {/* Mobile: Hamburger */}
             <button
-              className={`md:hidden p-1.5 transition-colors duration-300 ${
+              className={`lg:hidden p-1.5 transition-colors duration-300 ${
                 isScrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
               }`}
               onClick={() => setMobileOpen(true)}

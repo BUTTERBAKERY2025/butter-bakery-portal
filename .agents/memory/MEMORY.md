@@ -1,0 +1,1 @@
+- [Butter Bakery responsive patterns](butter-bakery-responsive.md) — lg: (1024px) is the desktop nav breakpoint; tablet (768-1023px) shows hamburger. scrollbar-hide must be defined manually in index.css.
