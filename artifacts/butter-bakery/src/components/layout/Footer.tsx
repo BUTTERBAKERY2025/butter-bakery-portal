@@ -7,9 +7,9 @@ export function Footer() {
   const f = t.footer;
 
   return (
-    <footer className="bg-dark-section text-background py-24 border-t border-white/10" id="contact">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
+    <footer className="bg-dark-section text-background py-14 md:py-24 border-t border-white/10" id="contact">
+      <div className="container mx-auto px-5 md:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 md:gap-8">
 
           <div className="col-span-2 md:col-span-5 flex flex-col">
             <FadeIn>

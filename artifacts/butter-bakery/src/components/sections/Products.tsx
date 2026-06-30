@@ -90,18 +90,18 @@ export function Products() {
   ];
 
   return (
-    <section id="products" className="py-32 md:py-48 bg-background relative">
-      <div className="container mx-auto px-6 md:px-12">
-        <FadeIn className="text-center mb-20 md:mb-28">
+    <section id="products" className="py-16 md:py-32 lg:py-48 bg-background relative">
+      <div className="container mx-auto px-5 md:px-12">
+        <FadeIn className="text-center mb-12 md:mb-20 lg:mb-28">
           <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{p.eyebrow}</h2>
-          <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-6">{p.title}</h3>
-          <p className="text-foreground/60 font-light max-w-2xl mx-auto text-lg leading-relaxed">
+          <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-4 md:mb-6">{p.title}</h3>
+          <p className="text-foreground/60 font-light max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             {p.subtitle}
           </p>
         </FadeIn>
 
         {/* Hero Feature: Coffee + Pastry */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 mb-16 md:mb-24 lg:mb-32">
           <div className="group">
             <FadeIn direction="up">
               <div className="aspect-[4/3] w-full overflow-hidden mb-8 relative">
@@ -147,8 +147,8 @@ export function Products() {
 
         {/* Pastry Collection Full-Width Showcase */}
         <FadeIn>
-          <div className="relative w-full overflow-hidden mb-20 group">
-            <div className="aspect-[21/8] md:aspect-[21/7] w-full overflow-hidden">
+          <div className="relative w-full overflow-hidden mb-10 md:mb-20 group">
+            <div className="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/8] w-full overflow-hidden">
               <img
                 src={pastryFlatLayImg}
                 alt="Butter Bakery Pastry Collection — Artisan croissants, tarts & chimney cakes"
@@ -176,7 +176,7 @@ export function Products() {
         </FadeIn>
 
         {/* Bread + Outdoor strip */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-20">
           <FadeIn direction="up">
             <div className="aspect-[16/7] overflow-hidden relative group">
               <img src={breadImg} alt="Artisan Bread — Traditional Baked Daily" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -223,7 +223,7 @@ export function Products() {
               </div>
             </div>
 
-            <div className="p-8 md:p-12">
+            <div className="p-4 md:p-12">
               {activeTab === "coffee" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   <MenuList items={coffeeMenu.drip} title="Coffee Drip" />
@@ -293,7 +293,7 @@ export function Products() {
 
         {/* Catering CTA */}
         <FadeIn delay={0.2}>
-          <div className="mt-16 p-10 md:p-14 border border-primary/20 text-center">
+          <div className="mt-10 md:mt-16 p-6 md:p-14 border border-primary/20 text-center">
             <h4 className="font-serif text-2xl md:text-3xl text-foreground mb-4">{p.catering}</h4>
             <p className="text-foreground/60 font-light leading-relaxed max-w-xl mx-auto mb-6">
               {p.cateringBody}

@@ -10,9 +10,9 @@ export function Story() {
   const s = t.story;
 
   return (
-    <section id="story" className="py-20 md:py-32 lg:py-48 bg-background relative overflow-hidden">
+    <section id="story" className="py-14 md:py-28 lg:py-40 bg-background relative overflow-hidden">
       <div className="container mx-auto px-5 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
 
           {/* Images — order flips in RTL automatically */}
           <div className="order-2 lg:order-1 relative">
@@ -55,7 +55,7 @@ export function Story() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <div className="space-y-6 text-foreground/70 font-light leading-relaxed text-lg">
+              <div className="space-y-5 text-foreground/70 font-light leading-relaxed text-base md:text-lg">
                 <p>{s.p1}</p>
                 <p>{s.p2}</p>
 
@@ -83,7 +83,7 @@ export function Story() {
         </div>
 
         {/* Second row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20 lg:mt-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 md:mt-20 lg:mt-28">
           <FadeIn direction="up">
             <div className="group overflow-hidden relative aspect-[4/3]">
               <img
@@ -116,7 +116,7 @@ export function Story() {
 
         {/* International Chef Team */}
         <FadeIn delay={0.2} direction="up">
-          <div className="mt-16 lg:mt-24 border border-border/40 p-8 md:p-12 relative overflow-hidden">
+          <div className="mt-10 md:mt-16 lg:mt-24 border border-border/40 p-6 md:p-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative z-10">
               <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{s.craftedEyebrow}</p>

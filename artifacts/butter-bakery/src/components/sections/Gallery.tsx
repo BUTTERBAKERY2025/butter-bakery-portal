@@ -54,11 +54,11 @@ export function Gallery() {
   }, [photos.length]);
 
   return (
-    <section className="py-24 bg-secondary relative" id="gallery">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-14 md:py-24 bg-secondary relative" id="gallery">
+      <div className="container mx-auto px-4 md:px-12">
 
-        <FadeIn className="mb-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <FadeIn className="mb-8 md:mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
             <div>
               <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-3">{g.eyebrow}</h2>
               <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium">{g.title}</h3>
@@ -70,7 +70,7 @@ export function Gallery() {
         </FadeIn>
 
         {/* Masonry-style clickable grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[180px]">
           {photos.map((photo, i) => (
             <FadeIn
               key={i}
@@ -85,16 +85,18 @@ export function Gallery() {
                   loading={i > 3 ? "lazy" : undefined}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Zoom icon */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                {/* Gradient always visible on mobile, hover-only on desktop */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Zoom icon — desktop hover only */}
+                <div className="absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400 hidden md:flex">
                   <div className="w-10 h-10 border border-white/50 flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
                     </svg>
                   </div>
                 </div>
-                <p className="absolute bottom-0 left-0 right-0 px-4 py-3 text-white text-xs uppercase tracking-widest font-light translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                {/* Caption — always visible on mobile, slides in on desktop hover */}
+                <p className="absolute bottom-0 left-0 right-0 px-2 md:px-4 py-2 md:py-3 text-white text-[9px] md:text-xs uppercase tracking-widest font-light md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
                   {photo.caption}
                 </p>
               </div>

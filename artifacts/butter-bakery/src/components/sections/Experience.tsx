@@ -6,12 +6,12 @@ export function Experience() {
   const ex = t.experience;
 
   return (
-    <section id="experience" className="py-20 md:py-32 bg-background overflow-hidden">
-      <div className="container mx-auto px-5 md:px-12">
+    <section id="experience" className="py-14 md:py-28 lg:py-32 bg-background overflow-hidden">
+      <div className="container mx-auto px-4 md:px-12">
 
         {/* Header */}
         <FadeIn>
-          <div className="text-center mb-14 md:mb-20">
+          <div className="text-center mb-10 md:mb-20">
             <p className="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-5">
               {ex.eyebrow}
             </p>

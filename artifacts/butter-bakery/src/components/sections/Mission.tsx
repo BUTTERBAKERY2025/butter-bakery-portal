@@ -23,7 +23,7 @@ export function Mission() {
   };
 
   return (
-    <section className="relative py-32 text-background overflow-hidden flex items-center justify-center min-h-[70vh]">
+    <section className="relative py-16 md:py-32 text-background overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
       <div className="absolute inset-0 z-0">
         <img
           src={berryBasketImg}

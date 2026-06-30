@@ -32,9 +32,9 @@ export function Branches() {
   const b = t.branches;
 
   return (
-    <section id="locations" className="py-20 md:py-32 bg-secondary relative">
+    <section id="locations" className="py-14 md:py-28 lg:py-32 bg-secondary relative">
       <div className="container mx-auto px-5 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-20 gap-5 md:gap-8">
           <FadeIn>
             <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{b.eyebrow}</h2>
             <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium">{b.title}</h3>
@@ -72,9 +72,9 @@ export function Branches() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
                 </div>
-                <div className="p-8 md:p-10 flex flex-col flex-grow">
-                  <h4 className="font-serif text-2xl mb-1">{branch.location}</h4>
-                  <p className="text-primary text-xs uppercase tracking-[0.2em] font-medium mb-4">{branch.tagline}</p>
+                <div className="p-5 md:p-8 lg:p-10 flex flex-col flex-grow">
+                  <h4 className="font-serif text-xl md:text-2xl mb-1">{branch.location}</h4>
+                  <p className="text-primary text-xs uppercase tracking-[0.2em] font-medium mb-3">{branch.tagline}</p>
                   <p className="text-foreground/70 font-light leading-relaxed flex-grow text-sm">
                     {branch.description}
                   </p>
@@ -85,7 +85,7 @@ export function Branches() {
         </div>
 
         {/* Other Branches */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
           {b.others.map((branch, idx) => {
             const imgs = otherImages[idx];
             return (
@@ -108,12 +108,12 @@ export function Branches() {
                       <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
                     </div>
                   )}
-                  <div className="p-8 md:p-10 flex flex-col flex-grow">
+                  <div className="p-5 md:p-8 lg:p-10 flex flex-col flex-grow">
                     <div className="text-primary text-xs font-medium tracking-widest uppercase mb-2">
                       {branch.city}
                     </div>
-                    <h4 className="font-serif text-2xl mb-1">{branch.location}</h4>
-                    <p className="text-foreground/50 text-xs uppercase tracking-[0.15em] font-light mb-4 italic">{branch.tagline}</p>
+                    <h4 className="font-serif text-xl md:text-2xl mb-1">{branch.location}</h4>
+                    <p className="text-foreground/50 text-xs uppercase tracking-[0.15em] font-light mb-3 italic">{branch.tagline}</p>
                     <p className="text-foreground/70 font-light leading-relaxed text-sm">
                       {branch.description}
                     </p>
@@ -126,7 +126,7 @@ export function Branches() {
 
         {/* Quote */}
         <FadeIn delay={0.6}>
-          <div className="mt-20 text-center">
+          <div className="mt-12 md:mt-20 text-center">
             <p className="font-serif text-xl md:text-2xl text-foreground/60 italic">
               {b.quote}
             </p>

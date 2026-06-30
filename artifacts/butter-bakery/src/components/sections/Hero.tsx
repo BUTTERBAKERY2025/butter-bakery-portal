@@ -23,7 +23,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-primary/8 mix-blend-multiply" />
       </motion.div>
 
-      <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center justify-center text-center mt-20">
+      <div className="container relative z-10 px-5 md:px-12 flex flex-col items-center justify-center text-center mt-16 md:mt-20">
 
         <FadeIn direction="down" delay={0.4}>
           <div className="flex items-center gap-4 mb-8 justify-center">
