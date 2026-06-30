@@ -3,6 +3,7 @@ import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
 import breadImg from "@/assets/real/bread.jpg";
 import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
 import elegantCroissantImg from "@assets/714264474_18074789993651984_4074190906897943917_n_1782725587614.jpg";
+import pastryFlatLayImg from "@assets/image_1782800185112.png";
 import { useState } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 
@@ -143,6 +144,36 @@ export function Products() {
             </FadeIn>
           </div>
         </div>
+
+        {/* Pastry Collection Full-Width Showcase */}
+        <FadeIn>
+          <div className="relative w-full overflow-hidden mb-20 group">
+            <div className="aspect-[21/8] md:aspect-[21/7] w-full overflow-hidden">
+              <img
+                src={pastryFlatLayImg}
+                alt="Butter Bakery Pastry Collection — Artisan croissants, tarts & chimney cakes"
+                className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+              />
+            </div>
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            {/* Caption */}
+            <div className="absolute bottom-0 inset-x-0 p-6 md:p-10 flex flex-col md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-white/60 mb-2">Our Collection</p>
+                <p className="font-serif text-2xl md:text-4xl text-white leading-tight">
+                  Artisan Pastry &amp; Viennoiserie
+                </p>
+                <p className="text-white/60 font-light text-sm mt-1 tracking-wide">
+                  طازجة كل يوم — Freshly Baked Every Day
+                </p>
+              </div>
+              <p className="text-white/40 text-xs uppercase tracking-widest mt-4 md:mt-0 md:text-right">
+                Croissants · Tarts · Chimney Cakes · Macarons
+              </p>
+            </div>
+          </div>
+        </FadeIn>
 
         {/* Bread + Outdoor strip */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
