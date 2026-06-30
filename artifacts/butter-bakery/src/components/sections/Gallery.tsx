@@ -9,6 +9,8 @@ import staffServingImg from "@/assets/real/staff-serving.jpg";
 import customerCupImg from "@/assets/real/customer-cup.jpg";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
 import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
+import branchMedinaAerialImg from "@/assets/real/branch-medina-aerial.jpg";
+import branchRiyadhEmbNightImg from "@/assets/real/branch-riyadh-emb-night.jpg";
 
 const berryBasketImg = "/gallery/684696860_18069942209651984_7097828562111979045_n_1782725587615.jpg";
 const avocadoCroissantImg = "/gallery/714599459_18074789468651984_7373858773853613920_n_1782725587613.jpg";
@@ -25,20 +27,22 @@ export function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const photos = [
-    { src: berryBasketImg,      caption: g.labels.berryBasket,       span: "col-span-1 row-span-2" },
-    { src: avocadoCroissantImg, caption: g.labels.avocadoCroissant,  span: "col-span-1 row-span-1" },
-    { src: kitkatImg,           caption: g.labels.kitkat,            span: "col-span-1 row-span-1" },
-    { src: branchRiyadhImg,     caption: "Riyadh — Anas Bin Malik",  span: "col-span-2 row-span-2" },
-    { src: purpleCakeImg,       caption: g.labels.purpleCake,        span: "col-span-1 row-span-1" },
-    { src: elegantCroissantImg, caption: g.labels.elegantCroissant,  span: "col-span-1 row-span-1" },
-    { src: yellowCarDrinkImg,   caption: g.labels.coldDrink,         span: "col-span-2 row-span-1" },
-    { src: branchAbhaImg,       caption: g.labels.deliveryBox,       span: "col-span-1 row-span-1" },
-    { src: coffeeBarImg,        caption: "Coffee Bar",               span: "col-span-1 row-span-1" },
-    { src: apronImg,            caption: g.labels.branchSketch,      span: "col-span-1 row-span-1" },
-    { src: staffServingImg,     caption: g.labels.yellowCake,        span: "col-span-1 row-span-1" },
-    { src: deliveryBoxImg,      caption: g.labels.apron,             span: "col-span-1 row-span-1" },
-    { src: customerCupImg,      caption: g.labels.summerCups,        span: "col-span-1 row-span-1" },
-    { src: outdoorStandImg,     caption: g.labels.icedDrinks,        span: "col-span-2 row-span-1" },
+    { src: berryBasketImg,          caption: g.labels.berryBasket,       span: "col-span-1 row-span-2" },
+    { src: avocadoCroissantImg,     caption: g.labels.avocadoCroissant,  span: "col-span-1 row-span-1" },
+    { src: kitkatImg,               caption: g.labels.kitkat,            span: "col-span-1 row-span-1" },
+    { src: branchRiyadhImg,         caption: "Riyadh — Anas Bin Malik",  span: "col-span-2 row-span-2" },
+    { src: purpleCakeImg,           caption: g.labels.purpleCake,        span: "col-span-1 row-span-1" },
+    { src: elegantCroissantImg,     caption: g.labels.elegantCroissant,  span: "col-span-1 row-span-1" },
+    { src: branchMedinaAerialImg,   caption: g.labels.medinaLabel,       span: "col-span-2 row-span-2" },
+    { src: yellowCarDrinkImg,       caption: g.labels.coldDrink,         span: "col-span-1 row-span-1" },
+    { src: branchAbhaImg,           caption: g.labels.deliveryBox,       span: "col-span-1 row-span-1" },
+    { src: coffeeBarImg,            caption: "Coffee Bar",               span: "col-span-1 row-span-1" },
+    { src: apronImg,                caption: g.labels.branchSketch,      span: "col-span-1 row-span-1" },
+    { src: staffServingImg,         caption: g.labels.yellowCake,        span: "col-span-1 row-span-1" },
+    { src: branchRiyadhEmbNightImg, caption: g.labels.riyadhEmbLabel,    span: "col-span-2 row-span-1" },
+    { src: customerCupImg,          caption: g.labels.summerCups,        span: "col-span-1 row-span-1" },
+    { src: outdoorStandImg,         caption: g.labels.icedDrinks,        span: "col-span-1 row-span-1" },
+    { src: deliveryBoxImg,          caption: g.labels.apron,             span: "col-span-2 row-span-1" },
   ];
 
   const handleNavigate = useCallback((next: boolean) => {

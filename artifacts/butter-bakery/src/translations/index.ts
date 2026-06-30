@@ -131,6 +131,8 @@ export const translations = {
         apron: "Drive-Thru Vibes",
         deliveryBox: "Abha — Al Hizam Branch",
         branchSketch: "The Bb Identity",
+        medinaLabel: "Al Madinah Al Munawwarah",
+        riyadhEmbLabel: "Riyadh — Embassies District",
       },
     },
     investment: {
@@ -154,7 +156,7 @@ export const translations = {
       pillars: [
         {
           title: "Proven Multi-City Concept",
-          body: "Operational branches in Abha (award-winning tourism project), Riyadh (Anas Bin Malik), and Tabuk — plus seasonal mobile branches at Namas, Taif, winter festivals, and national events.",
+          body: "Operational branches in Abha (award-winning tourism project), Riyadh (Anas Bin Malik), Tabuk, Al Madinah Al Munawwarah, and Riyadh (Al Safarat — Ministry of Tourism partner) — plus seasonal mobile branches at Namas, Taif, Aseer Summer Season, and national events.",
         },
         {
           title: "B2C + B2B + B2G Revenue",
@@ -244,8 +246,10 @@ export const translations = {
         "Abha — Al Hizam",
         "Riyadh — Anas Bin Malik",
         "Tabuk — Al Ward",
+        "Al Madinah Al Munawwarah",
+        "Riyadh — Al Safarat (Ministry of Tourism)",
       ],
-      seasonal: "Seasonal: Namas · Taif · National Events",
+      seasonal: "Seasonal: Namas · Taif · Aseer Summer · National Events",
     },
   },
 
@@ -381,6 +385,8 @@ export const translations = {
         apron: "درايف ثرو",
         deliveryBox: "فرع أبها — الحزام",
         branchSketch: "هوية Bb",
+        medinaLabel: "المدينة المنورة",
+        riyadhEmbLabel: "الرياض — حي السفارات",
       },
     },
     investment: {
@@ -404,7 +410,7 @@ export const translations = {
       pillars: [
         {
           title: "مفهوم متعدد المدن مُثبت",
-          body: "فروع تشغيلية في أبها (مشروع سياحي حائز على جوائز)، الرياض (أنس بن مالك)، وتبوك — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف والمهرجانات الشتوية والمناسبات الوطنية.",
+          body: "فروع تشغيلية في أبها (مشروع سياحي حائز على جوائز)، الرياض (أنس بن مالك)، تبوك، المدينة المنورة، والرياض (حي السفارات — شراكة مع وزارة السياحة) — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف وموسم صيف عسير والمناسبات الوطنية.",
         },
         {
           title: "إيرادات B2C + B2B + B2G",
@@ -494,8 +500,10 @@ export const translations = {
         "أبها — الحزام",
         "الرياض — أنس بن مالك",
         "تبوك — الورد",
+        "المدينة المنورة",
+        "الرياض — حي السفارات (وزارة السياحة)",
       ],
-      seasonal: "موسمية: النماص · الطائف · المناسبات الوطنية",
+      seasonal: "موسمية: النماص · الطائف · موسم صيف عسير · المناسبات الوطنية",
     },
   },
 } as const;
