@@ -9,9 +9,9 @@ export function Footer() {
   return (
     <footer className="bg-dark-section text-background py-24 border-t border-white/10" id="contact">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
 
-          <div className="md:col-span-5 flex flex-col">
+          <div className="col-span-2 md:col-span-5 flex flex-col">
             <FadeIn>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 overflow-hidden rounded-sm ring-1 ring-white/10">
@@ -64,7 +64,7 @@ export function Footer() {
             </FadeIn>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="col-span-2 md:col-span-3">
             <FadeIn delay={0.2}>
               <h4 className="text-xs uppercase tracking-widest text-background/40 mb-6">{f.branchesTitle}</h4>
               <ul className="space-y-2 text-sm font-light text-background/60">
@@ -81,7 +81,7 @@ export function Footer() {
 
         </div>
 
-        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-background/30 uppercase tracking-wider">
+        <div className="mt-12 md:mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-background/30 uppercase tracking-wider">
           <p>© {new Date().getFullYear()} Butter Bakery. {f.copyright}</p>
           <div className="flex gap-6 items-center">
             <a

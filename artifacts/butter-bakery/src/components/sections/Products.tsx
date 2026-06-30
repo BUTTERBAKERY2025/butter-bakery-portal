@@ -204,9 +204,9 @@ export function Products() {
         {/* Full Menu Explorer */}
         <FadeIn>
           <div className="border border-border/50 rounded-sm overflow-hidden">
-            <div className="bg-secondary/50 px-6 py-4 border-b border-border/50">
+            <div className="bg-secondary/50 px-4 md:px-6 py-4 border-b border-border/50">
               <p className="text-xs uppercase tracking-[0.3em] text-foreground/50 font-medium mb-4">{p.browseMenu}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-nowrap overflow-x-auto gap-2 pb-1 md:flex-wrap md:pb-0 scrollbar-hide" style={{scrollbarWidth:'none'}}>
                 {categories.map((cat) => (
                   <button
                     key={cat.id}

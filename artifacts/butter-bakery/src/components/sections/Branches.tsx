@@ -19,8 +19,8 @@ export function Branches() {
   const b = t.branches;
 
   return (
-    <section id="locations" className="py-32 bg-secondary relative">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="locations" className="py-20 md:py-32 bg-secondary relative">
+      <div className="container mx-auto px-5 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <FadeIn>
             <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{b.eyebrow}</h2>

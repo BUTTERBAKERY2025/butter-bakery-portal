@@ -10,9 +10,9 @@ export function Story() {
   const s = t.story;
 
   return (
-    <section id="story" className="py-32 md:py-48 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <section id="story" className="py-20 md:py-32 lg:py-48 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-5 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
           {/* Images — order flips in RTL automatically */}
           <div className="order-2 lg:order-1 relative">
@@ -46,7 +46,7 @@ export function Story() {
           <div className="order-1 lg:order-2 flex flex-col justify-center">
             <FadeIn>
               <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{s.eyebrow}</h2>
-              <h3 className={`font-serif text-4xl md:text-5xl lg:text-6xl text-foreground font-medium leading-[1.1] mb-3 ${isAr ? "leading-[1.3]" : ""}`}>
+              <h3 className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground font-medium leading-[1.1] mb-3 ${isAr ? "leading-[1.3]" : ""}`}>
                 {s.title}
               </h3>
               <p className="text-foreground/40 text-sm font-light mb-10 tracking-widest">

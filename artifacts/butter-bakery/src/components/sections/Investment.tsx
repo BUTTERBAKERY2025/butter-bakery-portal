@@ -10,18 +10,18 @@ export function Investment() {
   const inv = t.investment;
 
   return (
-    <section id="invest" className="py-32 md:py-48 bg-dark-section text-background relative overflow-hidden">
+    <section id="invest" className="py-20 md:py-32 lg:py-48 bg-dark-section text-background relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+      <div className="container mx-auto px-5 md:px-12 relative z-10">
 
         {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-16 md:mb-24">
           <div className="lg:col-span-5">
             <FadeIn>
               <h2 className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{inv.eyebrow}</h2>
-              <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-light leading-[1.1] mb-8 whitespace-pre-line">
+              <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-light leading-[1.15] mb-6 md:mb-8">
                 {inv.title}
               </h3>
               <p className="text-background/70 font-light text-lg leading-relaxed mb-10">
@@ -56,7 +56,7 @@ export function Investment() {
 
         {/* Photo strip */}
         <FadeIn>
-          <div className="grid grid-cols-3 gap-3 mb-16 h-52">
+          <div className="grid grid-cols-3 gap-2 md:gap-3 mb-16 h-36 sm:h-44 md:h-52">
             <div className="overflow-hidden relative group col-span-1">
               <img src={brandBagImg} alt="Butter Bakery branded takeaway bag" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
