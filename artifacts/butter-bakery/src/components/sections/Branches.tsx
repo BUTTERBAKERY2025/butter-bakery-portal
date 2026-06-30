@@ -6,6 +6,8 @@ import branchAbhaGardenImg from "@/assets/real/branch-abha-garden.jpg";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
 import seasonalDayImg from "@/assets/real/seasonal-summer-day.jpg";
 import seasonalNightImg from "@/assets/real/seasonal-summer-night.jpg";
+import branchMedinaAerialImg from "@/assets/real/branch-medina-aerial.jpg";
+import branchMedinaSunsetImg from "@/assets/real/branch-medina-sunset.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const featuredImages = [
@@ -16,6 +18,7 @@ const featuredImages = [
 const otherImages: { image: string; secondImage?: string }[] = [
   { image: coffeeBarImg },
   { image: seasonalDayImg, secondImage: seasonalNightImg },
+  { image: branchMedinaAerialImg, secondImage: branchMedinaSunsetImg },
 ];
 
 export function Branches() {

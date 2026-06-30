@@ -99,6 +99,12 @@ export const translations = {
           tagline: "We come to you wherever the joy is — #بارد_ممطر_صيفاً",
           description: "With every summer season, our mobile branches set off to tour Saudi Arabia's most vibrant tourist destinations. From the cool, misty mountains of Namas and Taif in Asir, to Aseer Summer Season festivals and national events — Butter Bakery brings its unique European-crafted bakery experience directly to where Saudi families spend their summers. Partnering with the Aseer Development Authority and the National Events Center, we are proud to be part of the Kingdom's thriving tourism scene.",
         },
+        {
+          city: "Al Madinah Al Munawwarah",
+          location: "The Luminous City — المدينة المنورة",
+          tagline: "Where every sip carries the spirit of the city",
+          description: "In the heart of the most luminous city on earth, Butter Bakery opens its doors with a presence worthy of its sacred surroundings. Our Medina branch stands as a refined architectural landmark — featuring a stunning rooftop terrace that frames the city's timeless skyline and majestic mountains at golden hour. From the ground-floor café where artisan baked goods meet specialty coffee, to the open-air rooftop where guests linger over the horizon, every corner is designed to honor the spirit of Al Madinah. A destination for pilgrims, residents, and visitors seeking a moment of beauty alongside devotion.",
+        },
       ],
     },
     gallery: {
@@ -336,6 +342,12 @@ export const translations = {
           location: "المملكة العربية السعودية — موسم صيف عسير",
           tagline: "نأتيكم حيث يكون الفرح — #بارد_ممطر_صيفاً",
           description: "مع كل موسم صيف، تنطلق فروعنا الموسمية المتنقلة لتجوب أجمل الوجهات السياحية في المملكة. من أجواء النماص والطائف الباردة الممطرة في عسير، إلى مهرجانات موسم صيف عسير والفعاليات الوطنية الكبرى — تحمل بتر بيكري تجربتها الفريدة إلى حيث تقضي الأسر السعودية صيفها. بالشراكة مع هيئة تطوير منطقة عسير والمركز الوطني للفعاليات، نفتخر بكوننا جزءاً من المشهد السياحي المزدهر في المملكة.",
+        },
+        {
+          city: "المدينة المنورة",
+          location: "المدينة المنورة — مدينة النور",
+          tagline: "حيث كل رشفة تحمل روح المدينة",
+          description: "في قلب أنور مدينة على وجه الأرض، تفتح بتر بيكري أبوابها بحضور يليق بهذه الأرض المباركة. يتميز فرع المدينة المنورة بموقعه المعماري الراقي وبمطل خلّاب على سطح المبنى يُطل على أفق المدينة الخالد وجبالها الشامخة في ساعة الغروب الذهبي. من مقهى الطابق الأرضي حيث تلتقي المخبوزات الحرفية بالقهوة المختصة، إلى المطل المفتوح حيث يُطيل الزوار النظر في الأفق — كل ركن مصمم ليكرّم روح المدينة المنورة. وجهة للحجاج والمقيمين وكل زائر يبحث عن لحظة من الجمال.",
         },
       ],
     },
