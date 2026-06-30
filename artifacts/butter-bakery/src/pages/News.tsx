@@ -219,14 +219,42 @@ export default function News() {
   const [active, setActive] = useState<Category>("all");
   const [selected, setSelected] = useState<NewsItem | null>(null);
 
+  // Scroll to top once on mount
   useEffect(() => {
     window.scrollTo({ top: 0 });
+  }, []);
+
+  // Update page title; restore it when leaving the page
+  useEffect(() => {
     document.title = isAr ? "الأخبار — بتر بيكري" : "News — Butter Bakery";
+    return () => { document.title = "Butter Bakery"; };
   }, [isAr]);
 
+  // Body scroll lock for modal — preserves scroll position (iOS fix)
   useEffect(() => {
-    document.body.style.overflow = selected ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (selected) {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = String(scrollY);
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = parseInt(document.body.dataset.scrollY ?? "0", 10);
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+      if (scrollY) window.scrollTo(0, scrollY);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+    };
   }, [selected]);
 
   const BackArrow = isAr ? ArrowRight : ArrowLeft;
