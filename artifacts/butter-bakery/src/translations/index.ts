@@ -178,6 +178,32 @@ export const translations = {
         body: "Government contracts and institutional tenders — including airline partnerships — for supplying bakery products at official events and to government departments.",
       },
     },
+    experience: {
+      eyebrow: "The Butter Bakery Academy",
+      title: "Baking Is Our Language",
+      subtitle: "We share our craft — with every generation, every season, every moment.",
+      workshop: {
+        label: "Live Baking Workshops",
+        caption: "Where little hands shape big dreams",
+      },
+      piping: {
+        label: "The Art of Precision",
+        caption: "Every detail, perfectly crafted",
+      },
+      croissant: {
+        label: "Crafted by Masters",
+        caption: "European technique, Saudi heart",
+      },
+      summer: {
+        label: "Every Season Has a Story",
+        caption: "Summer at Butter Bakery",
+      },
+      certificates: {
+        label: "Junior Chefs Graduate",
+        caption: "From our oven to your proudest moment",
+        quote: "\"We don't just bake bread — we bake confidence, joy, and memories that last a lifetime.\"",
+      },
+    },
     followUs: {
       eyebrow: "Follow Us",
       handle: "@butterbakery_sa",
@@ -388,6 +414,32 @@ export const translations = {
       b2g: {
         label: "B2G",
         body: "العقود الحكومية والمناقصات المؤسسية — بما تشمل شراكات الطيران — لتوريد منتجات المخبز في المناسبات الرسمية وللدوائر الحكومية.",
+      },
+    },
+    experience: {
+      eyebrow: "أكاديمية بتر بيكري",
+      title: "الخبز لغتنا",
+      subtitle: "نشارك حرفتنا — مع كل جيل، كل موسم، كل لحظة.",
+      workshop: {
+        label: "ورش الخبز الحي",
+        caption: "حيث تُصنع الأحلام الصغيرة",
+      },
+      piping: {
+        label: "فن الدقة",
+        caption: "كل تفصيلة، بكل عناية",
+      },
+      croissant: {
+        label: "بأيدي المحترفين",
+        caption: "أسلوب أوروبي، روح سعودية",
+      },
+      summer: {
+        label: "لكل موسم حكايته",
+        caption: "الصيف في بتر بيكري",
+      },
+      certificates: {
+        label: "خريجو الشيف الصغير",
+        caption: "من مطبخنا إلى لحظتكم الأجمل",
+        quote: "\"نحن لا نخبز الخبز فحسب — بل نخبز الثقة، والفرح، والذكريات التي تدوم طوال العمر.\"",
       },
     },
     followUs: {
