@@ -105,6 +105,12 @@ export const translations = {
           tagline: "Where every sip carries the spirit of the city",
           description: "In the heart of the most luminous city on earth, Butter Bakery opens its doors with a presence worthy of its sacred surroundings. Our Medina branch stands as a refined architectural landmark — featuring a stunning rooftop terrace that frames the city's timeless skyline and majestic mountains at golden hour. From the ground-floor café where artisan baked goods meet specialty coffee, to the open-air rooftop where guests linger over the horizon, every corner is designed to honor the spirit of Al Madinah. A destination for pilgrims, residents, and visitors seeking a moment of beauty alongside devotion.",
         },
+        {
+          city: "Riyadh — Embassies District",
+          location: "Al Safarat — حي السفارات",
+          tagline: "A royal experience in the heart of the capital",
+          description: "In one of Riyadh's most distinguished diplomatic quarters, Butter Bakery proudly operates in partnership with the Ministry of Tourism — a testament to the brand's role in elevating Saudi hospitality on the national stage. Set beneath sweeping Bedouin-inspired shade sails and surrounded by lush palms and terracotta urns, this branch transforms the Embassies District into a premium outdoor cultural destination. As the sun sets over the capital and warm lights illuminate the café façade, guests from across the world gather to experience the finest specialty coffee and artisan pastries in an atmosphere that blends Saudi heritage with European artisan craft.",
+        },
       ],
     },
     gallery: {
@@ -348,6 +354,12 @@ export const translations = {
           location: "المدينة المنورة — مدينة النور",
           tagline: "حيث كل رشفة تحمل روح المدينة",
           description: "في قلب أنور مدينة على وجه الأرض، تفتح بتر بيكري أبوابها بحضور يليق بهذه الأرض المباركة. يتميز فرع المدينة المنورة بموقعه المعماري الراقي وبمطل خلّاب على سطح المبنى يُطل على أفق المدينة الخالد وجبالها الشامخة في ساعة الغروب الذهبي. من مقهى الطابق الأرضي حيث تلتقي المخبوزات الحرفية بالقهوة المختصة، إلى المطل المفتوح حيث يُطيل الزوار النظر في الأفق — كل ركن مصمم ليكرّم روح المدينة المنورة. وجهة للحجاج والمقيمين وكل زائر يبحث عن لحظة من الجمال.",
+        },
+        {
+          city: "الرياض — حي السفارات",
+          location: "حي السفارات — Al Safarat",
+          tagline: "تجربة راقية في قلب العاصمة",
+          description: "في أحد أرقى الأحياء الدبلوماسية في الرياض، تفخر بتر بيكري بتشغيل هذا الفرع بشراكة مع وزارة السياحة — شهادة على دور العلامة في رفع مستوى الضيافة السعودية على الصعيد الوطني. تحت مظلات مستوحاة من التراث البدوي ووسط النخيل الباسق والجرار الفخارية، يتحول حي السفارات إلى وجهة ثقافية راقية في الهواء الطلق. ومع غروب الشمس على العاصمة وإضاءة واجهة المقهى بدفء مميز، يلتقي ضيوف من مختلف أنحاء العالم ليختبروا أجود القهوة المختصة والمخبوزات الحرفية في أجواء تمزج التراث السعودي بالحرفية الأوروبية.",
         },
       ],
     },
