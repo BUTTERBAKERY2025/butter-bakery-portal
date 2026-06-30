@@ -3,8 +3,9 @@ import branchAbhaImg from "@/assets/real/branch-abha.jpg";
 import branchRiyadhImg from "@/assets/real/branch-riyadh-interior.jpg";
 import branchRiyadhCounterImg from "@/assets/real/branch-riyadh-counter.jpg";
 import branchAbhaGardenImg from "@/assets/real/branch-abha-garden.jpg";
-import branchSeasonalImg from "@/assets/real/branch-seasonal.jpg";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
+import seasonalDayImg from "@/assets/real/seasonal-summer-day.jpg";
+import seasonalNightImg from "@/assets/real/seasonal-summer-night.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const featuredImages = [
@@ -12,7 +13,10 @@ const featuredImages = [
   { image: branchRiyadhImg, secondImage: branchRiyadhCounterImg },
 ];
 
-const otherImages = [coffeeBarImg, branchSeasonalImg];
+const otherImages: { image: string; secondImage?: string }[] = [
+  { image: coffeeBarImg },
+  { image: seasonalDayImg, secondImage: seasonalNightImg },
+];
 
 export function Branches() {
   const { t } = useLang();
@@ -73,29 +77,42 @@ export function Branches() {
 
         {/* Other Branches */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {b.others.map((branch, idx) => (
-            <FadeIn key={idx} delay={0.4 + idx * 0.1} direction="up">
-              <div className="bg-background rounded-sm overflow-hidden border border-border/50 h-full flex flex-col transition-colors hover:border-primary/50 group">
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img
-                    src={otherImages[idx]}
-                    alt={`Butter Bakery ${branch.city}`}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-8 md:p-10 flex flex-col flex-grow">
-                  <div className="text-primary text-xs font-medium tracking-widest uppercase mb-2">
-                    {branch.city}
+          {b.others.map((branch, idx) => {
+            const imgs = otherImages[idx];
+            return (
+              <FadeIn key={idx} delay={0.4 + idx * 0.1} direction="up">
+                <div className="bg-background rounded-sm overflow-hidden border border-border/50 h-full flex flex-col transition-colors hover:border-primary/50 group">
+                  <div className="aspect-[16/9] overflow-hidden relative">
+                    <img
+                      src={imgs.image}
+                      alt={`Butter Bakery ${branch.city}`}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
                   </div>
-                  <h4 className="font-serif text-2xl mb-1">{branch.location}</h4>
-                  <p className="text-foreground/50 text-xs uppercase tracking-[0.15em] font-light mb-4 italic">{branch.tagline}</p>
-                  <p className="text-foreground/70 font-light leading-relaxed text-sm">
-                    {branch.description}
-                  </p>
+                  {imgs.secondImage && (
+                    <div className="h-28 overflow-hidden relative">
+                      <img
+                        src={imgs.secondImage}
+                        alt={`${branch.city} night`}
+                        className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+                    </div>
+                  )}
+                  <div className="p-8 md:p-10 flex flex-col flex-grow">
+                    <div className="text-primary text-xs font-medium tracking-widest uppercase mb-2">
+                      {branch.city}
+                    </div>
+                    <h4 className="font-serif text-2xl mb-1">{branch.location}</h4>
+                    <p className="text-foreground/50 text-xs uppercase tracking-[0.15em] font-light mb-4 italic">{branch.tagline}</p>
+                    <p className="text-foreground/70 font-light leading-relaxed text-sm">
+                      {branch.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
 
         {/* Quote */}
