@@ -118,7 +118,7 @@ export function Navbar() {
 
             {/* Desktop: Invest */}
             <a
-              href="#invest"
+              href="/investor-relations"
               className={`hidden md:inline-flex text-xs uppercase tracking-widest px-5 py-2.5 border transition-all duration-300 ${
                 isScrolled
                   ? "border-primary text-primary hover:bg-primary hover:text-white"

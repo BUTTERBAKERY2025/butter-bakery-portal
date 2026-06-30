@@ -10,6 +10,7 @@ import { Investment } from "@/components/sections/Investment";
 import { FollowUs } from "@/components/sections/FollowUs";
 import { BrandMarquee } from "@/components/ui/BrandMarquee";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 export default function LandingPage() {
   return (
@@ -30,6 +31,7 @@ export default function LandingPage() {
 
       <Footer />
       <ScrollToTop />
+      <WhatsAppButton />
     </div>
   );
 }
