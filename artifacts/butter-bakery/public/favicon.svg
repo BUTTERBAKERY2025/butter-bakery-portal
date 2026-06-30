@@ -1,20 +1,14 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Dark warm background with slight rounded corners -->
-  <rect width="180" height="180" rx="32" fill="#1C1208"/>
-  <!-- Outer amber ring -->
-  <rect x="10" y="10" width="160" height="160" rx="24" fill="none" stroke="#D46916" stroke-width="2" opacity="0.5"/>
-  <!-- Stylised "bb" monogram in brand amber -->
+  <circle cx="90" cy="90" r="90" fill="#D46916"/>
   <text
     x="90"
     y="118"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="88"
+    font-size="90"
     font-weight="700"
     font-style="italic"
-    fill="#D46916"
+    fill="white"
     text-anchor="middle"
-    letter-spacing="-4"
-  >bb</text>
-  <!-- Subtle underline accent -->
-  <rect x="58" y="130" width="64" height="2" rx="1" fill="#D46916" opacity="0.4"/>
+    letter-spacing="-3"
+  >Bb</text>
 </svg>
