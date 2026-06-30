@@ -17,7 +17,9 @@ export function WhatsAppButton() {
   const label = isAr ? "تواصل معنا" : "Chat with us";
 
   return (
-    <div className={`fixed bottom-6 z-50 ${isAr ? "left-6" : "right-6"}`}>
+    <div className={`fixed bottom-5 md:bottom-6 z-50 ${isAr ? "left-5 md:left-6" : "right-5 md:right-6"}`}>
+      {/* Pulse ring — visible on mobile to draw attention */}
+      <span className="absolute inset-0 rounded-full bg-[#25D366]/30 animate-ping md:hidden pointer-events-none" />
       <a
         href={`https://wa.me/${WHATSAPP_NUMBER}`}
         target="_blank"
@@ -25,7 +27,7 @@ export function WhatsAppButton() {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         aria-label="WhatsApp"
-        className="flex items-center gap-3 bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-full"
+        className="relative flex items-center gap-3 bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-full"
       >
         <AnimatePresence>
           {hovered && (
@@ -41,7 +43,7 @@ export function WhatsAppButton() {
             </motion.span>
           )}
         </AnimatePresence>
-        <span className="w-14 h-14 flex items-center justify-center rounded-full bg-[#25D366] shrink-0">
+        <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-[#25D366] shrink-0">
           <WaIcon />
         </span>
       </a>

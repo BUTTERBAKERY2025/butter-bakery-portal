@@ -64,7 +64,7 @@ export function Branches() {
                     {branch.award}
                   </div>
                 </div>
-                <div className="h-28 overflow-hidden relative">
+                <div className="h-20 md:h-28 overflow-hidden relative">
                   <img
                     src={featuredImages[idx].secondImage}
                     alt={`${branch.city} interior`}
@@ -99,7 +99,7 @@ export function Branches() {
                     />
                   </div>
                   {imgs.secondImage && (
-                    <div className="h-28 overflow-hidden relative">
+                    <div className="h-20 md:h-28 overflow-hidden relative">
                       <img
                         src={imgs.secondImage}
                         alt={`${branch.city} night`}

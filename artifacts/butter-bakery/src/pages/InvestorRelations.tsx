@@ -85,23 +85,23 @@ export default function InvestorRelations() {
       </header>
 
       {/* Hero */}
-      <section className="relative pt-32 pb-24 bg-dark-section text-background overflow-hidden">
+      <section className="relative pt-20 pb-14 md:pt-32 md:pb-24 bg-dark-section text-background overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-        <div className="container mx-auto px-6 md:px-12">
+        <div className="container mx-auto px-5 md:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <p className="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-6">
+            <p className="text-primary text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] md:tracking-[0.35em] mb-4 md:mb-6">
               {isAr ? "بتر بيكري — علاقات المستثمرين" : "Butter Bakery — Investor Relations"}
             </p>
-            <h1 className="font-serif text-5xl md:text-7xl font-medium text-white mb-8 leading-tight max-w-3xl whitespace-pre-line">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-medium text-white mb-5 md:mb-8 leading-tight max-w-3xl whitespace-pre-line">
               {isAr ? "علاقات\nالمستثمرين" : "Investor\nRelations"}
             </h1>
-            <p className="text-background/60 max-w-xl leading-relaxed text-lg font-light">
+            <p className="text-background/60 max-w-xl leading-relaxed text-base md:text-lg font-light">
               {inv.p1}
             </p>
           </motion.div>
@@ -109,17 +109,17 @@ export default function InvestorRelations() {
       </section>
 
       {/* Stats */}
-      <section className="py-20 border-b border-border/50">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <section className="py-10 md:py-20 border-b border-border/50">
+        <div className="container mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-12">
             {inv.stats.map((stat, i) => (
               <FadeIn key={i} delay={i * 0.1} direction="up">
                 <div className="text-center md:text-start">
-                  <p className="font-serif text-4xl md:text-5xl font-medium text-primary mb-2">
+                  <p className="font-serif text-3xl md:text-5xl font-medium text-primary mb-1 md:mb-2">
                     <AnimatedCounter value={stat.value} />
                   </p>
-                  <p className="text-sm font-semibold text-foreground mb-1">{stat.label}</p>
-                  <p className="text-xs text-foreground/50 font-light leading-relaxed">{stat.sub}</p>
+                  <p className="text-xs md:text-sm font-semibold text-foreground mb-1">{stat.label}</p>
+                  <p className="text-[10px] md:text-xs text-foreground/50 font-light leading-relaxed">{stat.sub}</p>
                 </div>
               </FadeIn>
             ))}
@@ -128,24 +128,24 @@ export default function InvestorRelations() {
       </section>
 
       {/* Why */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 md:px-12">
+      <section className="py-14 md:py-24">
+        <div className="container mx-auto px-5 md:px-12">
           <FadeIn>
-            <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{inv.whyEyebrow}</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-16 max-w-lg whitespace-pre-line">
+            <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-3 md:mb-4">{inv.whyEyebrow}</p>
+            <h2 className="font-serif text-3xl md:text-5xl font-medium text-foreground mb-8 md:mb-16 max-w-lg whitespace-pre-line">
               {isAr ? "لماذا تستثمر\nمع بتر بيكري؟" : "Why Invest\nWith Butter Bakery?"}
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {inv.pillars.map((pillar, i) => {
               const Icon = pillarIcons[i] ?? ChevronRight;
               return (
                 <FadeIn key={i} delay={i * 0.08} direction="up">
-                  <div className="group p-8 border border-border hover:border-primary/40 transition-colors duration-500 bg-secondary/40 hover:bg-secondary/70">
-                    <div className="w-10 h-10 flex items-center justify-center border border-primary/20 text-primary mb-6 group-hover:border-primary transition-colors">
+                  <div className="group p-5 md:p-8 border border-border hover:border-primary/40 transition-colors duration-500 bg-secondary/40 hover:bg-secondary/70">
+                    <div className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center border border-primary/20 text-primary mb-4 md:mb-6 group-hover:border-primary transition-colors">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <h3 className="font-serif text-xl text-foreground mb-3">{pillar.title}</h3>
+                    <h3 className="font-serif text-lg md:text-xl text-foreground mb-2 md:mb-3">{pillar.title}</h3>
                     <p className="text-foreground/60 text-sm leading-relaxed font-light">{pillar.body}</p>
                   </div>
                 </FadeIn>
@@ -156,16 +156,16 @@ export default function InvestorRelations() {
       </section>
 
       {/* Revenue streams */}
-      <section className="py-20 bg-dark-section text-background">
-        <div className="container mx-auto px-6 md:px-12">
+      <section className="py-12 md:py-20 bg-dark-section text-background">
+        <div className="container mx-auto px-5 md:px-12">
           <FadeIn>
-            <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-12">{inv.segmentationEyebrow}</p>
+            <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-6 md:mb-12">{inv.segmentationEyebrow}</p>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
             {[inv.b2c, inv.b2b, inv.b2g].map((stream, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-dark-section p-10">
-                  <p className="text-primary font-mono text-2xl font-bold mb-4">{stream.label}</p>
+                <div className="bg-dark-section p-6 md:p-10">
+                  <p className="text-primary font-mono text-xl md:text-2xl font-bold mb-3 md:mb-4">{stream.label}</p>
                   <p className="text-background/60 text-sm leading-relaxed font-light">{stream.body}</p>
                 </div>
               </FadeIn>
@@ -175,31 +175,31 @@ export default function InvestorRelations() {
       </section>
 
       {/* Airline image */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-14 md:py-24">
+        <div className="container mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <FadeIn direction={isAr ? "right" : "left"}>
               <div className="overflow-hidden">
                 <img
                   src={airlineBbImg}
                   alt="Airline Partnership"
-                  className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700"
+                  className="w-full h-56 md:h-80 object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
             </FadeIn>
             <FadeIn direction={isAr ? "left" : "right"} delay={0.15}>
-              <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-4">{inv.b2gLabel}</p>
-              <h3 className="font-serif text-3xl md:text-4xl text-foreground mb-6">{isAr ? "شراكة الطيران" : "Airline Partnership"}</h3>
-              <p className="text-foreground/60 leading-relaxed font-light">{inv.b2g.body}</p>
+              <p className="text-primary text-xs font-semibold uppercase tracking-[0.3em] mb-3 md:mb-4">{inv.b2gLabel}</p>
+              <h3 className="font-serif text-2xl md:text-4xl text-foreground mb-4 md:mb-6">{isAr ? "شراكة الطيران" : "Airline Partnership"}</h3>
+              <p className="text-foreground/60 leading-relaxed font-light text-sm md:text-base">{inv.b2g.body}</p>
             </FadeIn>
           </div>
         </div>
       </section>
 
       {/* Contact Form */}
-      <section className="py-24 bg-secondary/40 border-t border-border/50">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
+      <section className="py-14 md:py-24 bg-secondary/40 border-t border-border/50">
+        <div className="container mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start max-w-5xl mx-auto">
 
             {/* Left: heading */}
             <FadeIn direction={isAr ? "right" : "left"}>

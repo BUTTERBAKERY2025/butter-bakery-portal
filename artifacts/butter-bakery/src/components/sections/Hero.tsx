@@ -26,27 +26,27 @@ export function Hero() {
       <div className="container relative z-10 px-5 md:px-12 flex flex-col items-center justify-center text-center mt-16 md:mt-20">
 
         <FadeIn direction="down" delay={0.4}>
-          <div className="flex items-center gap-4 mb-8 justify-center">
-            <div className="h-[1px] w-8 bg-primary/60" />
-            <span className="text-xs md:text-sm font-medium uppercase tracking-[0.35em] text-primary">
+          <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8 justify-center">
+            <div className="h-[1px] w-6 md:w-8 bg-primary/60" />
+            <span className="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] md:tracking-[0.35em] text-primary">
               {t.hero.eyebrow}
             </span>
-            <div className="h-[1px] w-8 bg-primary/60" />
+            <div className="h-[1px] w-6 md:w-8 bg-primary/60" />
           </div>
         </FadeIn>
 
         <FadeIn delay={0.6}>
-          <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-bold tracking-tight leading-[1.08] mb-6 drop-shadow-lg ${isAr ? "leading-[1.35]" : ""}`}>
+          <h1 className={`font-serif text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] text-white font-bold tracking-tight leading-[1.1] mb-5 md:mb-6 drop-shadow-lg ${isAr ? "leading-[1.35]" : ""}`}>
             {t.hero.headline1}<br />
             <span className="italic font-light text-primary/90">{t.hero.headline2}</span>
           </h1>
         </FadeIn>
 
         <FadeIn delay={0.8} direction="up">
-          <p className={`max-w-lg mx-auto text-base md:text-lg text-white/75 font-light mb-3 leading-relaxed px-2 md:px-0 ${isAr ? "font-normal" : ""}`}>
+          <p className={`max-w-lg mx-auto text-sm md:text-lg text-white/75 font-light mb-2 md:mb-3 leading-relaxed px-1 md:px-0 ${isAr ? "font-normal" : ""}`}>
             {t.hero.sub}
           </p>
-          <p className="text-white/40 text-xs md:text-sm font-light tracking-wide mb-10 md:mb-12">
+          <p className="text-white/40 text-[10px] md:text-sm font-light tracking-wide mb-8 md:mb-12">
             {t.hero.subSecondary}
           </p>
 

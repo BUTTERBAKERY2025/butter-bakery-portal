@@ -41,28 +41,28 @@ export function FollowUs() {
   const f = t.followUs;
 
   return (
-    <section className="py-24 bg-background border-t border-border/30">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-12 md:py-24 bg-background border-t border-border/30">
+      <div className="container mx-auto px-4 md:px-12">
 
-        <FadeIn className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <IgIcon className="w-6 h-6 text-primary" />
-            <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">{f.eyebrow}</span>
+        <FadeIn className="text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+            <IgIcon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.25em] md:tracking-[0.3em] text-primary font-semibold">{f.eyebrow}</span>
           </div>
-          <h3 className="font-serif text-4xl md:text-5xl text-foreground font-medium mb-4">
+          <h3 className="font-serif text-3xl md:text-5xl text-foreground font-medium mb-3 md:mb-4">
             {f.handle}
           </h3>
-          <p className="text-foreground/50 font-light max-w-md mx-auto">
+          <p className="text-foreground/50 font-light max-w-md mx-auto text-sm md:text-base">
             {f.sub}
           </p>
-          <p className="text-foreground/30 font-light text-sm mt-2">
+          <p className="text-foreground/30 font-light text-xs md:text-sm mt-1 md:mt-2">
             {f.subAr}
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-3 md:grid-cols-4 gap-1 mb-10">
+        <div className="grid grid-cols-3 md:grid-cols-4 gap-0.5 md:gap-1 mb-8 md:mb-10">
           {instaPosts.map((post, i) => (
-            <FadeIn key={i} delay={i * 0.04} direction="up">
+            <FadeIn key={i} delay={i * 0.03} direction="up">
               <a
                 href={INSTA_URL}
                 target="_blank"
@@ -72,10 +72,12 @@ export function FollowUs() {
                 <img
                   src={post.src}
                   alt={post.alt}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-400 flex items-center justify-center">
-                  <IgIcon className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
+                {/* Always-visible tint on mobile, hover-controlled on desktop */}
+                <div className="absolute inset-0 bg-black/0 md:bg-black/0 group-active:bg-black/30 md:group-hover:bg-black/45 transition-all duration-300 flex items-center justify-center">
+                  <IgIcon className="w-6 h-6 md:w-8 md:h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
                 </div>
               </a>
             </FadeIn>
@@ -87,7 +89,7 @@ export function FollowUs() {
             href={INSTA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground hover:border-primary hover:text-primary transition-all duration-300 text-sm uppercase tracking-[0.2em] font-medium"
+            className="inline-flex items-center gap-3 px-6 md:px-8 py-3.5 md:py-4 border border-foreground/20 text-foreground hover:border-primary hover:text-primary transition-all duration-300 text-xs md:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-medium"
           >
             <IgIcon className="w-4 h-4" />
             {f.cta}

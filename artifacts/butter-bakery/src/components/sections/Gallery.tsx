@@ -105,7 +105,7 @@ export function Gallery() {
         </div>
 
         <FadeIn delay={0.3}>
-          <div className="mt-16 text-center">
+          <div className="mt-8 md:mt-16 text-center">
             <p className="font-serif text-2xl text-foreground/50 italic">
               &ldquo;{g.quote}&rdquo;
             </p>

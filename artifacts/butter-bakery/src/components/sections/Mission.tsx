@@ -38,36 +38,36 @@ export function Mission() {
 
       <div className="container mx-auto px-6 text-center relative z-20">
         <FadeIn direction="up">
-          <div className="inline-flex items-center justify-center mb-10">
-            <div className="h-[1px] w-12 bg-primary/50" />
-            <span className="mx-4 text-xs font-medium uppercase tracking-[0.3em] text-primary">{m.eyebrow}</span>
-            <div className="h-[1px] w-12 bg-primary/50" />
+          <div className="inline-flex items-center justify-center mb-6 md:mb-10">
+            <div className="h-[1px] w-8 md:w-12 bg-primary/50" />
+            <span className="mx-3 md:mx-4 text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary">{m.eyebrow}</span>
+            <div className="h-[1px] w-8 md:w-12 bg-primary/50" />
           </div>
         </FadeIn>
 
         <FadeIn delay={0.2} direction="up">
-          <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light leading-[1.2] max-w-5xl mx-auto mb-8 text-white">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-[1.2] max-w-5xl mx-auto mb-5 md:mb-8 text-white px-2 md:px-0">
             {renderHeadline()}
           </h2>
         </FadeIn>
 
         <FadeIn delay={0.3} direction="up">
-          <p className="text-primary/70 text-sm tracking-[0.3em] mb-10">
+          <p className="text-primary/70 text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] mb-6 md:mb-10">
             {m.sub}
           </p>
         </FadeIn>
 
         <FadeIn delay={0.4} direction="up">
-          <p className="max-w-2xl mx-auto text-background/80 font-light text-lg md:text-xl leading-relaxed mb-8">
+          <p className="max-w-2xl mx-auto text-background/80 font-light text-base md:text-xl leading-relaxed mb-5 md:mb-8 px-1 md:px-0">
             {m.p1}
           </p>
-          <p className="max-w-2xl mx-auto text-background/55 font-light text-base md:text-lg leading-relaxed">
+          <p className="max-w-2xl mx-auto text-background/55 font-light text-sm md:text-lg leading-relaxed px-1 md:px-0">
             {m.p2}
           </p>
         </FadeIn>
 
         <FadeIn delay={0.6} direction="up">
-          <div className="mt-16 inline-flex items-center gap-8 text-background/30 text-xs uppercase tracking-[0.3em]">
+          <div className="mt-8 md:mt-16 flex flex-wrap justify-center items-center gap-3 md:gap-8 text-background/30 text-[9px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.3em]">
             <span>{m.tag1}</span>
             <span className="h-1 w-1 rounded-full bg-primary" />
             <span>{m.tag2}</span>

@@ -148,6 +148,21 @@
   }
 }
 
+/* Scroll offset for sticky navbar (~72px) */
+section[id], [id="contact"] {
+  scroll-margin-top: 5rem;
+}
+
+/* Prevent iOS Safari zoom on form focus (requires font-size ≥ 16px) */
+input, select, textarea {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  input, select, textarea {
+    font-size: 14px;
+  }
+}
+
 /* Arabic font override — applied via lang attribute set by LanguageContext */
 :lang(ar) {
   --app-font-sans: 'Noto Kufi Arabic', system-ui, sans-serif;
@@ -163,4 +178,9 @@
 }
 :lang(ar) .italic {
   font-style: normal;
+}
+:lang(ar) p,
+:lang(ar) li,
+:lang(ar) blockquote {
+  line-height: 1.9;
 }
