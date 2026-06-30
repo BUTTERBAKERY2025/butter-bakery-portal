@@ -2,8 +2,8 @@ import { FadeIn } from "@/components/ui/fade-in";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
 import breadImg from "@/assets/real/bread.jpg";
 import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
-import elegantCroissantImg from "@/assets/gallery/714264474_18074789993651984_4074190906897943917_n_1782725587614.jpg";
-import pastryFlatLayImg from "@/assets/gallery/image_1782800185112.png";
+const elegantCroissantImg = "/gallery/714264474_18074789993651984_4074190906897943917_n_1782725587614.jpg";
+const pastryFlatLayImg = "/gallery/image_1782800185112.jpg";
 import { useState } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 

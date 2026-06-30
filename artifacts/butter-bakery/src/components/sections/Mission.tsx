@@ -1,5 +1,5 @@
 import { FadeIn } from "@/components/ui/fade-in";
-import berryBasketImg from "@/assets/gallery/684696860_18069942209651984_7097828562111979045_n_1782725587615.jpg";
+const berryBasketImg = "/gallery/684696860_18069942209651984_7097828562111979045_n_1782725587615.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 export function Mission() {
