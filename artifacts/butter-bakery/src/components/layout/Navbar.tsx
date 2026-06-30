@@ -43,6 +43,7 @@ export function Navbar() {
     { label: t.nav.products, href: "#products" },
     { label: t.nav.locations, href: "#locations" },
     { label: t.nav.gallery, href: "#gallery" },
+    { label: t.nav.news, href: "/news", isPage: true },
   ];
 
   const close = () => setMobileOpen(false);
@@ -79,19 +80,20 @@ export function Navbar() {
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
-              const isActive = activeSection === sectionId;
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`text-sm tracking-wide transition-all duration-300 relative ${isAr ? "font-medium" : ""} ${
-                    isActive
-                      ? "text-primary"
-                      : isScrolled
-                      ? "text-foreground/80 hover:text-primary"
-                      : "text-white/90 hover:text-white"
-                  }`}
-                >
+              const isActive = !item.isPage && activeSection === sectionId;
+              const linkClass = `text-sm tracking-wide transition-all duration-300 relative ${isAr ? "font-medium" : ""} ${
+                isActive
+                  ? "text-primary"
+                  : isScrolled
+                  ? "text-foreground/80 hover:text-primary"
+                  : "text-white/90 hover:text-white"
+              }`;
+              return item.isPage ? (
+                <Link key={item.href} href={item.href} className={linkClass}>
+                  {item.label}
+                </Link>
+              ) : (
+                <a key={item.href} href={item.href} className={linkClass}>
                   {item.label}
                   {isActive && (
                     <span className="absolute -bottom-1 left-0 right-0 h-px bg-primary" />
@@ -172,19 +174,31 @@ export function Navbar() {
 
             {/* Nav links */}
             <div className="flex flex-col items-center justify-center flex-1 gap-2 px-6">
-              {navItems.map((item, i) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  onClick={close}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.08, duration: 0.4, ease: "easeOut" }}
-                  className={`font-serif text-4xl md:text-5xl text-foreground/75 hover:text-primary transition-colors duration-300 py-3 ${isAr ? "font-normal" : ""}`}
-                >
-                  {item.label}
-                </motion.a>
-              ))}
+              {navItems.map((item, i) => {
+                const mobileClass = `font-serif text-4xl md:text-5xl text-foreground/75 hover:text-primary transition-colors duration-300 py-3 ${isAr ? "font-normal" : ""}`;
+                const motionProps = {
+                  key: item.href,
+                  initial: { opacity: 0, y: 24 },
+                  animate: { opacity: 1, y: 0 },
+                  transition: { delay: 0.05 + i * 0.08, duration: 0.4, ease: "easeOut" as const },
+                };
+                return item.isPage ? (
+                  <motion.div {...motionProps}>
+                    <Link href={item.href} onClick={close} className={mobileClass}>
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    {...motionProps}
+                    href={item.href}
+                    onClick={close}
+                    className={mobileClass}
+                  >
+                    {item.label}
+                  </motion.a>
+                );
+              })}
 
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}

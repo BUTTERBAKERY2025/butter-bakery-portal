@@ -5,6 +5,7 @@ export const translations = {
       products: "Products",
       locations: "Locations",
       gallery: "Gallery",
+      news: "News",
       invest: "About Us",
     },
     hero: {
@@ -267,6 +268,7 @@ export const translations = {
       products: "منتجاتنا",
       locations: "فروعنا",
       gallery: "المعرض",
+      news: "الأخبار",
       invest: "معلومات عنا",
     },
     hero: {

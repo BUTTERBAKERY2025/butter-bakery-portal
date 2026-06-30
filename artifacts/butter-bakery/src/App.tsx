@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import LandingPage from "@/pages/LandingPage";
 import InvestorRelations from "@/pages/InvestorRelations";
+import News from "@/pages/News";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -14,6 +15,7 @@ function Router() {
     <Switch>
       <Route path="/" component={LandingPage} />
       <Route path="/investor-relations" component={InvestorRelations} />
+      <Route path="/news" component={News} />
       <Route component={NotFound} />
     </Switch>
   );
