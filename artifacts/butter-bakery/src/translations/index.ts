@@ -70,6 +70,7 @@ export const translations = {
       subtitle: "Each Butter Bakery location is thoughtfully designed to reflect its surroundings — combining refined European hospitality with authentic local warmth. Updated to January 2026.",
       quote: "\"We create a different time… with a flavor that resembles you.\"",
       quoteAr: "نصنع وقتاً مختلفاً… بنكهة تشبهك",
+      directions: "Get Directions",
       featured: [
         {
           city: "Abha",
@@ -331,6 +332,7 @@ export const translations = {
       subtitle: "كل فرع من فروع بتر بيكري مصمم بعناية ليعكس محيطه — يجمع بين الضيافة الأوروبية الراقية والدفء المحلي الأصيل. محدّث حتى يناير 2026.",
       quote: "\"نصنع وقتاً مختلفاً… بنكهة تشبهك.\"",
       quoteAr: "نصنع وقتاً مختلفاً… بنكهة تشبهك",
+      directions: "الاتجاهات",
       featured: [
         {
           city: "أبها",

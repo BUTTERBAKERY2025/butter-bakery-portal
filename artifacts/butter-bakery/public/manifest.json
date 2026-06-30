@@ -1,0 +1,38 @@
+{
+  "name": "Butter Bakery — بتر بيكري",
+  "short_name": "Butter Bakery",
+  "description": "Specialty coffee & artisan pastries — freshly baked every day | قهوة متخصصة ومعجنات أصيلة — يُخبز طازج كل يوم",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf9f7",
+  "theme_color": "#D46916",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.jpg",
+      "sizes": "180x180",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["food", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Locations",
+      "short_name": "Branches",
+      "url": "/#locations",
+      "description": "Find a Butter Bakery near you"
+    },
+    {
+      "name": "Investor Relations",
+      "short_name": "Investors",
+      "url": "/investor-relations"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import { Branches } from "@/components/sections/Branches";
 import { Gallery } from "@/components/sections/Gallery";
 import { Experience } from "@/components/sections/Experience";
 import { Investment } from "@/components/sections/Investment";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { FollowUs } from "@/components/sections/FollowUs";
 import { BrandMarquee } from "@/components/ui/BrandMarquee";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
@@ -28,6 +29,7 @@ export default function LandingPage() {
         <Gallery />
         <Experience />
         <Investment />
+        <Testimonials />
         <FollowUs />
       </main>
 

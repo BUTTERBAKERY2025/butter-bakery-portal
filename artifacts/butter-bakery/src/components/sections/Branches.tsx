@@ -14,9 +14,20 @@ import branchAbhaAirportCrowdImg from "@/assets/real/branch-abha-airport-crowd.j
 import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-counter.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
+const MapPinIcon = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+  </svg>
+);
+
 const featuredImages = [
   { image: branchAbhaImg, secondImage: branchAbhaGardenImg },
   { image: branchRiyadhImg, secondImage: branchRiyadhCounterImg },
+];
+
+const featuredMaps = [
+  "https://www.google.com/maps/search/Butter+Bakery+Al+Hizam+Abha+Saudi+Arabia",
+  "https://www.google.com/maps/search/Butter+Bakery+Anas+Ibn+Malik+Riyadh+Saudi+Arabia",
 ];
 
 const otherImages: { image: string; secondImage?: string }[] = [
@@ -25,6 +36,14 @@ const otherImages: { image: string; secondImage?: string }[] = [
   { image: branchMedinaAerialImg, secondImage: branchMedinaSunsetImg },
   { image: branchRiyadhEmbDayImg, secondImage: branchRiyadhEmbNightImg },
   { image: branchAbhaAirportCounterImg, secondImage: branchAbhaAirportCrowdImg },
+];
+
+const otherMaps = [
+  "https://www.google.com/maps/search/Butter+Bakery+Tabuk+Saudi+Arabia",
+  null,
+  "https://www.google.com/maps/search/Butter+Bakery+Medina+Saudi+Arabia",
+  "https://www.google.com/maps/search/Butter+Bakery+Embassies+Quarter+Riyadh+Saudi+Arabia",
+  "https://www.google.com/maps/search/Butter+Bakery+Airport+Road+Abha+Saudi+Arabia",
 ];
 
 export function Branches() {
@@ -75,9 +94,18 @@ export function Branches() {
                 <div className="p-5 md:p-8 lg:p-10 flex flex-col flex-grow">
                   <h4 className="font-serif text-xl md:text-2xl mb-1">{branch.location}</h4>
                   <p className="text-primary text-xs uppercase tracking-[0.2em] font-medium mb-3">{branch.tagline}</p>
-                  <p className="text-foreground/70 font-light leading-relaxed flex-grow text-sm">
+                  <p className="text-foreground/70 font-light leading-relaxed flex-grow text-sm mb-5">
                     {branch.description}
                   </p>
+                  <a
+                    href={featuredMaps[idx]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs text-foreground/40 hover:text-primary transition-colors duration-300 uppercase tracking-[0.15em] self-start"
+                  >
+                    <MapPinIcon />
+                    {t.branches.directions}
+                  </a>
                 </div>
               </div>
             </FadeIn>
@@ -88,6 +116,7 @@ export function Branches() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
           {b.others.map((branch, idx) => {
             const imgs = otherImages[idx];
+            const mapsUrl = otherMaps[idx];
             return (
               <FadeIn key={idx} delay={0.4 + idx * 0.1} direction="up">
                 <div className="bg-background rounded-sm overflow-hidden border border-border/50 h-full flex flex-col transition-colors hover:border-primary/50 group">
@@ -114,9 +143,20 @@ export function Branches() {
                     </div>
                     <h4 className="font-serif text-xl md:text-2xl mb-1">{branch.location}</h4>
                     <p className="text-foreground/50 text-xs uppercase tracking-[0.15em] font-light mb-3 italic">{branch.tagline}</p>
-                    <p className="text-foreground/70 font-light leading-relaxed text-sm">
+                    <p className="text-foreground/70 font-light leading-relaxed text-sm flex-grow mb-4">
                       {branch.description}
                     </p>
+                    {mapsUrl && (
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs text-foreground/40 hover:text-primary transition-colors duration-300 uppercase tracking-[0.15em] self-start"
+                      >
+                        <MapPinIcon />
+                        {t.branches.directions}
+                      </a>
+                    )}
                   </div>
                 </div>
               </FadeIn>
