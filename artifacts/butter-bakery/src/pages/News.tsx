@@ -6,7 +6,8 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { useLang } from "@/contexts/LanguageContext";
 import logoBb from "@/assets/real/logo-bb.jpg";
 
-import outdoorStand from "@/assets/real/outdoor-stand.jpg";
+import sevenSigningMain from "@/assets/real/seven-signing-main.png";
+import sevenSigningGroup from "@/assets/real/seven-signing-group.png";
 import branchAbha from "@/assets/real/branch-abha.jpg";
 import airlineBb from "@/assets/real/airline-bb.jpg";
 import branchMedinaAerial from "@/assets/real/branch-medina-aerial.jpg";
@@ -26,6 +27,7 @@ interface NewsItem {
   date: string;
   dateAr: string;
   image: string;
+  image2?: string;
   titleEn: string;
   titleAr: string;
   excerptEn: string;
@@ -42,7 +44,8 @@ const newsItems: NewsItem[] = [
     category: "partnerships",
     date: "June 2026",
     dateAr: "يونيو 2026",
-    image: outdoorStand,
+    image: sevenSigningMain,
+    image2: sevenSigningGroup,
     featured: true,
     breaking: true,
     titleEn: "Historic Agreement: Butter Bakery Signs with Seven — PIF",
@@ -488,21 +491,50 @@ export default function News() {
               className="bg-background w-full md:max-w-3xl max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image */}
-              <div className="relative h-64 md:h-80 overflow-hidden">
-                <img
-                  src={selected.image}
-                  alt={isAr ? selected.titleAr : selected.titleEn}
-                  className="w-full h-full object-cover"
-                />
-                <button
-                  onClick={() => setSelected(null)}
-                  className="absolute top-4 right-4 w-9 h-9 bg-background/90 backdrop-blur-sm flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-lg font-light"
-                >
-                  ✕
-                </button>
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
-              </div>
+              {/* Image(s) */}
+              {selected.image2 ? (
+                <div className="relative">
+                  {/* Close button */}
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="absolute top-4 right-4 z-10 w-9 h-9 bg-background/90 backdrop-blur-sm flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-lg font-light"
+                  >
+                    ✕
+                  </button>
+                  {/* Main large photo */}
+                  <div className="overflow-hidden h-72 md:h-96">
+                    <img
+                      src={selected.image2}
+                      alt={isAr ? selected.titleAr : selected.titleEn}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  {/* Second photo — smaller strip */}
+                  <div className="overflow-hidden h-44 md:h-56 border-t-2 border-primary/30">
+                    <img
+                      src={selected.image}
+                      alt={isAr ? selected.titleAr : selected.titleEn}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+                </div>
+              ) : (
+                <div className="relative h-64 md:h-80 overflow-hidden">
+                  <img
+                    src={selected.image}
+                    alt={isAr ? selected.titleAr : selected.titleEn}
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="absolute top-4 right-4 w-9 h-9 bg-background/90 backdrop-blur-sm flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-lg font-light"
+                  >
+                    ✕
+                  </button>
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+                </div>
+              )}
 
               {/* Body */}
               <div className="px-6 md:px-10 pb-10 pt-4">
