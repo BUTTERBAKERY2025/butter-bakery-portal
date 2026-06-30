@@ -10,6 +10,8 @@ import branchMedinaAerialImg from "@/assets/real/branch-medina-aerial.jpg";
 import branchMedinaSunsetImg from "@/assets/real/branch-medina-sunset.jpg";
 import branchRiyadhEmbDayImg from "@/assets/real/branch-riyadh-emb-day.jpg";
 import branchRiyadhEmbNightImg from "@/assets/real/branch-riyadh-emb-night.jpg";
+import branchAbhaAirportCrowdImg from "@/assets/real/branch-abha-airport-crowd.jpg";
+import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-counter.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const featuredImages = [
@@ -22,6 +24,7 @@ const otherImages: { image: string; secondImage?: string }[] = [
   { image: seasonalDayImg, secondImage: seasonalNightImg },
   { image: branchMedinaAerialImg, secondImage: branchMedinaSunsetImg },
   { image: branchRiyadhEmbDayImg, secondImage: branchRiyadhEmbNightImg },
+  { image: branchAbhaAirportCounterImg, secondImage: branchAbhaAirportCrowdImg },
 ];
 
 export function Branches() {

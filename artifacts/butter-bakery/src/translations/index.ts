@@ -111,6 +111,12 @@ export const translations = {
           tagline: "A royal experience in the heart of the capital",
           description: "In one of Riyadh's most distinguished diplomatic quarters, Butter Bakery proudly operates in partnership with the Ministry of Tourism — a testament to the brand's role in elevating Saudi hospitality on the national stage. Set beneath sweeping Bedouin-inspired shade sails and surrounded by lush palms and terracotta urns, this branch transforms the Embassies District into a premium outdoor cultural destination. As the sun sets over the capital and warm lights illuminate the café façade, guests from across the world gather to experience the finest specialty coffee and artisan pastries in an atmosphere that blends Saudi heritage with European artisan craft.",
         },
+        {
+          city: "Abha — Airport Road",
+          location: "Abha Airport Road — طريق مطار أبها",
+          tagline: "Where every journey begins with great taste",
+          description: "On Abha's Airport Road — the pulse of the city's modern movement — Butter Bakery launches its newest chapter with a bold, visually iconic interior. The signature illuminated ceiling panel, bearing the world's most celebrated culinary landmarks from Paris's Eiffel Tower to London's Big Ben, tells the story of a brand that brings the world's finest baking traditions under one roof. The open-kitchen counter — where guests can watch chefs craft pastries live — invites an immersive experience that blends the warmth of Aseer with European artisan mastery. This branch was met with an enthusiastic response from day one, with guests lining up to be among the first to experience the newest face of Butter Bakery in Abha.",
+        },
       ],
     },
     gallery: {
@@ -156,7 +162,7 @@ export const translations = {
       pillars: [
         {
           title: "Proven Multi-City Concept",
-          body: "Operational branches in Abha (award-winning tourism project), Riyadh (Anas Bin Malik), Tabuk, Al Madinah Al Munawwarah, and Riyadh (Al Safarat — Ministry of Tourism partner) — plus seasonal mobile branches at Namas, Taif, Aseer Summer Season, and national events.",
+          body: "Operational branches in Abha (Al Hizam — award-winning tourism project), Abha (Airport Road — newest opening), Riyadh (Anas Bin Malik), Tabuk, Al Madinah Al Munawwarah, and Riyadh (Al Safarat — Ministry of Tourism partner) — plus seasonal mobile branches at Namas, Taif, Aseer Summer Season, and national events.",
         },
         {
           title: "B2C + B2B + B2G Revenue",
@@ -244,6 +250,7 @@ export const translations = {
       ],
       branchList: [
         "Abha — Al Hizam",
+        "Abha — Airport Road",
         "Riyadh — Anas Bin Malik",
         "Tabuk — Al Ward",
         "Al Madinah Al Munawwarah",
@@ -365,6 +372,12 @@ export const translations = {
           tagline: "تجربة راقية في قلب العاصمة",
           description: "في أحد أرقى الأحياء الدبلوماسية في الرياض، تفخر بتر بيكري بتشغيل هذا الفرع بشراكة مع وزارة السياحة — شهادة على دور العلامة في رفع مستوى الضيافة السعودية على الصعيد الوطني. تحت مظلات مستوحاة من التراث البدوي ووسط النخيل الباسق والجرار الفخارية، يتحول حي السفارات إلى وجهة ثقافية راقية في الهواء الطلق. ومع غروب الشمس على العاصمة وإضاءة واجهة المقهى بدفء مميز، يلتقي ضيوف من مختلف أنحاء العالم ليختبروا أجود القهوة المختصة والمخبوزات الحرفية في أجواء تمزج التراث السعودي بالحرفية الأوروبية.",
         },
+        {
+          city: "أبها — طريق المطار",
+          location: "طريق مطار أبها — Airport Road",
+          tagline: "حيث كل رحلة تبدأ بنكهة استثنائية",
+          description: "على طريق مطار أبها — شريان المدينة العصري — تفتح بتر بيكري فصلها الجديد بتصميم داخلي آسر وهوية بصرية لا تُنسى. اللوحة المضيئة المميزة على السقف تحمل أيقونات أشهر المعالم الطهوية حول العالم من برج إيفل إلى بيج بن، لتحكي قصة علامة تجمع أرقى تقاليد الخبز العالمي تحت سقف واحد. الكاونتر المفتوح على المطبخ — حيث يشاهد الضيوف الشيفات يحضرون المعجنات أمامهم مباشرة — يُجسّد تجربة تفاعلية تمزج دفء عسير بالحرفية الأوروبية الأصيلة. استقبل الفرع إقبالاً كبيراً منذ أول يوم، حيث وقف الزوار في طوابير متحمسين ليكونوا من الأوائل الذين يختبرون الوجه الجديد لبتر بيكري في أبها.",
+        },
       ],
     },
     gallery: {
@@ -410,7 +423,7 @@ export const translations = {
       pillars: [
         {
           title: "مفهوم متعدد المدن مُثبت",
-          body: "فروع تشغيلية في أبها (مشروع سياحي حائز على جوائز)، الرياض (أنس بن مالك)، تبوك، المدينة المنورة، والرياض (حي السفارات — شراكة مع وزارة السياحة) — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف وموسم صيف عسير والمناسبات الوطنية.",
+          body: "فروع تشغيلية في أبها (الحزام — مشروع سياحي حائز على جوائز)، أبها (طريق المطار — أحدث الافتتاحات)، الرياض (أنس بن مالك)، تبوك، المدينة المنورة، والرياض (حي السفارات — شراكة مع وزارة السياحة) — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف وموسم صيف عسير والمناسبات الوطنية.",
         },
         {
           title: "إيرادات B2C + B2B + B2G",
@@ -498,6 +511,7 @@ export const translations = {
       ],
       branchList: [
         "أبها — الحزام",
+        "أبها — طريق المطار",
         "الرياض — أنس بن مالك",
         "تبوك — الورد",
         "المدينة المنورة",
