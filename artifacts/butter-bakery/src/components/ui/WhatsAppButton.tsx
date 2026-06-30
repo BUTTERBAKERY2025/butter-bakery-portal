@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 
-const WHATSAPP_NUMBER = "966500000000";
+const WHATSAPP_NUMBER = "966531920222";
 
 const WaIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
