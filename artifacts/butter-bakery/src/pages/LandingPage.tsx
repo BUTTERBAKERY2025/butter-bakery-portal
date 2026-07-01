@@ -9,6 +9,7 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Experience } from "@/components/sections/Experience";
 import { Investment } from "@/components/sections/Investment";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { Catering } from "@/components/sections/Catering";
 import { FollowUs } from "@/components/sections/FollowUs";
 import { BrandMarquee } from "@/components/ui/BrandMarquee";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
@@ -27,6 +28,7 @@ export default function LandingPage() {
         <Products />
         <Branches />
         <Gallery />
+        <Catering />
         <Experience />
         <Investment />
         <Testimonials />

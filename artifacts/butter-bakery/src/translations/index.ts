@@ -235,6 +235,40 @@ export const translations = {
         quote: "\"We don't just bake bread — we bake confidence, joy, and memories that last a lifetime.\"",
       },
     },
+    catering: {
+      eyebrow: "Catering & Events",
+      title: "We Come to Your Table",
+      titleAccent: "Your Table",
+      subtitle: "Premium catering crafted for moments that deserve the finest.",
+      description: "From intimate corporate breakfasts to grand gala dinners — Butter Bakery brings its full European artisan experience directly to your event. Our dedicated catering team handles everything: setup, presentation, staffing, and service — so all you do is enjoy the moment.",
+      tagline: "Corporate · Private · Institutional · Government",
+      videoLabel: "Live Event Setup",
+      services: [
+        {
+          icon: "🏢",
+          title: "Corporate Events",
+          desc: "Breakfast briefings, board lunches, office celebrations — we supply on regular contracts.",
+        },
+        {
+          icon: "🌸",
+          title: "Private Occasions",
+          desc: "Weddings, engagements, birthday celebrations, and family gatherings — crafted with care.",
+        },
+        {
+          icon: "🍽️",
+          title: "Full Buffet Stations",
+          desc: "Pastry spreads, bread stations, salad bars, and specialty coffee — complete setups.",
+        },
+        {
+          icon: "🤝",
+          title: "Supply Agreements",
+          desc: "Regular bakery supply for restaurants, cafés, hotels, and government institutions.",
+        },
+      ],
+      cta: "Request a Quote on WhatsApp",
+      ctaNote: "We respond within 24 hours",
+      quoteText: "\"Every event deserves a table that tells a story.\"",
+    },
     followUs: {
       eyebrow: "Follow Us",
       handle: "@butterbakery_sa",
@@ -507,6 +541,40 @@ export const translations = {
         caption: "من مطبخنا إلى لحظتكم الأجمل",
         quote: "\"نحن لا نخبز الخبز فحسب — بل نخبز الثقة، والفرح، والذكريات التي تدوم طوال العمر.\"",
       },
+    },
+    catering: {
+      eyebrow: "الكاترينج والمناسبات",
+      title: "نأتي إلى مائدتكم",
+      titleAccent: "مائدتكم",
+      subtitle: "كاترينج فاخر لكل لحظة تستحق الأفضل.",
+      description: "من إفطارات الأعمال الرسمية إلى حفلات العشاء الكبرى — تحضر بتر بيكري بكامل تجربتها الأوروبية الحرفية مباشرة إلى فعاليتكم. يتولى فريقنا المتخصص كل التفاصيل: الإعداد والتجهيز والتقديم والخدمة — حتى تستمتعوا باللحظة.",
+      tagline: "شركات · خاص · مؤسسي · حكومي",
+      videoLabel: "تجهيز فعالية حية",
+      services: [
+        {
+          icon: "🏢",
+          title: "فعاليات الشركات",
+          desc: "إفطارات العمل، غداءات مجالس الإدارة، احتفالات المكاتب — بعقود توريد منتظمة.",
+        },
+        {
+          icon: "🌸",
+          title: "المناسبات الخاصة",
+          desc: "أعراس ومناسبات وأعياد ميلاد وتجمعات عائلية — مصممة بعناية فائقة.",
+        },
+        {
+          icon: "🍽️",
+          title: "محطات البوفيه الكاملة",
+          desc: "معجنات وخبز وسلطات وقهوة مختصة — تجهيز متكامل من الألف إلى الياء.",
+        },
+        {
+          icon: "🤝",
+          title: "عقود التوريد",
+          desc: "توريد منتظم للمطاعم والمقاهي والفنادق والجهات الحكومية.",
+        },
+      ],
+      cta: "طلب عرض سعر عبر واتساب",
+      ctaNote: "نرد خلال 24 ساعة",
+      quoteText: "\"كل مناسبة تستحق مائدة تحكي قصة.\"",
     },
     followUs: {
       eyebrow: "تابعونا",
