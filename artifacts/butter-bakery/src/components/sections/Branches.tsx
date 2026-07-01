@@ -14,6 +14,7 @@ import branchAbhaAirportCrowdImg from "@/assets/real/branch-abha-airport-crowd.j
 import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-counter.jpg";
 import seasonalBaristaImg from "@/assets/real/seasonal-barista.jpg";
 import seasonalOutdoorImg from "@/assets/real/seasonal-outdoor.jpg";
+import seasonalStaffImg from "@/assets/real/seasonal-staff.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const MapPinIcon = () => (
@@ -218,7 +219,7 @@ export function Branches() {
 
             {/* Media side */}
             <FadeIn direction="up" delay={0.2}>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {/* Photo 1 — barista */}
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
@@ -228,9 +229,8 @@ export function Branches() {
                   />
                 </div>
 
-                {/* Right column: photo + video stacked */}
+                {/* Middle column: outdoor + video stacked */}
                 <div className="flex flex-col gap-3">
-                  {/* Photo 2 — outdoor booth */}
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={seasonalOutdoorImg}
@@ -238,8 +238,6 @@ export function Branches() {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-
-                  {/* Video */}
                   <div className="aspect-square overflow-hidden relative bg-black">
                     <video
                       src="/seasonal-video-1.mp4"
@@ -255,6 +253,15 @@ export function Branches() {
                     </div>
                   </div>
                 </div>
+
+                {/* Photo 3 — staff */}
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={seasonalStaffImg}
+                    alt="Seasonal branch staff"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
               </div>
             </FadeIn>
 
@@ -262,30 +269,20 @@ export function Branches() {
 
           {/* Bottom seasonal strip */}
           <FadeIn delay={0.3}>
-            <div className="grid grid-cols-3 gap-3 mt-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
               <div className="aspect-[4/5] overflow-hidden">
                 <img src={seasonalDayImg} alt="Seasonal day" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="aspect-[4/5] overflow-hidden relative">
-                <video
-                  src="/seasonal-video-2.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
+                <video src="/seasonal-video-2.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
               </div>
               <div className="aspect-[4/5] overflow-hidden relative">
-                <video
-                  src="/seasonal-video-3.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
+                <video src="/seasonal-video-3.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+              </div>
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <video src="/seasonal-video-4.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
               </div>
             </div>
