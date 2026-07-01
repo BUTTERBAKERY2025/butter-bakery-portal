@@ -80,9 +80,9 @@ const newsItems: NewsItem[] = [
     titleEn: "Butter Bakery Wins Best Tourism Project in Asir Region",
     titleAr: "بتر بيكري تفوز بجائزة أفضل مشروع سياحي في منطقة عسير",
     excerptEn:
-      "Our Abha Al Hizam flagship was officially recognised by the Asir Tourism Authority as the region's best tourism project — a testament to the experience we've crafted for every guest who walks through our doors.",
+      "Our Abha Al Hizam flagship was officially recognised as the region's best tourism project — a testament to the experience we've crafted for every guest who walks through our doors.",
     excerptAr:
-      "حصل فرعنا الرئيسي في أبها الحزام على تكريم رسمي من هيئة السياحة في منطقة عسير، إذ مُنح لقب أفضل مشروع سياحي في المنطقة — اعترافاً بالتجربة الاستثنائية التي نصنعها لكل ضيف يزورنا.",
+      "حصل فرعنا الرئيسي في أبها الحزام على تكريم رسمي بلقب أفضل مشروع سياحي في المنطقة — اعترافاً بالتجربة الاستثنائية التي نصنعها لكل ضيف يزورنا.",
   },
   {
     id: 2,
