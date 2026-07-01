@@ -273,9 +273,8 @@ export function Branches() {
               <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden">
                 <img src={seasonalDayImg} alt="Seasonal day" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
-              <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden relative">
-                <video src="/seasonal-video-2.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+              <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden">
+                <img src={seasonalNightImg} alt="Seasonal night" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden relative">
                 <video src="/seasonal-video-3.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
