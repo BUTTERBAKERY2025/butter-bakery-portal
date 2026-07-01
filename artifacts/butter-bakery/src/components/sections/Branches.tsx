@@ -18,7 +18,7 @@ import branchJizanSeafrontImg from "@/assets/real/branch-jizan-seafront.jpg";
 import branchJizanWaterfrontImg from "@/assets/real/branch-jizan-waterfront.jpg";
 import seasonalBaristaImg from "@/assets/real/seasonal-barista.jpg";
 import seasonalOutdoorImg from "@/assets/real/seasonal-outdoor.jpg";
-import seasonalStaffImg from "@/assets/real/seasonal-staff.jpg";
+import staffServingImg from "@/assets/real/staff-serving.jpg";
 import staffPastriesImg from "@/assets/real/staff-pastries.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
@@ -261,11 +261,11 @@ export function Branches() {
                   </div>
                 </div>
 
-                {/* Photo 3 — staff */}
+                {/* Photo 3 — staff serving */}
                 <div className="aspect-[3/4] overflow-hidden">
                   <img
-                    src={seasonalStaffImg}
-                    alt="Seasonal branch staff"
+                    src={staffServingImg}
+                    alt="Seasonal branch staff serving"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
