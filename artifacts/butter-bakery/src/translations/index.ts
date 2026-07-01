@@ -180,7 +180,7 @@ export const translations = {
       pillars: [
         {
           title: "Proven Multi-City Concept",
-          body: "Operational branches in Abha (Al Hizam — award-winning tourism project), Abha (Airport Road — newest opening), Riyadh (Anas Bin Malik), Tabuk, Al Madinah Al Munawwarah, and Riyadh (Al Safarat — Ministry of Tourism partner) — plus seasonal mobile branches at Namas, Taif, Aseer Summer Season, and national events.",
+          body: "Operational branches in Abha (Al Hizam — award-winning tourism project), Abha (Airport Road — newest opening), Riyadh (Anas Bin Malik), Tabuk, Al Madinah Al Munawwarah, Riyadh (Al Safarat — Ministry of Tourism partner), and Jizan (Corniche — Red Sea waterfront) — plus seasonal mobile branches at Namas, Taif, Aseer Summer Season, and national events.",
         },
         {
           title: "B2C + B2B + B2G Revenue",
@@ -495,7 +495,7 @@ export const translations = {
       pillars: [
         {
           title: "مفهوم متعدد المدن مُثبت",
-          body: "فروع تشغيلية في أبها (الحزام — مشروع سياحي حائز على جوائز)، أبها (طريق المطار — أحدث الافتتاحات)، الرياض (أنس بن مالك)، تبوك، المدينة المنورة، والرياض (حي السفارات — شراكة مع وزارة السياحة) — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف وموسم صيف عسير والمناسبات الوطنية.",
+          body: "فروع تشغيلية في أبها (الحزام — مشروع سياحي حائز على جوائز)، أبها (طريق المطار — أحدث الافتتاحات)، الرياض (أنس بن مالك)، تبوك، المدينة المنورة، الرياض (حي السفارات — شراكة مع وزارة السياحة)، وجازان (الكورنيش — واجهة البحر الأحمر) — بالإضافة إلى فروع موسمية متنقلة في النماص والطائف وموسم صيف عسير والمناسبات الوطنية.",
         },
         {
           title: "إيرادات B2C + B2B + B2G",

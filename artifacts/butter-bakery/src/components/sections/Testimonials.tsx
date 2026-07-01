@@ -39,6 +39,18 @@ const reviews = {
       city: "Abha",
       stars: 5,
     },
+    {
+      quote: "The Medina branch is a true gem — watching the golden hour from the rooftop terrace with a perfect flat white in hand is an experience I keep coming back for.",
+      name: "Sara M.",
+      city: "Al Madinah",
+      stars: 5,
+    },
+    {
+      quote: "Jizan finally has a café worthy of its beautiful corniche. Sitting by the Red Sea with Butter Bakery's croissants — this is what coastal living should feel like.",
+      name: "Faisal A.",
+      city: "Jizan",
+      stars: 5,
+    },
   ],
   ar: [
     {
@@ -63,6 +75,18 @@ const reviews = {
       quote: "تجربة الفرع الموسمي الخارجي فريدة من نوعها — أجواء ساحرة والأكل يضاهي كل شيء بالتفصيل.",
       name: "عبدالله ف.",
       city: "أبها",
+      stars: 5,
+    },
+    {
+      quote: "فرع المدينة درة حقيقية — مشاهدة غروب الشمس الذهبي من السطح المفتوح وكوب فلات وايت بيدك، تجربة لا تُنسى تعود إليها مراراً.",
+      name: "سارة م.",
+      city: "المدينة المنورة",
+      stars: 5,
+    },
+    {
+      quote: "جازان كانت تنتظر مقهى يليق بكورنيشها الجميل. الجلوس على البحر الأحمر مع كروسان بتر بيكري — هذا ما يعنيه العيش على الساحل.",
+      name: "فيصل أ.",
+      city: "جازان",
       stars: 5,
     },
   ],
@@ -90,7 +114,7 @@ export function Testimonials() {
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {list.map((r, i) => (
             <FadeIn key={i} delay={i * 0.1} direction="up">
               <div className="group p-6 md:p-8 border border-border/60 bg-secondary/30 hover:border-primary/40 hover:bg-secondary/60 transition-all duration-500 h-full flex flex-col">

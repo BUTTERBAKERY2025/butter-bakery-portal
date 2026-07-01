@@ -1,5 +1,10 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLang } from "@/contexts/LanguageContext";
+import catering1Img from "@/assets/real/catering-1.jpg";
+import catering2Img from "@/assets/real/catering-2.jpg";
+import catering3Img from "@/assets/real/catering-3.jpg";
+import catering4Img from "@/assets/real/catering-4.jpg";
+import catering5Img from "@/assets/real/catering-5.jpg";
 
 const WHATSAPP = "https://wa.me/966531920222";
 
@@ -21,17 +26,8 @@ export function Catering() {
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-foreground font-medium leading-[1.05] max-w-3xl">
-              {isAr ? (
-                <>
-                  نأتي إلى{" "}
-                  <span className="text-primary italic">مائدتكم</span>
-                </>
-              ) : (
-                <>
-                  We Come to{" "}
-                  <span className="text-primary italic">Your Table</span>
-                </>
-              )}
+              {c.title.replace(c.titleAccent, "").trim()}{" "}
+              <span className="text-primary italic">{c.titleAccent}</span>
             </h2>
             <p className="text-foreground/50 text-sm uppercase tracking-[0.25em] lg:mb-3 font-light lg:max-w-xs lg:text-right">
               {c.tagline}
@@ -99,6 +95,29 @@ export function Catering() {
           </div>
         </div>
 
+      </div>
+
+      {/* ── Catering photo strip ────────────────────────────── */}
+      <div className="container mx-auto px-5 md:px-12 pb-12 md:pb-20">
+        <FadeIn direction="up" delay={0.1}>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3">
+            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+              <img src={catering1Img} alt="Catering setup" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+              <img src={catering2Img} alt="Catering pastries" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+              <img src={catering3Img} alt="Catering table" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden">
+              <img src={catering4Img} alt="Catering display" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="col-span-2 md:col-span-1 aspect-[16/5] md:aspect-[3/4] overflow-hidden">
+              <img src={catering5Img} alt="Catering event" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700" />
+            </div>
+          </div>
+        </FadeIn>
       </div>
 
       {/* ── Dark CTA strip ─────────────────────────────────── */}
