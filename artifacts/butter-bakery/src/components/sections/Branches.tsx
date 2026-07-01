@@ -260,13 +260,13 @@ export function Branches() {
 
           </div>
 
-          {/* Bottom day/night seasonal strip */}
+          {/* Bottom seasonal strip */}
           <FadeIn delay={0.3}>
-            <div className="grid grid-cols-2 gap-3 mt-6">
-              <div className="aspect-[16/7] overflow-hidden">
+            <div className="grid grid-cols-3 gap-3 mt-6">
+              <div className="aspect-[4/5] overflow-hidden">
                 <img src={seasonalDayImg} alt="Seasonal day" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
-              <div className="aspect-[16/7] overflow-hidden relative">
+              <div className="aspect-[4/5] overflow-hidden relative">
                 <video
                   src="/seasonal-video-2.mp4"
                   autoPlay
@@ -275,7 +275,18 @@ export function Branches() {
                   playsInline
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+              </div>
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <video
+                  src="/seasonal-video-3.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
               </div>
             </div>
           </FadeIn>
