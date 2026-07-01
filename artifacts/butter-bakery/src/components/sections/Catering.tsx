@@ -1,11 +1,5 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLang } from "@/contexts/LanguageContext";
-import catering1 from "@/assets/real/catering-1.jpg";
-import catering2 from "@/assets/real/catering-2.jpg";
-import catering3 from "@/assets/real/catering-3.jpg";
-import catering4 from "@/assets/real/catering-4.jpg";
-import catering5 from "@/assets/real/catering-5.jpg";
-import catering6 from "@/assets/real/catering-6.jpg";
 
 const WHATSAPP = "https://wa.me/966500000000";
 
@@ -105,58 +99,6 @@ export function Catering() {
           </div>
         </div>
 
-        {/* ── Photo mosaic — 6 images ──────────────────────── */}
-        <FadeIn direction="up" delay={0.1}>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-            {/* Row 1: tall + normal + normal */}
-            <div className="row-span-2 aspect-[3/4] md:aspect-auto overflow-hidden">
-              <img
-                src={catering4}
-                alt="Catering spread"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden">
-              <img
-                src={catering2}
-                alt="Catering pastries"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden">
-              <img
-                src={catering3}
-                alt="Catering salad station"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden">
-              <img
-                src={catering5}
-                alt="Catering full setup"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-            <div className="aspect-square overflow-hidden">
-              <img
-                src={catering6}
-                alt="Catering buffet"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* Last wide photo */}
-        <FadeIn delay={0.15}>
-          <div className="aspect-[21/8] overflow-hidden mb-0">
-            <img
-              src={catering1}
-              alt="Catering table setup"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
-          </div>
-        </FadeIn>
       </div>
 
       {/* ── Dark CTA strip ─────────────────────────────────── */}
