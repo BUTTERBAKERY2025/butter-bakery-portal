@@ -4,6 +4,8 @@ import branchRiyadhImg from "@/assets/real/branch-riyadh-interior.jpg";
 import branchRiyadhCounterImg from "@/assets/real/branch-riyadh-counter.jpg";
 import branchAbhaGardenImg from "@/assets/real/branch-abha-garden.jpg";
 import coffeeBarImg from "@/assets/real/coffee-bar.jpg";
+import branchSeasonalImg from "@/assets/real/branch-seasonal.jpg";
+import outdoorStandImg from "@/assets/real/outdoor-stand.jpg";
 import seasonalDayImg from "@/assets/real/seasonal-summer-day.jpg";
 import seasonalNightImg from "@/assets/real/seasonal-summer-night.jpg";
 import branchMedinaAerialImg from "@/assets/real/branch-medina-aerial.jpg";
@@ -15,6 +17,7 @@ import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-count
 import seasonalBaristaImg from "@/assets/real/seasonal-barista.jpg";
 import seasonalOutdoorImg from "@/assets/real/seasonal-outdoor.jpg";
 import seasonalStaffImg from "@/assets/real/seasonal-staff.jpg";
+import staffPastriesImg from "@/assets/real/staff-pastries.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const MapPinIcon = () => (
@@ -35,7 +38,7 @@ const featuredMaps = [
 
 const otherImages: { image: string; secondImage?: string }[] = [
   { image: coffeeBarImg },
-  { image: seasonalDayImg, secondImage: seasonalNightImg },
+  { image: branchSeasonalImg, secondImage: outdoorStandImg },
   { image: branchMedinaAerialImg, secondImage: branchMedinaSunsetImg },
   { image: branchRiyadhEmbDayImg, secondImage: branchRiyadhEmbNightImg },
   { image: branchAbhaAirportCounterImg, secondImage: branchAbhaAirportCrowdImg },
@@ -269,17 +272,64 @@ export function Branches() {
 
           {/* Bottom seasonal strip */}
           <FadeIn delay={0.3}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-6">
-              <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden">
-                <img src={seasonalDayImg} alt="Seasonal day" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+
+              {/* Staff & Pastries */}
+              <div className="aspect-[3/4] overflow-hidden relative group">
+                <img
+                  src={staffPastriesImg}
+                  alt="Seasonal branch pastries"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-white/90 text-[9px] uppercase tracking-[0.25em] font-medium">Artisan Craft</p>
+                </div>
               </div>
-              <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden">
-                <img src={seasonalNightImg} alt="Seasonal night" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+
+              {/* Day atmosphere */}
+              <div className="aspect-[3/4] overflow-hidden relative group">
+                <img
+                  src={seasonalDayImg}
+                  alt="Seasonal branch daytime"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-amber-300/90 text-[9px] uppercase tracking-[0.25em] font-medium">Golden Hour</p>
+                </div>
               </div>
-              <div className="aspect-[16/9] lg:aspect-[4/5] overflow-hidden relative">
-                <video src="/seasonal-video-3.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+
+              {/* Night atmosphere */}
+              <div className="aspect-[3/4] overflow-hidden relative group">
+                <img
+                  src={seasonalNightImg}
+                  alt="Seasonal branch nighttime"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-blue-200/90 text-[9px] uppercase tracking-[0.25em] font-medium">Evening Glow</p>
+                </div>
               </div>
+
+              {/* Video */}
+              <div className="aspect-[3/4] overflow-hidden relative">
+                <video
+                  src="/seasonal-video-3.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <p className="text-white/90 text-[9px] uppercase tracking-[0.25em] font-medium">Live Scene</p>
+                </div>
+              </div>
+
             </div>
           </FadeIn>
         </div>
