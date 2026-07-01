@@ -72,6 +72,15 @@ export const translations = {
       quote: "\"We create a different time… with a flavor that resembles you.\"",
       quoteAr: "نصنع وقتاً مختلفاً… بنكهة تشبهك",
       directions: "Get Directions",
+      seasonal: {
+        eyebrow: "Seasonal Branches",
+        title: "We Come to You",
+        subtitle: "Wherever the joy is — Butter Bakery follows.",
+        description: "With every season, our mobile branches set off across the Kingdom — bringing our European-crafted pastries, specialty coffee, and warm hospitality directly to where you celebrate. From the cool misty mountains of Namas and Taif, to Aseer Summer Season festivals and national events, we are proud to be part of every moment that matters.",
+        tagline: "Mobile · Pop-up · Seasonal",
+        locations: ["Namas", "Taif", "Aseer Summer", "National Events"],
+        hashtag: "#بارد_ممطر_صيفاً",
+      },
       featured: [
         {
           city: "Abha",
@@ -336,6 +345,15 @@ export const translations = {
       quote: "\"نصنع وقتاً مختلفاً… بنكهة تشبهك.\"",
       quoteAr: "نصنع وقتاً مختلفاً… بنكهة تشبهك",
       directions: "الاتجاهات",
+      seasonal: {
+        eyebrow: "فروع موسمية",
+        title: "نأتي إليكم",
+        subtitle: "حيث يكون الفرح — تكون بتر بيكري.",
+        description: "مع كل موسم، تنطلق فروعنا المتنقلة لتجوب أرجاء المملكة — تحمل معها مخبوزاتنا الأوروبية الحرفية وقهوتنا المختصة ودفء ضيافتنا إلى حيث تحتفل. من النماص والطائف الباردة الممطرة، إلى مهرجانات موسم صيف عسير والفعاليات الوطنية الكبرى — نفتخر بأننا جزء من كل لحظة تستحق الاحتفال.",
+        tagline: "متنقل · موسمي · حيث أنتم",
+        locations: ["النماص", "الطائف", "موسم عسير", "الفعاليات الوطنية"],
+        hashtag: "#بارد_ممطر_صيفاً",
+      },
       featured: [
         {
           city: "أبها",

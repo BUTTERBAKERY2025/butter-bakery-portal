@@ -12,6 +12,8 @@ import branchRiyadhEmbDayImg from "@/assets/real/branch-riyadh-emb-day.jpg";
 import branchRiyadhEmbNightImg from "@/assets/real/branch-riyadh-emb-night.jpg";
 import branchAbhaAirportCrowdImg from "@/assets/real/branch-abha-airport-crowd.jpg";
 import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-counter.jpg";
+import seasonalBaristaImg from "@/assets/real/seasonal-barista.jpg";
+import seasonalOutdoorImg from "@/assets/real/seasonal-outdoor.jpg";
 import { useLang } from "@/contexts/LanguageContext";
 
 const MapPinIcon = () => (
@@ -175,6 +177,109 @@ export function Branches() {
             </p>
           </div>
         </FadeIn>
+      </div>
+
+      {/* ── Seasonal Branches ─────────────────────────────────── */}
+      <div className="bg-[#1C1208] mt-14 md:mt-28 py-16 md:py-28">
+        <div className="container mx-auto px-5 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* Text side */}
+            <FadeIn direction="up">
+              <p className="text-primary text-xs font-semibold uppercase tracking-[0.35em] mb-5">
+                {b.seasonal.eyebrow}
+              </p>
+              <h3 className="font-serif text-4xl md:text-5xl text-white font-medium mb-6 leading-tight">
+                {b.seasonal.title}
+              </h3>
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-6 font-light">
+                {b.seasonal.tagline}
+              </p>
+              <p className="text-white/70 font-light leading-relaxed md:leading-loose text-sm md:text-base mb-8">
+                {b.seasonal.description}
+              </p>
+
+              {/* Location pills */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {b.seasonal.locations.map((loc, i) => (
+                  <span
+                    key={i}
+                    className="px-4 py-1.5 border border-primary/40 text-primary text-[11px] uppercase tracking-[0.2em] font-medium"
+                  >
+                    {loc}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-primary/60 text-sm font-light tracking-wide">
+                {b.seasonal.hashtag}
+              </p>
+            </FadeIn>
+
+            {/* Media side */}
+            <FadeIn direction="up" delay={0.2}>
+              <div className="grid grid-cols-2 gap-3">
+                {/* Photo 1 — barista */}
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={seasonalBaristaImg}
+                    alt="Seasonal branch barista"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+
+                {/* Right column: photo + video stacked */}
+                <div className="flex flex-col gap-3">
+                  {/* Photo 2 — outdoor booth */}
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={seasonalOutdoorImg}
+                      alt="Seasonal outdoor branch"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+
+                  {/* Video */}
+                  <div className="aspect-square overflow-hidden relative bg-black">
+                    <video
+                      src="/seasonal-video-1.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover opacity-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-2 left-2 bg-primary/90 px-2 py-0.5 text-[9px] uppercase tracking-widest text-white font-medium">
+                      Live
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+          </div>
+
+          {/* Bottom day/night seasonal strip */}
+          <FadeIn delay={0.3}>
+            <div className="grid grid-cols-2 gap-3 mt-6">
+              <div className="aspect-[16/7] overflow-hidden">
+                <img src={seasonalDayImg} alt="Seasonal day" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              </div>
+              <div className="aspect-[16/7] overflow-hidden relative">
+                <video
+                  src="/seasonal-video-2.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
