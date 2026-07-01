@@ -18,7 +18,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const ids = ["story", "products", "locations", "gallery"];
+    const ids = ["story", "products", "locations", "gallery", "catering"];
     const observers: IntersectionObserver[] = [];
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -43,6 +43,7 @@ export function Navbar() {
     { label: t.nav.products, href: "#products" },
     { label: t.nav.locations, href: "#locations" },
     { label: t.nav.gallery, href: "#gallery" },
+    { label: t.nav.catering, href: "#catering" },
     { label: t.nav.news, href: "/news", isPage: true },
   ];
 

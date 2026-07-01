@@ -1,7 +1,7 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLang } from "@/contexts/LanguageContext";
 
-const WHATSAPP = "https://wa.me/966500000000";
+const WHATSAPP = "https://wa.me/966531920222";
 
 export function Catering() {
   const { t, isAr } = useLang();
