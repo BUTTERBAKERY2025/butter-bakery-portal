@@ -14,6 +14,8 @@ import branchRiyadhEmbDayImg from "@/assets/real/branch-riyadh-emb-day.jpg";
 import branchRiyadhEmbNightImg from "@/assets/real/branch-riyadh-emb-night.jpg";
 import branchAbhaAirportCrowdImg from "@/assets/real/branch-abha-airport-crowd.jpg";
 import branchAbhaAirportCounterImg from "@/assets/real/branch-abha-airport-counter.jpg";
+import branchJizanSeafrontImg from "@/assets/real/branch-jizan-seafront.jpg";
+import branchJizanWaterfrontImg from "@/assets/real/branch-jizan-waterfront.jpg";
 import seasonalBaristaImg from "@/assets/real/seasonal-barista.jpg";
 import seasonalOutdoorImg from "@/assets/real/seasonal-outdoor.jpg";
 import seasonalStaffImg from "@/assets/real/seasonal-staff.jpg";
@@ -42,6 +44,7 @@ const otherImages: { image: string; secondImage?: string }[] = [
   { image: branchMedinaAerialImg, secondImage: branchMedinaSunsetImg },
   { image: branchRiyadhEmbDayImg, secondImage: branchRiyadhEmbNightImg },
   { image: branchAbhaAirportCounterImg, secondImage: branchAbhaAirportCrowdImg },
+  { image: branchJizanSeafrontImg, secondImage: branchJizanWaterfrontImg },
 ];
 
 const otherMaps = [
@@ -50,6 +53,7 @@ const otherMaps = [
   "https://www.google.com/maps/search/Butter+Bakery+Medina+Saudi+Arabia",
   "https://www.google.com/maps/search/Butter+Bakery+Embassies+Quarter+Riyadh+Saudi+Arabia",
   "https://www.google.com/maps/search/Butter+Bakery+Airport+Road+Abha+Saudi+Arabia",
+  "https://www.google.com/maps/search/Butter+Bakery+Jizan+Corniche+Saudi+Arabia",
 ];
 
 export function Branches() {

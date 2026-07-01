@@ -129,6 +129,12 @@ export const translations = {
           tagline: "Where every journey begins with great taste",
           description: "On Abha's Airport Road — the pulse of the city's modern movement — Butter Bakery launches its newest chapter with a bold, visually iconic interior. The signature illuminated ceiling panel, bearing the world's most celebrated culinary landmarks from Paris's Eiffel Tower to London's Big Ben, tells the story of a brand that brings the world's finest baking traditions under one roof. The open-kitchen counter — where guests can watch chefs craft pastries live — invites an immersive experience that blends the warmth of Aseer with European artisan mastery. This branch was met with an enthusiastic response from day one, with guests lining up to be among the first to experience the newest face of Butter Bakery in Abha.",
         },
+        {
+          city: "Jizan",
+          location: "Al Korniche — جازان الكورنيش",
+          tagline: "Where the sea meets the taste of Europe",
+          description: "On the breathtaking seafront of Jizan, Butter Bakery arrives with a presence as open and welcoming as the sea itself. This waterfront branch captures the spirit of Jizan — a city of warmth, colour, and maritime culture — wrapping it in our signature European artisan character. Guests are invited to savour freshly baked pastries and specialty coffee against a backdrop of the Red Sea's shimmering horizon, where the salty breeze and golden light make every visit an experience apart. A new landmark on the Jizan Corniche, and a proud addition to our growing family across the Kingdom.",
+        },
       ],
     },
     gallery: {
@@ -437,6 +443,12 @@ export const translations = {
           location: "طريق مطار أبها — Airport Road",
           tagline: "حيث كل رحلة تبدأ بنكهة استثنائية",
           description: "على طريق مطار أبها — شريان المدينة العصري — تفتح بتر بيكري فصلها الجديد بتصميم داخلي آسر وهوية بصرية لا تُنسى. اللوحة المضيئة المميزة على السقف تحمل أيقونات أشهر المعالم الطهوية حول العالم من برج إيفل إلى بيج بن، لتحكي قصة علامة تجمع أرقى تقاليد الخبز العالمي تحت سقف واحد. الكاونتر المفتوح على المطبخ — حيث يشاهد الضيوف الشيفات يحضرون المعجنات أمامهم مباشرة — يُجسّد تجربة تفاعلية تمزج دفء عسير بالحرفية الأوروبية الأصيلة. استقبل الفرع إقبالاً كبيراً منذ أول يوم، حيث وقف الزوار في طوابير متحمسين ليكونوا من الأوائل الذين يختبرون الوجه الجديد لبتر بيكري في أبها.",
+        },
+        {
+          city: "جازان",
+          location: "الكورنيش — جازان الكورنيش",
+          tagline: "حيث يلتقي البحر بنكهة أوروبا",
+          description: "على الواجهة البحرية الساحرة في جازان، تحطّ بتر بيكري رحالها بحضور بحجم المدينة ودفئها. يلتقط هذا الفرع الساحلي روح جازان — مدينة الدفء والألوان والموروث البحري — ويُلبسها هويتنا الحرفية الأوروبية المميزة. يُدعى الضيوف إلى الاستمتاع بالمخبوزات الطازجة والقهوة المختصة على خلفية أفق البحر الأحمر المتلألئ، حيث تمنح النسمة البحرية والضوء الذهبي كل زيارة طعم التجربة الفريدة. معلمٌ جديد على كورنيش جازان، وإضافة تفخر بها عائلتنا المتنامية في أرجاء المملكة.",
         },
       ],
     },
