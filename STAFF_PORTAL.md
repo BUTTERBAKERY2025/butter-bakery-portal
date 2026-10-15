@@ -42,3 +42,19 @@ disabling or resetting a password signs that person out immediately.
    Sign in at `/staff`, then change nothing else in the secrets; manage people from `/staff/admin`.
 
 To publish a new version of the package, upload the new zips (only changed files are replaced). The terminal import also accepts `--prune` to remove files that were dropped.
+
+## Design office (Admin → Designs)
+
+Every cup, box, paper, sign, card, uniform, bag, social template and menu reference, each with a status
+(draft → in review → approved → at the printer), its specification, print files, images and a 3D model
+(cups, boxes and cards are real 3D; sheets and boards are shown as printed panels).
+
+**Protected share links** (for a designer or printer, view only):
+- `/share/<token>` + a 6-digit PIN shown once to the admin. Send the link and the PIN in separate messages.
+- The link stops working when it expires (24 h – 30 days), when its open limit is reached, when an admin cancels it,
+  or after 10 wrong PINs. Five wrong PINs from one IP pause that IP for 15 minutes.
+- Only hashes of the token and PIN are stored. The share page shows the 3D model, specs and images only — no print files,
+  no staff data — and every open is logged (Admin → Activity log, and under each link).
+- "View only" can't stop a screenshot; the recipient's name is shown on the viewer.
+
+Tables: `designs`, `design_shares` (see `lib/db/src/schema/designs.ts`). Design images and textures are paths into `brand_files`.

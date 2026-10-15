@@ -11,6 +11,7 @@ import StaffLogin from "@/pages/staff/StaffLogin";
 import StaffLibrary from "@/pages/staff/StaffLibrary";
 import StaffAdmin from "@/pages/staff/StaffAdmin";
 import StaffGuide from "@/pages/staff/StaffGuide";
+import ShareView from "@/pages/staff/ShareView";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/staff/library" component={StaffLibrary} />
       <Route path="/staff/admin" component={StaffAdmin} />
       <Route path="/staff/guide" component={StaffGuide} />
+      <Route path="/share/:token" component={ShareView} />
       <Route component={NotFound} />
     </Switch>
   );
