@@ -35,6 +35,11 @@ export const pool = new Pool({
   connectionString: url.replace(/[?&]sslmode=[^&]*/g, ""),
   ...(needsTls ? { ssl: { rejectUnauthorized: false } } : {}),
 });
+// A dropped idle connection (pooler restart, network blip) must not take the whole server down;
+// the pool simply opens a new connection on the next query.
+pool.on("error", (err) => {
+  console.error("postgres pool: idle client error", err.message);
+});
 export const db = drizzle(pool, { schema });
 
 export * from "./schema";

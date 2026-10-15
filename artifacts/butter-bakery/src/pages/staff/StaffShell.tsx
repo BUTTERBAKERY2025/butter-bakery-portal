@@ -1,7 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import logoBb from "@/assets/real/logo-bb.jpg";
 import { api, ApiError, type Section, type StaffUser } from "./api";
 import { useStaffText } from "./i18n";
 
@@ -26,16 +25,25 @@ export function useMe() {
   });
 }
 
-/** Keeps search engines away from every staff page. */
+/** Keeps search engines away from every staff page, and loads the identity fonts once. */
 export function useNoIndex() {
   useEffect(() => {
     const m = document.createElement("meta");
     m.name = "robots";
     m.content = "noindex, nofollow";
     document.head.appendChild(m);
+    if (!document.getElementById("bb-fonts")) {
+      const l = document.createElement("link");
+      l.id = "bb-fonts";
+      l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lato:wght@300;400;700&family=Readex+Pro:wght@300;400;500;600&display=swap";
+      document.head.appendChild(l);
+    }
     return () => m.remove();
   }, []);
 }
+
+export const canSeeGuide = (me: Me) => me.sections.some((x) => x.id === "guide-online" && x.access !== "none");
 
 export function StaffShell({ me, children, wide = false }: { me?: Me | null; children: ReactNode; wide?: boolean }) {
   const { s, lang, toggleLang } = useStaffText();
@@ -49,53 +57,54 @@ export function StaffShell({ me, children, wide = false }: { me?: Me | null; chi
     navigate("/staff");
   };
 
-  const tab = (href: string, label: string) => (
-    <Link
-      href={href}
-      className={`text-sm tracking-wide px-1 py-1 border-b-2 transition-colors ${
-        loc === href ? "border-primary text-primary" : "border-transparent text-foreground/60 hover:text-foreground"
-      }`}
-    >
-      {label}
-    </Link>
-  );
+  const tab = (href: string, label: string) => {
+    const on = loc === href || (href !== "/staff/home" && loc.startsWith(href));
+    return (
+      <Link
+        href={href}
+        className={`relative text-[0.82rem] tracking-wide py-2 whitespace-nowrap transition-colors ${on ? "text-[var(--bb-cream)]" : "text-[var(--bb-cream)]/55 hover:text-[var(--bb-cream)]"}`}
+      >
+        {label}
+        {on && <span className="absolute -bottom-px inset-x-0 h-0.5 bg-[var(--bb-orange)]" />}
+      </Link>
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/60 bg-background/95 sticky top-0 z-40 backdrop-blur">
-        <div className="container mx-auto px-5 md:px-10 min-h-16 py-2 md:py-0 md:h-16 flex flex-wrap md:flex-nowrap items-center justify-between gap-x-3 gap-y-1">
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <span className="w-9 h-9 overflow-hidden rounded-sm ring-1 ring-border">
-              <img src={logoBb} alt="Butter" className="w-full h-full object-cover" />
-            </span>
-            <span className="flex flex-col leading-none">
-              <span className="font-serif text-base font-bold tracking-wider">BUTTER</span>
-              <span className="text-[0.55rem] uppercase tracking-[0.3em] text-primary mt-1">{s.portal}</span>
-            </span>
+    <div className="staff-theme min-h-screen">
+      <header className="sticky top-0 z-40 bg-[var(--bb-brown)] text-[var(--bb-cream)]">
+        <div className="max-w-[1400px] mx-auto px-5 md:px-10 min-h-16 py-2 md:py-0 md:h-16 flex flex-wrap md:flex-nowrap items-center justify-between gap-x-6 gap-y-1">
+          <Link href={me ? "/staff/home" : "/staff"} className="flex items-center gap-3 shrink-0">
+            <img src="/staff/logo-icon-cream.svg" alt="Butter" className="h-6 w-auto" />
+            <span className="h-5 w-px bg-[var(--bb-cream)]/25" />
+            <span className="text-[0.62rem] uppercase tracking-[0.32em] text-[var(--bb-cream)]/70">{s.portal}</span>
           </Link>
           {me && (
-            <nav className="order-last md:order-none w-full md:w-auto flex items-center gap-5 overflow-x-auto">
-              {me.sections.some((x) => x.id === "guide-online" && x.access !== "none") && tab("/staff/guide", s.guideTab)}
+            <nav className="order-last md:order-none w-full md:w-auto flex items-center gap-6 overflow-x-auto md:me-auto">
+              {tab("/staff/home", s.home)}
+              {canSeeGuide(me) && tab("/staff/guide", s.guideTab)}
               {tab("/staff/library", s.brandLibrary)}
+              {me.user.isAdmin && tab("/staff/designs", s.designs)}
               {me.user.isAdmin && tab("/staff/admin", s.admin)}
             </nav>
           )}
           <div className="flex items-center gap-2 shrink-0">
+            {me && <span className="hidden lg:inline text-xs text-[var(--bb-cream)]/50 me-2">{me.user.displayName}</span>}
             <button
               onClick={toggleLang}
-              className="text-xs tracking-widest px-3 py-2 border border-border text-foreground/60 hover:border-primary hover:text-primary"
+              className="text-xs tracking-widest px-3 py-1.5 border border-[var(--bb-cream)]/25 text-[var(--bb-cream)]/80 hover:border-[var(--bb-orange)] hover:text-[var(--bb-cream)]"
             >
               {lang === "en" ? "عربي" : "EN"}
             </button>
             {me && (
-              <button onClick={signOut} className="text-xs tracking-wide px-3 py-2 text-foreground/60 hover:text-primary">
+              <button onClick={signOut} className="text-xs tracking-wide px-2 py-1.5 text-[var(--bb-cream)]/60 hover:text-[var(--bb-orange)]">
                 {s.signOut}
               </button>
             )}
           </div>
         </div>
       </header>
-      {wide ? <main>{children}</main> : <main className="container mx-auto px-5 md:px-10 py-8 md:py-12">{children}</main>}
+      {wide ? <main>{children}</main> : <main className="max-w-[1400px] mx-auto px-5 md:px-10 py-8 md:py-12">{children}</main>}
     </div>
   );
 }
@@ -107,7 +116,7 @@ export function useRequireMe(adminOnly = false) {
   useEffect(() => {
     if (me.isLoading) return;
     if (!me.data) navigate("/staff");
-    else if (adminOnly && !me.data.user.isAdmin) navigate("/staff/library");
+    else if (adminOnly && !me.data.user.isAdmin) navigate("/staff/home");
   }, [me.isLoading, me.data, adminOnly, navigate]);
   return me;
 }

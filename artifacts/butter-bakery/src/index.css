@@ -198,3 +198,50 @@ input, select, textarea {
 .font-arabic {
   font-family: 'Noto Kufi Arabic', system-ui, sans-serif;
 }
+
+/* ---------- Staff portal: the Butter identity (scoped, the public site is unchanged) ---------- */
+.staff-theme {
+  --background: 39 52% 95%;
+  --foreground: 29 33% 12%;
+  --card: 40 100% 99%;
+  --card-foreground: 29 33% 12%;
+  --border: 37 34% 84%;
+  --input: 37 34% 80%;
+  --ring: 19 100% 50%;
+  --primary: 19 100% 50%;
+  --primary-foreground: 39 52% 95%;
+  --muted: 38 40% 91%;
+  --muted-foreground: 33 18% 40%;
+  --destructive: 4 72% 45%;
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Lato", Arial, sans-serif;
+  --bb-brown: #2a1f15;
+  --bb-orange: #fe5000;
+  --bb-cream: #f1e9da;
+  --bb-caramel: #c08b3d;
+  --bb-olive: #524727;
+  --bb-khaki: #c4b47e;
+  font-family: var(--font-sans);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+html[lang="ar"] .staff-theme {
+  --font-sans: "Readex Pro", Tahoma, sans-serif;
+  --font-serif: "Readex Pro", Tahoma, sans-serif;
+}
+html[lang="ar"] .staff-theme .font-serif { font-weight: 500; letter-spacing: 0; }
+.staff-theme .bb-eyebrow { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bb-orange); }
+html[lang="ar"] .staff-theme .bb-eyebrow { letter-spacing: 0; font-size: 0.8rem; }
+.staff-theme .bb-card { background: hsl(var(--card)); border: 1px solid hsl(var(--border)); }

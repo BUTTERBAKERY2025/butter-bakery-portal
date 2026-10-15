@@ -7,7 +7,6 @@ import { api, ApiError, fmtDate, fmtSize, type Access, type AdminSection, type L
 import { useStaffText } from "./i18n";
 import { StaffShell, useRequireMe } from "./StaffShell";
 import { TIER_DOT } from "./StaffLibrary";
-import { StaffDesigns } from "./StaffDesigns";
 
 type Presets = Record<"partner" | "agency" | "management", Record<string, Access>>;
 interface Draft {
@@ -37,7 +36,10 @@ export default function StaffAdmin() {
   const { s, isAr } = useStaffText();
   const me = useRequireMe(true);
   const qc = useQueryClient();
-  const [tab, setTab] = useState<"users" | "designs" | "log" | "library">("users");
+  const [tab, setTab] = useState<"users" | "log" | "library">(() => {
+    const t = new URLSearchParams(window.location.search).get("tab");
+    return t === "log" || t === "library" ? t : "users";
+  });
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState("");
   const [flash, setFlash] = useState("");
@@ -120,7 +122,6 @@ export default function StaffAdmin() {
       </div>
       <div className="flex gap-6 border-b border-border/60 mb-8 overflow-x-auto">
         {tabBtn("users", s.users)}
-        {tabBtn("designs", s.designs)}
         {tabBtn("log", s.log)}
         {tabBtn("library", s.library)}
       </div>
@@ -254,8 +255,6 @@ export default function StaffAdmin() {
           </div>
         </div>
       )}
-
-      {tab === "designs" && <StaffDesigns />}
 
       {tab === "log" && (
         <div className="overflow-x-auto border border-border/60">
