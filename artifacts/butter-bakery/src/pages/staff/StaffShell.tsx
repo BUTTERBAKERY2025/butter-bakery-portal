@@ -37,7 +37,7 @@ export function useNoIndex() {
   }, []);
 }
 
-export function StaffShell({ me, children }: { me?: Me | null; children: ReactNode }) {
+export function StaffShell({ me, children, wide = false }: { me?: Me | null; children: ReactNode; wide?: boolean }) {
   const { s, lang, toggleLang } = useStaffText();
   const [loc, navigate] = useLocation();
   const qc = useQueryClient();
@@ -63,7 +63,7 @@ export function StaffShell({ me, children }: { me?: Me | null; children: ReactNo
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/60 bg-background/95 sticky top-0 z-40 backdrop-blur">
-        <div className="container mx-auto px-5 md:px-10 h-16 flex items-center justify-between gap-4">
+        <div className="container mx-auto px-5 md:px-10 min-h-16 py-2 md:py-0 md:h-16 flex flex-wrap md:flex-nowrap items-center justify-between gap-x-3 gap-y-1">
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <span className="w-9 h-9 overflow-hidden rounded-sm ring-1 ring-border">
               <img src={logoBb} alt="Butter" className="w-full h-full object-cover" />
@@ -74,7 +74,8 @@ export function StaffShell({ me, children }: { me?: Me | null; children: ReactNo
             </span>
           </Link>
           {me && (
-            <nav className="flex items-center gap-5">
+            <nav className="order-last md:order-none w-full md:w-auto flex items-center gap-5 overflow-x-auto">
+              {me.sections.some((x) => x.id === "guide-online" && x.access !== "none") && tab("/staff/guide", s.guideTab)}
               {tab("/staff/library", s.brandLibrary)}
               {me.user.isAdmin && tab("/staff/admin", s.admin)}
             </nav>
@@ -94,7 +95,7 @@ export function StaffShell({ me, children }: { me?: Me | null; children: ReactNo
           </div>
         </div>
       </header>
-      <main className="container mx-auto px-5 md:px-10 py-8 md:py-12">{children}</main>
+      {wide ? <main>{children}</main> : <main className="container mx-auto px-5 md:px-10 py-8 md:py-12">{children}</main>}
     </div>
   );
 }

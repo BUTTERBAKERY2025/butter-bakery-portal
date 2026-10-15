@@ -10,6 +10,7 @@ import NotFound from "@/pages/not-found";
 import StaffLogin from "@/pages/staff/StaffLogin";
 import StaffLibrary from "@/pages/staff/StaffLibrary";
 import StaffAdmin from "@/pages/staff/StaffAdmin";
+import StaffGuide from "@/pages/staff/StaffGuide";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/staff" component={StaffLogin} />
       <Route path="/staff/library" component={StaffLibrary} />
       <Route path="/staff/admin" component={StaffAdmin} />
+      <Route path="/staff/guide" component={StaffGuide} />
       <Route component={NotFound} />
     </Switch>
   );
