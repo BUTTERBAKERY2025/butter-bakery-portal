@@ -1,0 +1,43 @@
+# Staff portal · بوابة الموظفين
+
+A private area of the website where the Butter team and approved partners open and download the brand package.
+Each person has their own account, and an admin decides, section by section, what they can see.
+
+- **Website button:** "Staff only · للموظفين فقط" under the BUTTER BAKERY name in the footer → `/staff`
+- **Pages:** `/staff` (sign in) · `/staff/library` (files) · `/staff/admin` (accounts, activity log, library)
+- **Code:** `lib/db/src/schema/staff.ts`, `lib/db/src/brand-sections.ts`, `artifacts/api-server/src/routes/staff.ts`,
+  `artifacts/api-server/src/lib/staffAuth.ts`, `artifacts/butter-bakery/src/pages/staff/`, `scripts/src/import-brand-files.ts`
+
+## Access levels
+
+Every section of the package can be set per person to **Hidden**, **View** (open in the browser) or **Download**.
+Admins see everything and manage accounts. Three presets follow the package README:
+
+| Preset | Sections |
+|---|---|
+| Partner 🟢 | Logos, fonts, A3 summary, packaging, signage, business card |
+| Agency 🟡 | Partner + social templates, menu references, mockups |
+| Management 🔴 | Everything, including the full guide and `brand.json` |
+
+Accounts can have an end date (useful for a printer or agency on one job) and can be disabled at any time;
+disabling or resetting a password signs that person out immediately.
+
+## Security
+
+- Passwords are hashed with scrypt; sessions are random tokens stored hashed, in an `httpOnly`, `SameSite=Lax` cookie (12 hours).
+- Five wrong passwords from the same IP for the same username lock that pair for 15 minutes.
+- Every sign-in, failed sign-in, file open and download is written to the activity log with the user and IP.
+- Files the user is not allowed to see return 404, so ids cannot be probed. Staff pages are `noindex` and `no-store`.
+- **The brand files are stored in Postgres, never in git** (this repository is public).
+- "View" is a convenience, not DRM: anyone who can open a file in a browser can also save it. Give confidential sections only to people you trust.
+
+## Setup (once)
+
+1. Secrets on the deployment: `DATABASE_URL` (already used by the API), `STAFF_ADMIN_USERNAME`, `STAFF_ADMIN_PASSWORD` (10+ characters).
+2. Create the tables: `pnpm --filter @workspace/db run push`
+3. Load the files: unzip **both** `butter-bakery-brand-v1.zip` and `butter-bakery-brand-v1-print.zip` into the same folder, then
+   `pnpm --filter @workspace/scripts run brand:import /path/to/butter-bakery-brand-v1`
+4. Deploy. On start the API creates the first admin from the two secrets (only if there is no admin yet).
+   Sign in at `/staff`, then change nothing else in the secrets; manage people from `/staff/admin`.
+
+To publish a new version of the package, run step 3 again with the new folder (add `--prune` to remove files that were dropped).

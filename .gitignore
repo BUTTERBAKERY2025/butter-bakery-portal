@@ -50,3 +50,7 @@ Thumbs.db
 
 # Uploaded assets (large files — not needed in production build)
 attached_assets/
+
+# Brand package (confidential) — loaded into the database with brand:import, never committed
+butter-bakery-brand-v*/
+butter-bakery-brand-v*.zip

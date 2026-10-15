@@ -21,6 +21,17 @@ export function Footer() {
                 <div>
                   <p className="font-serif text-xl font-bold tracking-wider text-white leading-none">BUTTER BAKERY</p>
                   <p className="text-primary text-[0.6rem] uppercase tracking-[0.3em] mt-0.5">{f.cafe}</p>
+                  <Link
+                    href="/staff"
+                    rel="nofollow"
+                    className="inline-flex items-center gap-1.5 mt-2.5 text-[0.6rem] uppercase tracking-[0.25em] text-background/40 border border-white/15 px-2 py-1 hover:text-primary hover:border-primary transition-colors"
+                  >
+                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="5" y="11" width="14" height="10" rx="1.5" />
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                    </svg>
+                    {isAr ? "للموظفين فقط" : "Staff only"}
+                  </Link>
                 </div>
               </div>
               <p className="text-primary text-sm uppercase tracking-[0.15em] mb-6 font-light">

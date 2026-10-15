@@ -7,6 +7,9 @@ import LandingPage from "@/pages/LandingPage";
 import InvestorRelations from "@/pages/InvestorRelations";
 import News from "@/pages/News";
 import NotFound from "@/pages/not-found";
+import StaffLogin from "@/pages/staff/StaffLogin";
+import StaffLibrary from "@/pages/staff/StaffLibrary";
+import StaffAdmin from "@/pages/staff/StaffAdmin";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +19,9 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/investor-relations" component={InvestorRelations} />
       <Route path="/news" component={News} />
+      <Route path="/staff" component={StaffLogin} />
+      <Route path="/staff/library" component={StaffLibrary} />
+      <Route path="/staff/admin" component={StaffAdmin} />
       <Route component={NotFound} />
     </Switch>
   );
