@@ -40,6 +40,8 @@ export default function StaffAdmin() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState("");
   const [flash, setFlash] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadMsg, setUploadMsg] = useState("");
 
   const ok = !!me.data?.user.isAdmin;
   const meta = useQuery({ queryKey: ["staff-meta"], queryFn: () => api<{ sections: AdminSection[]; presets: Presets }>("/admin/meta"), enabled: ok });
@@ -279,6 +281,38 @@ export default function StaffAdmin() {
       )}
 
       {tab === "library" && (
+        <div className="space-y-6">
+        <div className="border border-border bg-card p-5 space-y-3">
+          <p className="text-sm font-medium">{s.uploadTitle}</p>
+          <p className="text-xs text-foreground/60">{s.uploadHint}</p>
+          <input
+            type="file"
+            accept=".zip,application/zip"
+            disabled={uploading}
+            onChange={async (e) => {
+              const f = e.target.files?.[0];
+              e.target.value = "";
+              if (!f) return;
+              setUploading(true);
+              setUploadMsg("");
+              try {
+                const r = await fetch("/api/staff/admin/import", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/zip" }, body: f });
+                const d = await r.json().catch(() => ({}));
+                if (!r.ok) throw new Error(d.message || d.error || String(r.status));
+                setUploadMsg(`${f.name}: +${d.added} · ${d.updated} ↻ · ${d.unchanged} =`);
+                qc.invalidateQueries({ queryKey: ["staff-meta"] });
+                qc.invalidateQueries({ queryKey: ["staff-files"] });
+              } catch (err) {
+                setUploadMsg(`${s.failed} ${err instanceof Error ? err.message : ""}`);
+              } finally {
+                setUploading(false);
+              }
+            }}
+            className="block text-sm"
+          />
+          {uploading && <p className="text-xs text-foreground/60">{s.uploading}</p>}
+          {uploadMsg && <p className="text-xs" dir="ltr">{uploadMsg}</p>}
+        </div>
         <div className="divide-y divide-border/60 border border-border/60">
           {sections.map((sec) => (
             <div key={sec.id} className="flex flex-wrap items-center gap-3 px-4 py-3 text-sm">
@@ -287,6 +321,7 @@ export default function StaffAdmin() {
             </div>
           ))}
           {sections.every((x) => x.files === 0) && <p className="p-4 text-sm text-foreground/60">{s.emptyLibrary}</p>}
+        </div>
         </div>
       )}
     </StaffShell>

@@ -35,9 +35,10 @@ disabling or resetting a password signs that person out immediately.
 
 1. Secrets on the deployment: `DATABASE_URL` (already used by the API), `STAFF_ADMIN_USERNAME`, `STAFF_ADMIN_PASSWORD` (10+ characters).
 2. Create the tables: `pnpm --filter @workspace/db run push`
-3. Load the files: unzip **both** `butter-bakery-brand-v1.zip` and `butter-bakery-brand-v1-print.zip` into the same folder, then
-   `pnpm --filter @workspace/scripts run brand:import /path/to/butter-bakery-brand-v1`
+3. Load the files, either way:
+   - **From the portal (easiest):** sign in as admin → Admin → "Files in the library" → upload `butter-bakery-brand-v1.zip`, then `butter-bakery-brand-v1-print.zip`.
+   - **From a terminal:** unzip both into one folder, then `pnpm --filter @workspace/scripts run brand:import /path/to/butter-bakery-brand-v1`
 4. Deploy. On start the API creates the first admin from the two secrets (only if there is no admin yet).
    Sign in at `/staff`, then change nothing else in the secrets; manage people from `/staff/admin`.
 
-To publish a new version of the package, run step 3 again with the new folder (add `--prune` to remove files that were dropped).
+To publish a new version of the package, upload the new zips (only changed files are replaced). The terminal import also accepts `--prune` to remove files that were dropped.

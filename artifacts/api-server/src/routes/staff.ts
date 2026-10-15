@@ -1,4 +1,5 @@
-import { Router, type IRouter, type Request, type Response } from "express";
+import express, { Router, type IRouter, type Request, type Response } from "express";
+import { importBrandZip } from "../lib/brandImport";
 import { asc, desc, eq, inArray, sql } from "drizzle-orm";
 import {
   db,
@@ -246,6 +247,25 @@ router.patch("/staff/admin/users/:id", requireAdmin, async (req, res) => {
   await audit(req, "admin", { detail: `updated ${u.username}: ${changes.join(", ")}` });
   res.json({ user: publicUser(updated!) });
 });
+
+// Upload one brand package zip (main or print). Re-uploading updates changed files only.
+router.post(
+  "/staff/admin/import",
+  requireAdmin,
+  express.raw({ type: ["application/zip", "application/x-zip-compressed", "application/octet-stream"], limit: "80mb" }),
+  async (req, res) => {
+    if (!Buffer.isBuffer(req.body) || req.body.length < 22) { res.status(400).json({ error: "not_a_zip" }); return; }
+    let result;
+    try {
+      result = await importBrandZip(new Uint8Array(req.body));
+    } catch {
+      res.status(400).json({ error: "not_a_zip", message: "The file could not be opened as a zip." });
+      return;
+    }
+    await audit(req, "admin", { detail: `imported package: +${result.added} new, ${result.updated} updated` });
+    res.json(result);
+  },
+);
 
 router.get("/staff/admin/log", requireAdmin, async (req, res) => {
   const limit = Math.min(Math.max(Number(req.query.limit) || 200, 1), 1000);

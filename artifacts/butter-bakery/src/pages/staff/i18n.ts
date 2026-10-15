@@ -64,7 +64,10 @@ const en = {
   } as Record<string, string>,
   saved: "Saved",
   library: "Files in the library",
-  emptyLibrary: "No files have been loaded yet. See the README: brand:import.",
+  emptyLibrary: "No files yet. Upload the two package zips above.",
+  uploadTitle: "Upload the brand package",
+  uploadHint: "Upload butter-bakery-brand-v1.zip, then butter-bakery-brand-v1-print.zip. Uploading a newer version updates only the files that changed.",
+  uploading: "Uploading… this can take a minute.",
 };
 
 const ar: typeof en = {
@@ -131,7 +134,10 @@ const ar: typeof en = {
   },
   saved: "اتحفظ",
   library: "الملفات في المكتبة",
-  emptyLibrary: "لسه ما اترفعتش ملفات. شوف ملف README: brand:import.",
+  emptyLibrary: "لسه مفيش ملفات. ارفع ملفين الباقة من فوق.",
+  uploadTitle: "رفع باقة الهوية",
+  uploadHint: "ارفع butter-bakery-brand-v1.zip وبعده butter-bakery-brand-v1-print.zip. لو رفعت نسخة أحدث، بيتحدّث بس اللي اتغيّر.",
+  uploading: "جاري الرفع… ممكن ياخد دقيقة.",
 };
 
 export function useStaffText() {
