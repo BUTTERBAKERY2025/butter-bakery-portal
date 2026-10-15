@@ -8,6 +8,9 @@ import { api, ApiError } from "./api";
 import { useStaffText } from "./i18n";
 import { StaffShell, useMe, type Me } from "./StaffShell";
 
+// People who can see the identity guide land on it; everyone else lands on the library.
+const landing = (m: Me) => (m.sections.some((x) => x.id === "guide-online" && x.access !== "none") ? "/staff/guide" : "/staff/library");
+
 export default function StaffLogin() {
   const { s } = useStaffText();
   const me = useMe();
@@ -19,7 +22,7 @@ export default function StaffLogin() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (me.data) navigate("/staff/library");
+    if (me.data) navigate(landing(me.data));
   }, [me.data, navigate]);
 
   const submit = async (e: FormEvent) => {
@@ -29,7 +32,7 @@ export default function StaffLogin() {
     try {
       const data = await api<Me>("/login", { method: "POST", body: { username, password } });
       qc.setQueryData(["staff-me"], data);
-      navigate("/staff/library");
+      navigate(landing(data));
     } catch (err) {
       const code = err instanceof ApiError ? err.code : "";
       setError(
