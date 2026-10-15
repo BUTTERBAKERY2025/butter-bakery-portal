@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Download, ExternalLink, FileText, Lock } from "lucide-react";
 import { api, fileUrl, fmtSize, type BrandFile, type Tier } from "./api";
@@ -76,9 +77,9 @@ export default function StaffLibrary() {
               </div>
               <p className="text-sm text-foreground/60 mb-5">{isAr ? sec.descAr : sec.descEn}</p>
               {sec.id === "guide-online" ? (
-                <a href="/api/staff/guide/" target="_blank" rel="noopener" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm hover:opacity-90">
+                <Link href="/staff/guide" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm hover:opacity-90">
                   <ExternalLink className="w-4 h-4" /> {s.openGuide}
-                </a>
+                </Link>
               ) : (
               <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 {list.map((f) => {
