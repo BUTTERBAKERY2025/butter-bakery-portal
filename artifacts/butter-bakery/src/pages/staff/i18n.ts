@@ -65,8 +65,9 @@ const en = {
   saved: "Saved",
   library: "Files in the library",
   emptyLibrary: "No files yet. Upload the two package zips above.",
+  openGuide: "Open the identity guide",
   uploadTitle: "Upload the brand package",
-  uploadHint: "Upload butter-bakery-brand-v1.zip, then butter-bakery-brand-v1-print.zip. Uploading a newer version updates only the files that changed.",
+  uploadHint: "Upload butter-bakery-brand-v1.zip, butter-bakery-brand-v1-print.zip and butter-identity-guide-online.zip. Uploading a newer version updates only the files that changed.",
   uploading: "Uploading… this can take a minute.",
 };
 
@@ -135,8 +136,9 @@ const ar: typeof en = {
   saved: "اتحفظ",
   library: "الملفات في المكتبة",
   emptyLibrary: "لسه مفيش ملفات. ارفع ملفين الباقة من فوق.",
+  openGuide: "افتح دليل الهوية",
   uploadTitle: "رفع باقة الهوية",
-  uploadHint: "ارفع butter-bakery-brand-v1.zip وبعده butter-bakery-brand-v1-print.zip. لو رفعت نسخة أحدث، بيتحدّث بس اللي اتغيّر.",
+  uploadHint: "ارفع butter-bakery-brand-v1.zip و butter-bakery-brand-v1-print.zip و butter-identity-guide-online.zip. لو رفعت نسخة أحدث، بيتحدّث بس اللي اتغيّر.",
   uploading: "جاري الرفع… ممكن ياخد دقيقة.",
 };
 

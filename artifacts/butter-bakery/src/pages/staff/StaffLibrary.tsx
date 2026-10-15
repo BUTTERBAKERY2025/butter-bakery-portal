@@ -49,7 +49,7 @@ export default function StaffLibrary() {
         <nav className="flex flex-wrap gap-2 mb-10">
           {sections.map((sec) => (
             <a key={sec.id} href={`#${sec.id}`} className="text-xs border border-border px-3 py-1.5 hover:border-primary hover:text-primary">
-              {TIER_DOT[sec.tier]} {isAr ? sec.ar : sec.en} <span className="text-foreground/40" dir="ltr">· {bySection.get(sec.id)?.length ?? 0}</span>
+              {TIER_DOT[sec.tier]} {isAr ? sec.ar : sec.en}{sec.id !== "guide-online" && <span className="text-foreground/40" dir="ltr"> · {bySection.get(sec.id)?.length ?? 0}</span>}
             </a>
           ))}
         </nav>
@@ -68,11 +68,18 @@ export default function StaffLibrary() {
                 {sec.access === "view" && (
                   <span className="text-[0.7rem] px-2 py-0.5 border border-border rounded-full text-foreground/60">{s.viewOnly}</span>
                 )}
-                <span className="text-xs text-foreground/50 ms-auto">
-                  {list.length} {s.files}
-                </span>
+                {sec.id !== "guide-online" && (
+                  <span className="text-xs text-foreground/50 ms-auto">
+                    {list.length} {s.files}
+                  </span>
+                )}
               </div>
               <p className="text-sm text-foreground/60 mb-5">{isAr ? sec.descAr : sec.descEn}</p>
+              {sec.id === "guide-online" ? (
+                <a href="/api/staff/guide/" target="_blank" rel="noopener" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm hover:opacity-90">
+                  <ExternalLink className="w-4 h-4" /> {s.openGuide}
+                </a>
+              ) : (
               <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 {list.map((f) => {
                   const name = f.path.split("/").pop()!;
@@ -107,6 +114,7 @@ export default function StaffLibrary() {
                   );
                 })}
               </ul>
+              )}
             </section>
           );
         })}

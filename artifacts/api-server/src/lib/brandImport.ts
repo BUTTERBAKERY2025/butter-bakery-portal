@@ -27,6 +27,7 @@ export async function importBrandZip(zip: Uint8Array): Promise<ImportResult> {
     const parts = name.split("/").filter(Boolean);
     if (parts.some((p) => p.startsWith(".") || p === "..")) continue;
     if (parts[0]?.startsWith("butter-bakery-brand")) parts.shift();
+    else if (parts[0]?.startsWith("butter-identity-guide-online")) parts[0] = "guide-online";
     const rel = parts.join("/");
     const section = sectionForPath(rel);
     if (!section) { r.skipped.push(rel); continue; }

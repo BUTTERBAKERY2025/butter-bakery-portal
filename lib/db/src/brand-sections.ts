@@ -110,6 +110,15 @@ export const BRAND_SECTIONS: BrandSection[] = [
     prefixes: ["guidelines/butter-brand-guidelines-full.pdf"],
   },
   {
+    id: "guide-online",
+    tier: "red",
+    en: "Identity guide (online)",
+    ar: "دليل الهوية (أونلاين)",
+    descEn: "The full interactive identity guide, as presented. Confidential.",
+    descAr: "دليل الهوية الكامل التفاعلي بنفس طريقة العرض. سري.",
+    prefixes: ["guide-online/"],
+  },
+  {
     id: "brand-data",
     tier: "red",
     en: "Brand data",

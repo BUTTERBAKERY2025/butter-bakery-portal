@@ -108,7 +108,7 @@ router.post("/staff/me/password", requireStaff, async (req, res) => {
 // ---------------- library ----------------
 router.get("/staff/files", requireStaff, async (req, res) => {
   const u = req.staff!;
-  const visible = BRAND_SECTIONS.filter((s) => allows(u, s.id, "view")).map((s) => s.id);
+  const visible = BRAND_SECTIONS.filter((s) => s.id !== "guide-online" && allows(u, s.id, "view")).map((s) => s.id);
   if (!visible.length) { res.json({ files: [] }); return; }
   const rows = await db
     .select({
@@ -156,6 +156,26 @@ async function sendFile(req: Request, res: Response, mode: "view" | "download") 
 
 router.get("/staff/files/:id/view", requireStaff, (req, res) => sendFile(req, res, "view"));
 router.get("/staff/files/:id/download", requireStaff, (req, res) => sendFile(req, res, "download"));
+
+// ---------------- online identity guide ----------------
+// Serves the interactive guide by path so its relative links (img/, fonts/, logos/) work.
+const GUIDE_TYPES: Record<string, string> = { html: "text/html; charset=utf-8", css: "text/css", js: "text/javascript" };
+router.get(/^\/staff\/guide(?:\/(.*))?$/, requireStaff, async (req, res) => {
+  if (!allows(req.staff!, "guide-online", "view")) { res.status(404).json({ error: "not_found" }); return; }
+  const raw = decodeURIComponent((req.params as Record<string, string>)[0] ?? "");
+  if (raw === "" && !req.path.endsWith("/")) { res.redirect(302, req.baseUrl + req.path + "/"); return; }
+  const rel = raw === "" ? "index.html" : raw;
+  if (rel.split("/").some((p) => p === ".." || p.startsWith("."))) { res.status(404).end(); return; }
+  const [f] = await db.select().from(brandFilesTable).where(eq(brandFilesTable.path, `guide-online/${rel}`)).limit(1);
+  if (!f) { res.status(404).send("Not part of the online guide. Print files are in the brand library."); return; }
+  const ext = rel.split(".").pop()?.toLowerCase() ?? "";
+  if (ext === "html") await audit(req, "view", { path: "guide-online/index.html" });
+  else res.setHeader("Cache-Control", "private, max-age=3600");
+  res.setHeader("Content-Type", GUIDE_TYPES[ext] ?? f.mime);
+  res.setHeader("Content-Length", String(f.size));
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.end(f.data);
+});
 
 // ---------------- admin ----------------
 router.get("/staff/admin/meta", requireAdmin, async (_req, res) => {
