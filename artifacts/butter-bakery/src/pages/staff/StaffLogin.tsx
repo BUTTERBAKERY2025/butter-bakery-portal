@@ -8,8 +8,7 @@ import { api, ApiError } from "./api";
 import { useStaffText } from "./i18n";
 import { StaffShell, useMe, type Me } from "./StaffShell";
 
-// People who can see the identity guide land on it; everyone else lands on the library.
-const landing = (m: Me) => (m.sections.some((x) => x.id === "guide-online" && x.access !== "none") ? "/staff/guide" : "/staff/library");
+const landing = (_m: Me) => "/staff/home";
 
 export default function StaffLogin() {
   const { s } = useStaffText();
@@ -46,27 +45,37 @@ export default function StaffLogin() {
 
   return (
     <StaffShell>
-      <div className="max-w-sm mx-auto pt-6 md:pt-16">
-        <p className="text-primary text-xs uppercase tracking-[0.3em] mb-3">Staff only</p>
-        <h1 className="font-serif text-3xl md:text-4xl mb-3">{s.loginTitle}</h1>
-        <p className="text-foreground/60 text-sm leading-relaxed mb-8">{s.loginSub}</p>
-        <form onSubmit={submit} className="space-y-5">
-          <div className="space-y-2">
-            <Label htmlFor="u">{s.username}</Label>
-            <Input id="u" dir="ltr" autoComplete="username" autoCapitalize="none" spellCheck={false} value={username} onChange={(e) => setUsername(e.target.value)} required />
+      <div className="grid md:grid-cols-2 min-h-[calc(100vh-10rem)] bb-card overflow-hidden">
+        <div className="relative bg-[var(--bb-brown)] text-[var(--bb-cream)] p-8 md:p-14 flex flex-col justify-between min-h-[260px]">
+          <img src="/staff/logo-icon-cream.svg" alt="" className="w-40 md:w-56 opacity-95" />
+          <div>
+            <p className="text-[0.65rem] uppercase tracking-[0.32em] text-[var(--bb-orange)] mb-3">Roastery · Bakery</p>
+            <p className="font-serif text-3xl md:text-4xl leading-tight">{s.loginTitle}</p>
+            <p className="text-sm text-[var(--bb-cream)]/60 mt-3 max-w-sm leading-relaxed">{s.loginSub}</p>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="p">{s.password}</Label>
-            <Input id="p" dir="ltr" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
-          {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-          <Button type="submit" className="w-full" disabled={busy}>
-            {s.signIn}
-          </Button>
-        </form>
-        <Link href="/" className="inline-block mt-8 text-xs text-foreground/50 hover:text-primary">
-          ← {s.back}
-        </Link>
+          <div className="absolute inset-y-0 end-0 w-1.5 bg-[var(--bb-orange)]" />
+        </div>
+        <div className="p-8 md:p-14 flex items-center">
+          <form onSubmit={submit} className="space-y-5 w-full max-w-sm mx-auto">
+            <p className="bb-eyebrow">Staff only</p>
+            <h1 className="font-serif text-3xl mb-2">{s.signIn}</h1>
+            <div className="space-y-2">
+              <Label htmlFor="u">{s.username}</Label>
+              <Input id="u" dir="ltr" autoComplete="username" autoCapitalize="none" spellCheck={false} value={username} onChange={(e) => setUsername(e.target.value)} required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="p">{s.password}</Label>
+              <Input id="p" dir="ltr" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
+            {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+            <Button type="submit" className="w-full" disabled={busy}>
+              {s.signIn}
+            </Button>
+            <Link href="/" className="inline-block pt-4 text-xs text-foreground/50 hover:text-primary">
+              ← {s.back}
+            </Link>
+          </form>
+        </div>
       </div>
     </StaffShell>
   );

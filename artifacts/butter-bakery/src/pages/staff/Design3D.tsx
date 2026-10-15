@@ -6,7 +6,22 @@ export type Model3D =
   | { type: "cup"; oz: string; colour: string; texture: string }
   | { type: "box"; L: number; W: number; H: number; color: string; logoColor: string; logo: string }
   | { type: "flat"; w: number; h: number; d?: number; front: string; back?: string; standing?: boolean }
-  | { type: "card"; w: number; h: number; bg: string; logo: string; logoColor: string; backBg: string; symbol: string; symbolColor: string };
+  | { type: "card"; w: number; h: number; bg: string; logo: string; logoColor: string; backBg: string; symbol: string; symbolColor: string }
+  | { type: "bag"; w: number; h: number; d: number; color: string; logoColor: string; logo: string; front?: string; handles?: "rope" | "flat" | "none" }
+  | { type: "pouch"; w: number; h: number; d: number; color: string; front?: string; logo?: string; logoColor?: string }
+  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string };
+
+/** The identity colours offered for a live colour change on the model. */
+export const BRAND_SWATCHES = ["#FE5000", "#2A1F15", "#F1E9DA", "#C08B3D", "#524727", "#C4B47E", "#FFFFFF"];
+
+/** Returns the model with its main colour replaced (box, card, bag, pouch, carrier). */
+export function withColour(m: Model3D, c?: string | null): Model3D {
+  if (!c) return m;
+  if (m.type === "card") return { ...m, bg: c };
+  if (m.type === "box" || m.type === "bag" || m.type === "pouch" || m.type === "carrier") return { ...m, color: c };
+  return m;
+}
+export const hasColour = (m: Model3D) => ["box", "card", "bag", "pouch", "carrier"].includes(m.type);
 
 // Cup dimensions in mm (top Ø, bottom Ø, height), same as the identity guide's cup viewer.
 const CUP: Record<string, { D: number; d: number; H: number }> = {
@@ -71,6 +86,33 @@ async function boxLidTexture(m: Extract<Model3D, { type: "box" }>): Promise<THRE
     const w = Math.min(c.width, c.height * 1.25) * 0.5;
     const h = (w * (img.naturalHeight || 1)) / (img.naturalWidth || 1);
     g.drawImage(img, (c.width - w) / 2, (c.height - h) / 2, w, h);
+  }
+  return canvasTexture(c);
+}
+
+/** A printed panel: the uploaded artwork if there is one, else the colour with the logo in the middle. */
+async function panelTexture(wMM: number, hMM: number, color: string, logo?: string, logoColor?: string, image?: string, logoScale = 0.55, logoY = 0.5) {
+  if (image) return loadTexture(image);
+  const c = document.createElement("canvas");
+  c.width = 1024;
+  c.height = Math.max(64, Math.round((1024 * hMM) / wMM));
+  const g = c.getContext("2d")!;
+  g.fillStyle = color;
+  g.fillRect(0, 0, c.width, c.height);
+  // a little paper grain
+  g.globalAlpha = 0.05;
+  for (let i = 0; i < 1800; i++) {
+    g.fillStyle = Math.random() > 0.5 ? "#000" : "#fff";
+    g.fillRect(Math.random() * c.width, Math.random() * c.height, 1.5, 1.5);
+  }
+  g.globalAlpha = 1;
+  if (logo && logoColor) {
+    const img = await recoloured(logo, logoColor);
+    if (img) {
+      const w = c.width * logoScale,
+        h = (w * (img.naturalHeight || 1)) / (img.naturalWidth || 1);
+      g.drawImage(img, (c.width - w) / 2, c.height * logoY - h / 2, w, h);
+    }
   }
   return canvasTexture(c);
 }
@@ -206,6 +248,94 @@ async function buildModel(m: Model3D, lidOn: boolean): Promise<{ group: THREE.Gr
     slab.position.y = h / 2;
     group.add(slab);
     return { group, height: h, width: w };
+  }
+  if (m.type === "bag") {
+    // Paper carrier bag: open top, gusseted sides, rope or flat handles.
+    const w = m.w * MM, h = m.h * MM, d = m.d * MM;
+    const face = await panelTexture(m.w, m.h, m.color, m.logo, m.logoColor, m.front, 0.6, 0.48);
+    const paper = (map?: THREE.Texture) => new THREE.MeshStandardMaterial({ color: map ? 0xffffff : new THREE.Color(m.color), map, roughness: 0.92, side: THREE.DoubleSide });
+    const side = paper();
+    side.color = new THREE.Color(m.color).multiplyScalar(0.93);
+    const hidden = new THREE.MeshBasicMaterial({ visible: false });
+    const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), [side, side, hidden, paper(), paper(face), paper(face)]);
+    body.position.y = h / 2;
+    body.castShadow = true;
+    group.add(body);
+    // inner shading so the opening reads as an opening
+    const inner = new THREE.Mesh(new THREE.BoxGeometry(w * 0.995, h * 0.99, d * 0.99), new THREE.MeshStandardMaterial({ color: new THREE.Color(m.color).multiplyScalar(0.55), side: THREE.BackSide, roughness: 1 }));
+    inner.position.y = h / 2;
+    group.add(inner);
+    if (m.handles !== "none") {
+      const hm = new THREE.MeshStandardMaterial({ color: m.handles === "flat" ? new THREE.Color(m.color).multiplyScalar(0.9) : new THREE.Color(m.logoColor), roughness: 0.8 });
+      for (const z of [d / 2 + 0.0008, -d / 2 - 0.0008]) {
+        const curve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(-w * 0.22, h * 0.94, z),
+          new THREE.Vector3(-w * 0.2, h * 1.12, z),
+          new THREE.Vector3(0, h * 1.2, z),
+          new THREE.Vector3(w * 0.2, h * 1.12, z),
+          new THREE.Vector3(w * 0.22, h * 0.94, z),
+        ]);
+        const r = m.handles === "flat" ? 0.005 : 0.0028;
+        const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 48, r, 10, false), hm);
+        if (m.handles === "flat") tube.scale.z = 0.25;
+        tube.castShadow = true;
+        group.add(tube);
+      }
+    }
+    return { group, height: h * 1.2, width: Math.max(w, d) };
+  }
+  if (m.type === "pouch") {
+    // Stand-up coffee pouch: full gusset at the base narrowing to a flat seal at the top.
+    const w = m.w * MM, h = m.h * MM, d = m.d * MM;
+    const geo = new THREE.BoxGeometry(w, h, d, 1, 24, 1);
+    const pos = geo.attributes.position as THREE.BufferAttribute;
+    for (let i = 0; i < pos.count; i++) {
+      const t = (pos.getY(i) + h / 2) / h; // 0 bottom → 1 top
+      const k = Math.max(0.04, 1 - Math.pow(t, 0.85));
+      pos.setZ(i, pos.getZ(i) * k);
+      // a slight belly so it doesn't look like a brick
+      pos.setX(i, pos.getX(i) * (1 + 0.025 * Math.sin(Math.PI * t)));
+    }
+    geo.computeVertexNormals();
+    const face = await panelTexture(m.w, m.h, m.color, m.logo, m.logoColor, m.front, 0.55, 0.42);
+    const edge = new THREE.MeshStandardMaterial({ color: new THREE.Color(m.color).multiplyScalar(0.85), roughness: 0.5 });
+    const fm = new THREE.MeshStandardMaterial({ map: face, roughness: 0.45, metalness: 0.05 });
+    const body = new THREE.Mesh(geo, [edge, edge, edge, edge, fm, fm]);
+    body.position.y = h / 2;
+    body.castShadow = true;
+    const seal = new THREE.Mesh(new THREE.BoxGeometry(w * 1.02, h * 0.06, 0.0015), edge);
+    seal.position.y = h * 0.985;
+    group.add(body, seal);
+    return { group, height: h, width: w };
+  }
+  if (m.type === "carrier") {
+    // Moulded cup carrier with a centre handle panel.
+    const cols = m.cups === 2 ? 2 : 2, rows = m.cups === 2 ? 1 : 2;
+    const cell = 0.1, base = 0.035;
+    const W = cols * cell, D = rows * cell;
+    const kraft = new THREE.MeshStandardMaterial({ color: new THREE.Color(m.color), roughness: 0.95 });
+    const tray = new THREE.Mesh(new THREE.BoxGeometry(W, base, D), kraft);
+    tray.position.y = base / 2;
+    tray.castShadow = true;
+    group.add(tray);
+    const holeMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(m.color).multiplyScalar(0.45), roughness: 1 });
+    for (let i = 0; i < cols; i++)
+      for (let j = 0; j < rows; j++) {
+        const hole = new THREE.Mesh(new THREE.CircleGeometry(cell * 0.38, 40), holeMat);
+        hole.rotation.x = -Math.PI / 2;
+        hole.position.set(-W / 2 + cell * (i + 0.5), base + 0.0005, -D / 2 + cell * (j + 0.5));
+        group.add(hole);
+      }
+    const ph = 0.075;
+    const panelTex = await panelTexture(W * 1000, ph * 1000, m.color, m.logo, m.logoColor, undefined, 0.22, 0.4);
+    const pm = new THREE.MeshStandardMaterial({ map: panelTex, roughness: 0.95, side: THREE.DoubleSide });
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(W, ph, 0.003), [kraft, kraft, kraft, kraft, pm, pm]);
+    panel.position.y = base + ph / 2;
+    group.add(panel);
+    const grip = new THREE.Mesh(new THREE.BoxGeometry(W * 0.3, ph * 0.18, 0.004), holeMat);
+    grip.position.y = base + ph * 0.8;
+    group.add(grip);
+    return { group, height: base + ph, width: Math.max(W, D) };
   }
   // flat: a sheet, sticker sheet or board, printed front (and back)
   const w = m.w * MM,
