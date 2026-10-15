@@ -1,5 +1,7 @@
+import path from "node:path";
 import express, { type Express } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
@@ -26,9 +28,21 @@ app.use(
   }),
 );
 app.use(cors());
-app.use(express.json());
+app.set("trust proxy", 1);
+app.use(cookieParser());
+app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
+
+// Optional: also serve the built website (used when this server hosts the site itself, e.g. on Render).
+const staticDir = process.env.STATIC_DIR;
+if (staticDir) {
+  const root = path.resolve(staticDir);
+  app.use(express.static(root, { index: false, maxAge: "1h" }));
+  app.get(/^(?!\/api\/).*/, (_req, res) => {
+    res.sendFile(path.join(root, "index.html"));
+  });
+}
 
 export default app;
