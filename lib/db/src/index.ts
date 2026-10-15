@@ -17,13 +17,16 @@ function withCredentials(raw: string): string {
   const user = process.env.DATABASE_USER;
   const pass = process.env.DATABASE_PASSWORD;
   if (!user && !pass) return raw;
-  const u = new URL(raw);
-  if (user) {
-    const ref = decodeURIComponent(u.username).split(".")[1];
-    u.username = encodeURIComponent(ref && !user.includes(".") ? `${user}.${ref}` : user);
-  }
-  if (pass) u.password = encodeURIComponent(pass);
-  return u.toString();
+  // Split by hand: a pasted password may contain characters (# [ ] @) that break URL parsing.
+  const scheme = raw.indexOf("://");
+  const at = raw.lastIndexOf("@");
+  if (scheme < 0 || at < scheme) return raw;
+  const creds = raw.slice(scheme + 3, at);
+  const oldUser = creds.split(":")[0] ?? "";
+  const ref = decodeURIComponent(oldUser).split(".")[1];
+  const newUser = user ? (ref && !user.includes(".") ? `${user}.${ref}` : user) : decodeURIComponent(oldUser);
+  const newPass = pass ?? creds.slice(oldUser.length + 1);
+  return `${raw.slice(0, scheme + 3)}${encodeURIComponent(newUser)}:${pass ? encodeURIComponent(newPass) : newPass}${raw.slice(at)}`;
 }
 const url = withCredentials(process.env.DATABASE_URL);
 // Hosted Postgres (Supabase pooler) needs TLS; Supabase signs with its own CA, so encrypt without chain verification.
