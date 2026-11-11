@@ -12,7 +12,8 @@ export type DesignModel =
   | { type: "card"; w: number; h: number; bg: string; logo: string; logoColor: string; backBg: string; symbol: string; symbolColor: string }
   | { type: "bag"; w: number; h: number; d: number; color: string; logoColor: string; logo: string; front?: string; handles?: "rope" | "flat" | "none" }
   | { type: "pouch"; w: number; h: number; d: number; color: string; front?: string; logo?: string; logoColor?: string }
-  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string };
+  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string }
+  | { type: "fold"; kit: string; boxOut: string; boxIn: string; sleeveOut?: string; sleeveIn?: string };
 
 export interface DesignSpecs {
   size?: string;
