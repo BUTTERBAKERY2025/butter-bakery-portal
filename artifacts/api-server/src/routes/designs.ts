@@ -91,7 +91,7 @@ function cleanModel(v: unknown): DesignModel | null | string {
       return { type: "carrier", cups: m.cups === 2 ? 2 : 4, color: colour("color", "#C8B79A"), logo: p("logo") || "logos/svg/logo-icon-color.svg", logoColor: colour("logoColor", "#FE5000") };
     case "fold": {
       // Folding dieline viewer: the kit holds the traced dieline, the paths are the print textures.
-      if (!["honeycake"].includes(String(m.kit))) return "Unknown folding kit.";
+      if (!["honeycake", "orangebox"].includes(String(m.kit))) return "Unknown folding kit.";
       if (!p("boxOut") || !p("boxIn")) return "A folding model needs its outside and inside print textures.";
       const sl = p("sleeveOut") && p("sleeveIn") ? { sleeveOut: p("sleeveOut"), sleeveIn: p("sleeveIn") } : {};
       return { type: "fold", kit: String(m.kit), boxOut: p("boxOut"), boxIn: p("boxIn"), ...sl };

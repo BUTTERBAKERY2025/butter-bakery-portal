@@ -64,12 +64,47 @@ function netTools(net: Net) {
     pv.add(p);
     return p;
   }
+  /** A non-rectangular panel (corner webs, lock flaps) given as its outline in page points. */
+  function attachPoly(pv: G, pts: [number, number][], off = 0) {
+    const f = pv.userData.f;
+    const local = pts.map(([nx, ny]) => {
+      const r = R(nx, ny);
+      return new THREE.Vector2(r[0] - f[0], r[1] - f[1]);
+    });
+    let tris = THREE.ShapeUtils.triangulateShape(local, []);
+    const pos = local.flatMap((v) => [v.x, 0, v.y]);
+    // outer face points down (-y), inner face up (+y), like the rectangular panels
+    const up = (t: number[]) => {
+      const [a, b, c] = t.map((i) => local[i]!);
+      return (b!.x - a!.x) * (c!.y - a!.y) - (b!.y - a!.y) * (c!.x - a!.x) < 0;
+    };
+    const orient = (wantUp: boolean) => tris.flatMap((t) => (up(t) === wantUp ? t : [t[0]!, t[2]!, t[1]!]));
+    const g = new THREE.Group();
+    const mk = (uv: number[], idx: number[], mat: THREE.Material, y: number) => {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+      geo.setIndex(idx);
+      geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, mat);
+      m.position.y = y;
+      m.castShadow = true;
+      m.receiveShadow = true;
+      g.add(m);
+    };
+    mk(pts.flatMap(([nx, ny]) => [nx / pw, 1 - ny / ph]), orient(false), outer, -0.025);
+    mk(pts.flatMap(([nx, ny]) => [(pw - nx) / pw, 1 - ny / ph]), orient(true), inner, 0.025);
+    g.position.y = off;
+    pv.add(g);
+    tris = [];
+    return g;
+  }
   const root = () => {
     const g = new THREE.Group() as G;
     g.userData.f = [0, 0];
     return g;
   };
-  return { R, pivot, attach, root };
+  return { R, pivot, attach, attachPoly, root };
 }
 
 type Kit = {
@@ -167,7 +202,93 @@ const honeycake: Kit = {
   },
 };
 
-export const FOLD_KITS: Record<string, Kit> = { honeycake };
+/** Butter orange box (mailer, 170 × 120 × 80 mm inside, corner webs) with its one-piece carry sleeve 174 × 596 mm. */
+const orangebox: Kit = {
+  title: { ar: "العلبة البرتقالية مع السليف", en: "Orange box with sleeve" },
+  steps: honeycake.steps,
+  boxSteps: 7,
+  boxEnd: 0.66,
+  views: { angle: [40, 52, 62], top: [0, 84, 0.01], front: [0, 15, 74] },
+  build(scene, m) {
+    // Box die-line traced from the print file, page 3 (page 1103 × 1491 pt). Right side mirrors the left about x = 568.4.
+    const B = netTools({ pw: 1103.04, ph: 1491.12, cx: 568.4, cy: 941, outer: m.boxOut, inner: m.boxIn });
+    const { R, pivot: pv, attach: A, attachPoly: AP } = B;
+    const X = 1136.8;
+    const mir = (pts: [number, number][]) => pts.map(([x, y]) => [X - x, y] as [number, number]);
+    const boxRoot = B.root();
+    scene.add(boxRoot);
+    A(boxRoot, [327.5, 771, 809.3, 1111]);                                   // base 170 × 120
+    const back = pv(boxRoot, R(568.4, 771)); A(back, [327.5, 544.3, 809.3, 771]);
+    const earBPts: [number, number][] = [[327.5, 544.3], [292.3, 553.2], [279.7, 556.3], [270.8, 567.6], [270.8, 580.6], [270, 715.3], [327.5, 771]];
+    const earBL = pv(back, R(327.5, 657)); AP(earBL, earBPts, 0.11);
+    const earBR = pv(back, R(809.3, 657)); AP(earBR, mir(earBPts), 0.11);
+    const lid = pv(back, R(568.4, 544.3)); A(lid, [321.8, 198.7, 815, 544.3]);
+    const tuck = pv(lid, R(568.4, 198.7)); A(tuck, [321.9, 113.7, 815, 198.7]);
+    const wingPts: [number, number][] = [[321.9, 113.7], [310.5, 118], [180.1, 118], [180.1, 193.1], [242.1, 193.1], [247.5, 198.7], [321.9, 198.7]];
+    const wingL = pv(tuck, R(321.9, 156)); AP(wingL, wingPts);
+    const wingR = pv(tuck, R(815, 156)); AP(wingR, mir(wingPts));
+    const lipAPts: [number, number][] = [[236.8, 198.7], [321.8, 198.7], [321.8, 324.6], [326.1, 327.5], [326.1, 426.6], [321.8, 429.4], [321.8, 544.3], [236.8, 544.3]];
+    const lipBPts: [number, number][] = [[236.8, 198.7], [231.2, 201.6], [154.6, 201.6], [154.6, 327.4], [144.7, 330.3], [144.7, 423.8], [154.6, 426.6], [154.6, 541.5], [231.2, 541.5], [236.8, 544.3]];
+    const lipAL = pv(lid, R(321.8, 371)); AP(lipAL, lipAPts);
+    const lipBL = pv(lipAL, R(236.8, 371)); AP(lipBL, lipBPts, -0.07);
+    const lipAR = pv(lid, R(815, 371)); AP(lipAR, mir(lipAPts));
+    const lipBR = pv(lipAR, R(900, 371)); AP(lipBR, mir(lipBPts), -0.07);
+    const front = pv(boxRoot, R(568.4, 1111)); A(front, [327.5, 1111, 809.3, 1337.6]);
+    const earFPts: [number, number][] = [[327.5, 1337.6], [292.3, 1328.8], [279.7, 1325.6], [270.8, 1314.3], [270.8, 1301.3], [270, 1166.7], [327.5, 1111]];
+    const earFL = pv(front, R(327.5, 1224)); AP(earFL, earFPts, 0.11);
+    const earFR = pv(front, R(809.3, 1224)); AP(earFR, mir(earFPts), 0.11);
+    const left = pv(boxRoot, R(327.5, 941)); A(left, [100.8, 771, 327.5, 1111]);
+    const stripBPts: [number, number][] = [[327.5, 771], [270, 715.3], [137.1, 714.3], [124.1, 714.3], [112.7, 723.2], [109.6, 735.8], [100.8, 771]];
+    const stripFPts: [number, number][] = [[327.5, 1111], [270, 1166.7], [137.1, 1167.6], [124.1, 1167.6], [112.7, 1158.8], [109.6, 1146.2], [100.8, 1111]];
+    const stripLB = pv(left, R(214, 771)); AP(stripLB, stripBPts, -0.05);
+    const stripLF = pv(left, R(214, 1111)); AP(stripLF, stripFPts, -0.05);
+    const right = pv(boxRoot, R(809.3, 941)); A(right, [809.3, 771, 1036, 1111]);
+    const stripRB = pv(right, R(922.8, 771)); AP(stripRB, mir(stripBPts), -0.05);
+    const stripRF = pv(right, R(922.8, 1111)); AP(stripRF, mir(stripFPts), -0.05);
+
+    // Sleeve 174 × 596 mm (page in points): handle 75 · panel 80 · label 81 · base 124 · label 81 · panel 80 · handle 75.
+    const MP = 72 / 25.4;
+    const sw = 174 * MP, sh = 596 * MP, HO = 29 * MP;
+    const Yr = [0, 75, 155, 236, 360, 441, 521, 596].map((v) => v * MP);
+    const S = netTools({ pw: sw, ph: sh, cx: sw / 2, cy: (Yr[3]! + Yr[4]!) / 2, outer: m.slvOut, inner: m.slvIn });
+    const slvRoot = S.root();
+    slvRoot.rotation.y = PI;
+    scene.add(slvRoot);
+    const c = sw / 2;
+    S.attach(slvRoot, [0, Yr[3]!, sw, Yr[4]!]);
+    const lblF = S.pivot(slvRoot, S.R(c, Yr[3]!)); S.attach(lblF, [0, Yr[2]!, sw, Yr[3]!]);
+    const panF = S.pivot(lblF, S.R(c, Yr[2]!)); S.attach(panF, [0, Yr[1]!, sw, Yr[2]!]);
+    const hdlF = S.pivot(panF, S.R(c, Yr[1]!)); S.attach(hdlF, [HO, 0, sw - HO, Yr[1]!]);
+    const lblB = S.pivot(slvRoot, S.R(c, Yr[4]!)); S.attach(lblB, [0, Yr[4]!, sw, Yr[5]!]);
+    const panB = S.pivot(lblB, S.R(c, Yr[5]!)); S.attach(panB, [0, Yr[5]!, sw, Yr[6]!]);
+    const hdlB = S.pivot(panB, S.R(c, Yr[6]!)); S.attach(hdlB, [HO, Yr[6]!, sw - HO, sh]);
+    const LEAN = Math.asin(6.05 / 8.0);
+
+    return {
+      apply(b, s, sleeveOn) {
+        const f1 = ease(seg(b, 0, 0.12));
+        boxRoot.rotation.z = PI * (1 - f1);
+        boxRoot.position.y = 5 * Math.sin(PI * f1) + 0.06;
+        const f2 = ease(seg(b, 0.15, 0.3)); back.rotation.x = HP * f2; front.rotation.x = -HP * f2;
+        const f3 = ease(seg(b, 0.31, 0.44)); left.rotation.z = HP * f3; right.rotation.z = -HP * f3;
+        const fe = ease(seg(b, 0.29, 0.42));
+        earBL.rotation.z = HP * fe; earBR.rotation.z = -HP * fe; earFL.rotation.z = HP * fe; earFR.rotation.z = -HP * fe;
+        const fs = ease(seg(b, 0.31, 0.44)) * (PI - 0.03);
+        stripLB.rotation.x = fs; stripLF.rotation.x = -fs; stripRB.rotation.x = fs; stripRF.rotation.x = -fs;
+        const fa = ease(seg(b, 0.47, 0.55)); lipAL.rotation.z = HP * fa; lipAR.rotation.z = -HP * fa;
+        const fb = ease(seg(b, 0.53, 0.62)); lipBL.rotation.z = (PI - 0.04) * fb; lipBR.rotation.z = -(PI - 0.04) * fb;
+        const ft = ease(seg(b, 0.64, 0.72)); tuck.rotation.x = HP * ft; wingL.rotation.z = HP * ft; wingR.rotation.z = -HP * ft;
+        lid.rotation.x = HP * ease(seg(b, 0.75, 1));
+        slvRoot.visible = sleeveOn && s >= 0;
+        const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
+        lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
+        lblB.rotation.x = -HP * s1; panB.rotation.x = -LEAN * s2; hdlB.rotation.x = LEAN * s3;
+      },
+    };
+  },
+};
+
+export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox };
 
 const T = {
   ar: { loading: "جارٍ تجهيز النموذج…", failed: "تعذّر تحميل النموذج.", noWebgl: "يحتاج العرض ثلاثي الأبعاد إلى WebGL، وهو معطّل في هذا المتصفح.", play: "تشغيل التجميع", pause: "إيقاف", open: "فتح العلبة", reset: "فرد", withSleeve: "مع السليف", boxOnly: "العلبة فقط", angle: "مائلة", top: "من أعلى", front: "من الأمام", stage: "مرحلة التجميع", prev: "الخطوة السابقة", next: "الخطوة التالية", hint: "اسحب للتدوير · كبّر بالعجلة أو بإصبعين" },
