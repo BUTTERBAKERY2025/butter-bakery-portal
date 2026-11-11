@@ -57,4 +57,11 @@ Every cup, box, paper, sign, card, uniform, bag, social template and menu refere
   no staff data — and every open is logged (Admin → Activity log, and under each link).
 - "View only" can't stop a screenshot; the recipient's name is shown on the viewer.
 
+**Folding 3D (dieline models):** packaging that has a traced dieline uses model type `fold`
+(`artifacts/butter-bakery/src/pages/staff/FoldViewer.tsx`). The viewer folds the flat print sheet step by step
+(slider, play, step list, sleeve on/off, camera views) and shows the inside print when the lid is open.
+The model stores the kit name (the traced dieline, e.g. `honeycake`) and four textures in `brand_files`:
+the outside print page, the inside print (mirrored, as seen from inside), and the sleeve's outside and inside.
+To add a design, trace its dieline into a new kit in `FOLD_KITS` and allow the kit name in `cleanModel`.
+
 Tables: `designs`, `design_shares` (see `lib/db/src/schema/designs.ts`). Design images and textures are paths into `brand_files`.

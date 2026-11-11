@@ -42,6 +42,7 @@ export function modelPaths(m: DesignModel | null | undefined): string[] {
     case "bag": return [m.logo, ...(m.front ? [m.front] : [])];
     case "pouch": return [...(m.front ? [m.front] : []), ...(m.logo ? [m.logo] : [])];
     case "carrier": return m.logo ? [m.logo] : [];
+    case "fold": return [m.boxOut, m.boxIn, ...(m.sleeveOut ? [m.sleeveOut] : []), ...(m.sleeveIn ? [m.sleeveIn] : [])];
   }
 }
 

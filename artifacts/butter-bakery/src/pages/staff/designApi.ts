@@ -8,7 +8,8 @@ export type StoredModel =
   | { type: "card"; w: number; h: number; bg: string; logo: string; logoColor: string; backBg: string; symbol: string; symbolColor: string }
   | { type: "bag"; w: number; h: number; d: number; color: string; logoColor: string; logo: string; front?: string; handles?: "rope" | "flat" | "none" }
   | { type: "pouch"; w: number; h: number; d: number; color: string; front?: string; logo?: string; logoColor?: string }
-  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string };
+  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string }
+  | { type: "fold"; kit: string; boxOut: string; boxIn: string; sleeveOut?: string; sleeveIn?: string };
 
 export interface Specs {
   size?: string;
@@ -109,6 +110,7 @@ export function toViewer(m: StoredModel, url: (p: string) => string = (p) => ass
     case "bag": return { ...m, logo: url(m.logo), front: m.front ? url(m.front) : undefined };
     case "pouch": return { ...m, logo: m.logo ? url(m.logo) : undefined, front: m.front ? url(m.front) : undefined };
     case "carrier": return { ...m, logo: m.logo ? url(m.logo) : undefined };
+    case "fold": return { ...m, boxOut: url(m.boxOut), boxIn: url(m.boxIn), sleeveOut: m.sleeveOut ? url(m.sleeveOut) : undefined, sleeveIn: m.sleeveIn ? url(m.sleeveIn) : undefined };
   }
 }
 

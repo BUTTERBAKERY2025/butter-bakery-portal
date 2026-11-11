@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { FoldViewer, type FoldModel } from "./FoldViewer";
 
 /** Model descriptions match DesignModel on the server; asset fields are URLs here. */
 export type Model3D =
@@ -9,7 +10,8 @@ export type Model3D =
   | { type: "card"; w: number; h: number; bg: string; logo: string; logoColor: string; backBg: string; symbol: string; symbolColor: string }
   | { type: "bag"; w: number; h: number; d: number; color: string; logoColor: string; logo: string; front?: string; handles?: "rope" | "flat" | "none" }
   | { type: "pouch"; w: number; h: number; d: number; color: string; front?: string; logo?: string; logoColor?: string }
-  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string };
+  | { type: "carrier"; cups: 2 | 4; color: string; logo?: string; logoColor?: string }
+  | FoldModel;
 
 /** The identity colours offered for a live colour change on the model. */
 export const BRAND_SWATCHES = ["#FE5000", "#2A1F15", "#F1E9DA", "#C08B3D", "#524727", "#C4B47E", "#FFFFFF"];
@@ -166,7 +168,7 @@ function shade(hex: string, k: number) {
   return c.multiplyScalar(k);
 }
 
-async function buildModel(m: Model3D, lidOn: boolean): Promise<{ group: THREE.Group; height: number; width: number }> {
+async function buildModel(m: Exclude<Model3D, FoldModel>, lidOn: boolean): Promise<{ group: THREE.Group; height: number; width: number }> {
   const group = new THREE.Group();
   if (m.type === "cup") {
     const s = CUP[m.oz] ?? CUP["12"];
@@ -368,8 +370,14 @@ export interface Design3DText {
   hint: string;
 }
 
-/** Rotate by dragging, zoom with the wheel or a pinch. Nothing is downloadable from the canvas. */
+/** Folding dieline models get their own viewer; everything else uses the parametric scene below. */
 export function Design3D({ model, text, className = "" }: { model: Model3D; text: Design3DText; className?: string }) {
+  if (model.type === "fold") return <FoldViewer model={model} className={className} />;
+  return <Design3DScene model={model} text={text} className={className} />;
+}
+
+/** Rotate by dragging, zoom with the wheel or a pinch. Nothing is downloadable from the canvas. */
+function Design3DScene({ model, text, className = "" }: { model: Exclude<Model3D, FoldModel>; text: Design3DText; className?: string }) {
   const stage = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<"loading" | "ok" | "failed" | "nowebgl">("loading");
   const [spin, setSpin] = useState(true);

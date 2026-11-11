@@ -137,6 +137,7 @@ function viewerModel(m: DesignModel | null, u: (p: string) => string) {
     case "bag": return { ...m, logo: u(m.logo), front: m.front ? u(m.front) : undefined };
     case "pouch": return { ...m, logo: m.logo ? u(m.logo) : undefined, front: m.front ? u(m.front) : undefined };
     case "carrier": return { ...m, logo: m.logo ? u(m.logo) : undefined };
+    case "fold": return { ...m, boxOut: u(m.boxOut), boxIn: u(m.boxIn), sleeveOut: m.sleeveOut ? u(m.sleeveOut) : undefined, sleeveIn: m.sleeveIn ? u(m.sleeveIn) : undefined };
   }
 }
 
