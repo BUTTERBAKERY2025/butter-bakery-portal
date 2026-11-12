@@ -376,7 +376,96 @@ const crogg4: Kit = {
   },
 };
 
-export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox, crogg4 };
+/** CROGG box, 6 pieces (2 rows × 3): roll-end tuck-front box 198 × 134 × 73 mm + carry sleeve 200 × 586 mm.
+ *  Die-line in mm (flat 486 × 445), converted to points for the net. */
+const crogg6: Kit = {
+  title: { ar: "علبة CROGG ٦ قطع مع السليف", en: "CROGG box, 6 pieces, with sleeve" },
+  steps: [
+    { ar: "العلبة مفرودة (الوجه المطبوع)", en: "Flat blank, printed side", t: 0 },
+    { ar: "قلب الكرتونة، الوجه الداخلي للأعلى", en: "Turn over, inside up", t: 0.08 },
+    { ar: "رفع الواجهة والظهر", en: "Raise front and back walls", t: 0.2 },
+    { ar: "طيّ الأذن ورفع الجنبين", en: "Ears in, raise the sides", t: 0.29 },
+    { ar: "لفّ الجدار الداخلي وتقفيل الألسنة", en: "Roll the inner side walls, lock the tabs", t: 0.4 },
+    { ar: "طيّ جناحي الغطاء", en: "Fold the lid dust flaps", t: 0.46 },
+    { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة", en: "Close the lid, tuck behind the front", t: 0.66 },
+    { ar: "رفع ليبل السليف على الواجهة والظهر", en: "Sleeve labels up the front and back", t: 0.78 },
+    { ar: "ضمّ اللوحين المائلين نحو الأعلى", en: "Lean the side panels in", t: 0.88 },
+    { ar: "لصق المقبضين معاً", en: "Glue the handles together", t: 1 },
+  ],
+  boxSteps: 7,
+  boxEnd: 0.66,
+  views: { angle: [44, 52, 70], top: [0, 90, 0.01], front: [0, 16, 80] },
+  build(scene, m) {
+    const MP = 72 / 25.4;
+    const pt = (pts: [number, number][]) => pts.map(([x, y]) => [x * MP, y * MP] as [number, number]);
+    const rc = (a: number, b: number, c: number, d: number): Rect => [a * MP, b * MP, c * MP, d * MP];
+    const B = netTools({ pw: 486 * MP, ph: 445 * MP, cx: 243 * MP, cy: 305 * MP, outer: m.boxOut, inner: m.boxIn });
+    const { pivot: pv, attach: A, attachPoly: AP } = B;
+    const R = (x: number, y: number) => B.R(x * MP, y * MP);
+    const mir = (pts: [number, number][]) => pts.map(([x, y]) => [486 - x, y] as [number, number]);
+    const boxRoot = B.root();
+    scene.add(boxRoot);
+    A(boxRoot, rc(144, 238, 342, 372));                                          // base 198 × 134
+    const back = pv(boxRoot, R(243, 238)); A(back, rc(144, 165, 342, 238));       // back wall 73
+    const earB: [number, number][] = [[144, 166], [84, 174], [84, 235], [144, 237]];
+    const earBL = pv(back, R(144, 201.5)); AP(earBL, pt(earB), 0.11);
+    const earBR = pv(back, R(342, 201.5)); AP(earBR, pt(mir(earB)), 0.11);
+    const lid = pv(back, R(243, 165)); A(lid, rc(143, 30, 343, 165));             // lid 200 × 135
+    const tuck = pv(lid, R(243, 30)); AP(tuck, pt([[145, 30], [145, 10], [155, 0], [331, 0], [341, 10], [341, 30]]));
+    const dust: [number, number][] = [[143, 33], [114, 42], [114, 157], [143, 163]];
+    const dustL = pv(lid, R(143, 97.5)); AP(dustL, pt(dust));
+    const dustR = pv(lid, R(343, 97.5)); AP(dustR, pt(mir(dust)));
+    const front = pv(boxRoot, R(243, 372)); A(front, rc(144, 372, 342, 445));     // front wall 73
+    const earF: [number, number][] = [[144, 373], [84, 381], [84, 442], [144, 444]];
+    const earFL = pv(front, R(144, 408.5)); AP(earFL, pt(earF), 0.11);
+    const earFR = pv(front, R(342, 408.5)); AP(earFR, pt(mir(earF)), 0.11);
+    const left = pv(boxRoot, R(144, 305)); A(left, rc(71, 238, 144, 372));        // side walls 73
+    const right = pv(boxRoot, R(342, 305)); A(right, rc(342, 238, 415, 372));
+    const inner: [number, number][] = [[71, 238], [0, 242], [0, 258], [-4, 258], [-4, 272], [0, 272], [0, 338], [-4, 338], [-4, 352], [0, 352], [0, 368], [71, 372]];
+    const innerL = pv(left, R(71, 305)); AP(innerL, pt(inner), -0.05);           // rolled inner wall with lock tabs
+    const innerR = pv(right, R(415, 305)); AP(innerR, pt(mir(inner)), -0.05);
+
+    // Sleeve 200 × 586 mm: handle 75 · panel 76 · label 74 · base 136 · label 74 · panel 76 · handle 75.
+    const sw = 200 * MP, sh = 586 * MP, HO = 42 * MP;
+    const Yr = [0, 75, 151, 225, 361, 435, 511, 586].map((v) => v * MP);
+    const S = netTools({ pw: sw, ph: sh, cx: sw / 2, cy: (Yr[3]! + Yr[4]!) / 2, outer: m.slvOut, inner: m.slvIn });
+    const slvRoot = S.root();
+    slvRoot.rotation.y = PI;
+    scene.add(slvRoot);
+    const c = sw / 2;
+    S.attach(slvRoot, [0, Yr[3]!, sw, Yr[4]!]);
+    const lblF = S.pivot(slvRoot, S.R(c, Yr[3]!)); S.attach(lblF, [0, Yr[2]!, sw, Yr[3]!]);
+    const panF = S.pivot(lblF, S.R(c, Yr[2]!)); S.attach(panF, [0, Yr[1]!, sw, Yr[2]!]);
+    const hdlF = S.pivot(panF, S.R(c, Yr[1]!)); S.attach(hdlF, [HO, 0, sw - HO, Yr[1]!]);
+    const lblB = S.pivot(slvRoot, S.R(c, Yr[4]!)); S.attach(lblB, [0, Yr[4]!, sw, Yr[5]!]);
+    const panB = S.pivot(lblB, S.R(c, Yr[5]!)); S.attach(panB, [0, Yr[5]!, sw, Yr[6]!]);
+    const hdlB = S.pivot(panB, S.R(c, Yr[6]!)); S.attach(hdlB, [HO, Yr[6]!, sw - HO, sh]);
+    const LEAN = Math.asin(66.5 / 76);
+
+    return {
+      apply(b, s, sleeveOn) {
+        const f1 = ease(seg(b, 0, 0.12));
+        boxRoot.rotation.z = PI * (1 - f1);
+        boxRoot.position.y = 6 * Math.sin(PI * f1) + 0.06;
+        const f2 = ease(seg(b, 0.15, 0.3)); back.rotation.x = HP * f2; front.rotation.x = -HP * f2;
+        const fe = ease(seg(b, 0.29, 0.4));
+        earBL.rotation.z = HP * fe; earBR.rotation.z = -HP * fe; earFL.rotation.z = HP * fe; earFR.rotation.z = -HP * fe;
+        const f3 = ease(seg(b, 0.33, 0.45)); left.rotation.z = HP * f3; right.rotation.z = -HP * f3;
+        const fi = ease(seg(b, 0.46, 0.6)) * (PI - 0.04); innerL.rotation.z = fi; innerR.rotation.z = -fi;
+        const fd = ease(seg(b, 0.6, 0.7)); dustL.rotation.z = HP * fd; dustR.rotation.z = -HP * fd;
+        const ft = ease(seg(b, 0.64, 0.74)); tuck.rotation.x = (HP + 0.12) * ft;
+        lid.rotation.x = HP * ease(seg(b, 0.75, 1));
+        slvRoot.visible = sleeveOn && s >= 0;
+        const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
+        lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
+        lblB.rotation.x = -HP * s1; panB.rotation.x = -LEAN * s2; hdlB.rotation.x = LEAN * s3;
+      },
+    };
+  },
+};
+
+
+export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox, crogg4, crogg6 };
 
 const T = {
   ar: { loading: "جارٍ تجهيز النموذج…", failed: "تعذّر تحميل النموذج.", noWebgl: "يحتاج العرض ثلاثي الأبعاد إلى WebGL، وهو معطّل في هذا المتصفح.", play: "تشغيل التجميع", pause: "إيقاف", open: "فتح العلبة", reset: "فرد", withSleeve: "مع السليف", boxOnly: "العلبة فقط", angle: "مائلة", top: "من أعلى", front: "من الأمام", stage: "مرحلة التجميع", prev: "الخطوة السابقة", next: "الخطوة التالية", hint: "اسحب للتدوير · كبّر بالعجلة أو بإصبعين" },
