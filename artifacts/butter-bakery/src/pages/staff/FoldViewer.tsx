@@ -288,182 +288,121 @@ const orangebox: Kit = {
   },
 };
 
-/** CROGG box, 4 pieces: roll-end tuck-front box 262 × 70 × 73 mm (double side walls, lid dust flaps) + carry sleeve 264 × 470 mm.
- *  Die-line in mm (flat 550 × 318), converted to points for the net. */
-const crogg4: Kit = {
-  title: { ar: "علبة CROGG ٤ قطع مع السليف", en: "CROGG box, 4 pieces, with sleeve" },
-  steps: [
-    { ar: "العلبة مفرودة (الوجه المطبوع)", en: "Flat blank, printed side", t: 0 },
-    { ar: "قلب الكرتونة، الوجه الداخلي للأعلى", en: "Turn over, inside up", t: 0.08 },
-    { ar: "رفع الواجهة والظهر", en: "Raise front and back walls", t: 0.2 },
-    { ar: "طيّ الأذن ورفع الجنبين", en: "Ears in, raise the sides", t: 0.29 },
-    { ar: "لفّ الجدار الداخلي وتقفيل الألسنة", en: "Roll the inner side walls, lock the tabs", t: 0.4 },
-    { ar: "طيّ جناحي الغطاء", en: "Fold the lid dust flaps", t: 0.46 },
-    { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة", en: "Close the lid, tuck behind the front", t: 0.66 },
-    { ar: "رفع ليبل السليف على الواجهة والظهر", en: "Sleeve labels up the front and back", t: 0.78 },
-    { ar: "ضمّ اللوحين المائلين نحو الأعلى", en: "Lean the side panels in", t: 0.88 },
-    { ar: "لصق المقبضين معاً", en: "Glue the handles together", t: 1 },
-  ],
-  boxSteps: 7,
-  boxEnd: 0.66,
-  views: { angle: [44, 52, 68], top: [0, 90, 0.01], front: [0, 16, 80] },
-  build(scene, m) {
-    const MP = 72 / 25.4;
-    const pt = (pts: [number, number][]) => pts.map(([x, y]) => [x * MP, y * MP] as [number, number]);
-    const rc = (a: number, b: number, c: number, d: number): Rect => [a * MP, b * MP, c * MP, d * MP];
-    const B = netTools({ pw: 550 * MP, ph: 317 * MP, cx: 275 * MP, cy: 209 * MP, outer: m.boxOut, inner: m.boxIn });
-    const { pivot: pv, attach: A, attachPoly: AP } = B;
-    const R = (x: number, y: number) => B.R(x * MP, y * MP);
-    const mir = (pts: [number, number][]) => pts.map(([x, y]) => [550 - x, y] as [number, number]);
-    const boxRoot = B.root();
-    scene.add(boxRoot);
-    A(boxRoot, rc(144, 174, 406, 244));                                          // base 262 × 70
-    const back = pv(boxRoot, R(275, 174)); A(back, rc(144, 101, 406, 174));       // back wall 73
-    const earB: [number, number][] = [[144, 102], [84, 110], [84, 171], [144, 173]];
-    const earBL = pv(back, R(144, 137)); AP(earBL, pt(earB), 0.11);
-    const earBR = pv(back, R(406, 137)); AP(earBR, pt(mir(earB)), 0.11);
-    const lid = pv(back, R(275, 101)); A(lid, rc(143, 30, 407, 101));             // lid 264 × 71
-    const tuck = pv(lid, R(275, 30)); AP(tuck, pt([[145, 30], [145, 10], [155, 0], [395, 0], [405, 10], [405, 30]]));
-    const dust: [number, number][] = [[143, 33], [118, 40], [118, 95], [143, 99]];
-    const dustL = pv(lid, R(143, 65)); AP(dustL, pt(dust));
-    const dustR = pv(lid, R(407, 65)); AP(dustR, pt(mir(dust)));
-    const front = pv(boxRoot, R(275, 244)); A(front, rc(144, 244, 406, 317));     // front wall 73
-    const earF: [number, number][] = [[144, 245], [84, 253], [84, 314], [144, 316]];
-    const earFL = pv(front, R(144, 280)); AP(earFL, pt(earF), 0.11);
-    const earFR = pv(front, R(406, 280)); AP(earFR, pt(mir(earF)), 0.11);
-    const left = pv(boxRoot, R(144, 209)); A(left, rc(71, 174, 144, 244));        // side walls 73
-    const right = pv(boxRoot, R(406, 209)); A(right, rc(406, 174, 479, 244));
-    const inner: [number, number][] = [[71, 174], [0, 178], [0, 188], [-4, 188], [-4, 202], [0, 202], [0, 216], [-4, 216], [-4, 230], [0, 230], [0, 240], [71, 244]];
-    const innerL = pv(left, R(71, 209)); AP(innerL, pt(inner), -0.05);           // rolled inner wall with lock tabs
-    const innerR = pv(right, R(479, 209)); AP(innerR, pt(mir(inner)), -0.05);
-
-    // Sleeve 264 × 470 mm: handle 75 · panel 50 · label 74 · base 72 · label 74 · panel 50 · handle 75.
-    const sw = 264 * MP, sh = 470 * MP, HO = 74 * MP;
-    const Yr = [0, 75, 125, 199, 271, 345, 395, 470].map((v) => v * MP);
-    const S = netTools({ pw: sw, ph: sh, cx: sw / 2, cy: (Yr[3]! + Yr[4]!) / 2, outer: m.slvOut, inner: m.slvIn });
-    const slvRoot = S.root();
-    slvRoot.rotation.y = PI;
-    scene.add(slvRoot);
-    const c = sw / 2;
-    S.attach(slvRoot, [0, Yr[3]!, sw, Yr[4]!]);
-    const lblF = S.pivot(slvRoot, S.R(c, Yr[3]!)); S.attach(lblF, [0, Yr[2]!, sw, Yr[3]!]);
-    const panF = S.pivot(lblF, S.R(c, Yr[2]!)); S.attach(panF, [0, Yr[1]!, sw, Yr[2]!]);
-    const hdlF = S.pivot(panF, S.R(c, Yr[1]!)); S.attach(hdlF, [HO, 0, sw - HO, Yr[1]!]);
-    const lblB = S.pivot(slvRoot, S.R(c, Yr[4]!)); S.attach(lblB, [0, Yr[4]!, sw, Yr[5]!]);
-    const panB = S.pivot(lblB, S.R(c, Yr[5]!)); S.attach(panB, [0, Yr[5]!, sw, Yr[6]!]);
-    const hdlB = S.pivot(panB, S.R(c, Yr[6]!)); S.attach(hdlB, [HO, Yr[6]!, sw - HO, sh]);
-    const LEAN = Math.asin(34.5 / 50);
-
-    return {
-      apply(b, s, sleeveOn) {
-        const f1 = ease(seg(b, 0, 0.12));
-        boxRoot.rotation.z = PI * (1 - f1);
-        boxRoot.position.y = 6 * Math.sin(PI * f1) + 0.06;
-        const f2 = ease(seg(b, 0.15, 0.3)); back.rotation.x = HP * f2; front.rotation.x = -HP * f2;
-        const fe = ease(seg(b, 0.29, 0.4));
-        earBL.rotation.z = HP * fe; earBR.rotation.z = -HP * fe; earFL.rotation.z = HP * fe; earFR.rotation.z = -HP * fe;
-        const f3 = ease(seg(b, 0.33, 0.45)); left.rotation.z = HP * f3; right.rotation.z = -HP * f3;
-        const fi = ease(seg(b, 0.46, 0.6)) * (PI - 0.04); innerL.rotation.z = fi; innerR.rotation.z = -fi;
-        const fd = ease(seg(b, 0.6, 0.7)); dustL.rotation.z = HP * fd; dustR.rotation.z = -HP * fd;
-        const ft = ease(seg(b, 0.64, 0.74)); tuck.rotation.x = (HP + 0.12) * ft;
-        lid.rotation.x = HP * ease(seg(b, 0.75, 1));
-        slvRoot.visible = sleeveOn && s >= 0;
-        const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
-        lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
-        lblB.rotation.x = -HP * s1; panB.rotation.x = -LEAN * s2; hdlB.rotation.x = LEAN * s3;
-      },
-    };
-  },
+/** CROGG boxes: roll-end tuck-front box (double side walls, lid dust flaps) + one-piece carry sleeve,
+ *  built from the print die-line in mm (converted to points for the net). Sized for a baked croissant ≈ 54 × 67 mm. */
+type CroggSpec = {
+  pieces: 4 | 6; L: number; D: number; H: number;
+  dust: [number, number, number]; // dust-flap depth, top inset, bottom inset
+  tabs: [number, number];         // lock-tab offsets from the base edges
+  sleeveW: number; panel: number; // sleeve width, leaning panel length
 };
+function croggKit(c: CroggSpec): Kit {
+  const n = c.pieces === 6 ? "٦" : "٤";
+  return {
+    title: { ar: `علبة CROGG ${n} قطع مع السليف`, en: `CROGG box, ${c.pieces} pieces, with sleeve` },
+    steps: [
+      { ar: "العلبة مفرودة (الوجه المطبوع)", en: "Flat blank, printed side", t: 0 },
+      { ar: "قلب الكرتونة، الوجه الداخلي للأعلى", en: "Turn over, inside up", t: 0.08 },
+      { ar: "رفع الواجهة والظهر", en: "Raise front and back walls", t: 0.2 },
+      { ar: "طيّ الأذن ورفع الجنبين", en: "Ears in, raise the sides", t: 0.29 },
+      { ar: "لفّ الجدار الداخلي وتقفيل الألسنة", en: "Roll the inner side walls, lock the tabs", t: 0.4 },
+      { ar: "طيّ جناحي الغطاء", en: "Fold the lid dust flaps", t: 0.46 },
+      { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة", en: "Close the lid, tuck behind the front", t: 0.66 },
+      { ar: "رفع ليبل السليف على الواجهة والظهر", en: "Sleeve labels up the front and back", t: 0.78 },
+      { ar: "ضمّ اللوحين المائلين نحو الأعلى", en: "Lean the side panels in", t: 0.88 },
+      { ar: "لصق المقبضين معاً", en: "Glue the handles together", t: 1 },
+    ],
+    boxSteps: 7,
+    boxEnd: 0.66,
+    views: { angle: [44, 52, c.pieces === 6 ? 70 : 68], top: [0, 90, 0.01], front: [0, 16, 80] },
+    build(scene, m) {
+      const { L, D, H } = c;
+      const IW = H - 2, TUCK = 30, LID = D + 1, EAR = 60;
+      const X = [0, IW, IW + H, IW + H + L, IW + 2 * H + L, 2 * IW + 2 * H + L];
+      const Yr = [0, TUCK, TUCK + LID, TUCK + LID + H, TUCK + LID + H + D, TUCK + LID + 2 * H + D];
+      const BW = X[5]!, BH = Yr[5]!, x0 = X[2]!, x1 = X[3]!, cx = BW / 2, cy = (Yr[3]! + Yr[4]!) / 2;
+      const MP = 72 / 25.4;
+      const pt = (pts: [number, number][]) => pts.map(([x, y]) => [x * MP, y * MP] as [number, number]);
+      const rc = (a: number, b: number, cc: number, d: number): Rect => [a * MP, b * MP, cc * MP, d * MP];
+      const B = netTools({ pw: BW * MP, ph: BH * MP, cx: cx * MP, cy: cy * MP, outer: m.boxOut, inner: m.boxIn });
+      const { pivot: pv, attach: A, attachPoly: AP } = B;
+      const R = (x: number, y: number) => B.R(x * MP, y * MP);
+      const mir = (pts: [number, number][]) => pts.map(([x, y]) => [BW - x, y] as [number, number]);
+      const ear = (ya: number, yb: number): [number, number][] => [[x0, ya + 1], [x0 - EAR, ya + 9], [x0 - EAR, yb - 3], [x0, yb - 1]];
+      const boxRoot = B.root();
+      scene.add(boxRoot);
+      A(boxRoot, rc(x0, Yr[3]!, x1, Yr[4]!));                                     // base
+      const back = pv(boxRoot, R(cx, Yr[3]!)); A(back, rc(x0, Yr[2]!, x1, Yr[3]!)); // back wall
+      const yb = (Yr[2]! + Yr[3]!) / 2;
+      const earBL = pv(back, R(x0, yb)); AP(earBL, pt(ear(Yr[2]!, Yr[3]!)), 0.11);
+      const earBR = pv(back, R(x1, yb)); AP(earBR, pt(mir(ear(Yr[2]!, Yr[3]!))), 0.11);
+      const lid = pv(back, R(cx, Yr[2]!)); A(lid, rc(x0 - 1, Yr[1]!, x1 + 1, Yr[2]!)); // lid = depth + 1
+      const tuck = pv(lid, R(cx, Yr[1]!));
+      AP(tuck, pt([[x0 + 1, TUCK], [x0 + 1, 10], [x0 + 11, 0], [x1 - 11, 0], [x1 - 1, 10], [x1 - 1, TUCK]]));
+      const [dw, da, db] = c.dust;
+      const dust: [number, number][] = [[x0 - 1, Yr[1]! + 3], [x0 - 1 - dw, Yr[1]! + da], [x0 - 1 - dw, Yr[2]! - db], [x0 - 1, Yr[2]! - 2]];
+      const yl = (Yr[1]! + Yr[2]!) / 2;
+      const dustL = pv(lid, R(x0 - 1, yl)); AP(dustL, pt(dust));
+      const dustR = pv(lid, R(x1 + 1, yl)); AP(dustR, pt(mir(dust)));
+      const front = pv(boxRoot, R(cx, Yr[4]!)); A(front, rc(x0, Yr[4]!, x1, Yr[5]!)); // front wall
+      const yf = (Yr[4]! + Yr[5]!) / 2;
+      const earFL = pv(front, R(x0, yf)); AP(earFL, pt(ear(Yr[4]!, Yr[5]!)), 0.11);
+      const earFR = pv(front, R(x1, yf)); AP(earFR, pt(mir(ear(Yr[4]!, Yr[5]!))), 0.11);
+      const left = pv(boxRoot, R(x0, cy)); A(left, rc(X[1]!, Yr[3]!, x0, Yr[4]!));   // side walls
+      const right = pv(boxRoot, R(x1, cy)); A(right, rc(x1, Yr[3]!, X[4]!, Yr[4]!));
+      const [ta, tb] = c.tabs;
+      const t0 = [Yr[3]! + ta, Yr[3]! + tb], t1 = [Yr[4]! - tb, Yr[4]! - ta];
+      const inner: [number, number][] = [[X[1]!, Yr[3]!], [0, Yr[3]! + 4], [0, t0[0]!], [-4, t0[0]!], [-4, t0[1]!], [0, t0[1]!],
+        [0, t1[0]!], [-4, t1[0]!], [-4, t1[1]!], [0, t1[1]!], [0, Yr[4]! - 4], [X[1]!, Yr[4]!]];
+      const innerL = pv(left, R(X[1]!, cy)); AP(innerL, pt(inner), -0.05);        // rolled inner wall with lock tabs
+      const innerR = pv(right, R(X[4]!, cy)); AP(innerR, pt(mir(inner)), -0.05);
 
-/** CROGG box, 6 pieces (2 rows × 3): roll-end tuck-front box 198 × 134 × 73 mm + carry sleeve 200 × 586 mm.
- *  Die-line in mm (flat 486 × 445), converted to points for the net. */
-const crogg6: Kit = {
-  title: { ar: "علبة CROGG ٦ قطع مع السليف", en: "CROGG box, 6 pieces, with sleeve" },
-  steps: [
-    { ar: "العلبة مفرودة (الوجه المطبوع)", en: "Flat blank, printed side", t: 0 },
-    { ar: "قلب الكرتونة، الوجه الداخلي للأعلى", en: "Turn over, inside up", t: 0.08 },
-    { ar: "رفع الواجهة والظهر", en: "Raise front and back walls", t: 0.2 },
-    { ar: "طيّ الأذن ورفع الجنبين", en: "Ears in, raise the sides", t: 0.29 },
-    { ar: "لفّ الجدار الداخلي وتقفيل الألسنة", en: "Roll the inner side walls, lock the tabs", t: 0.4 },
-    { ar: "طيّ جناحي الغطاء", en: "Fold the lid dust flaps", t: 0.46 },
-    { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة", en: "Close the lid, tuck behind the front", t: 0.66 },
-    { ar: "رفع ليبل السليف على الواجهة والظهر", en: "Sleeve labels up the front and back", t: 0.78 },
-    { ar: "ضمّ اللوحين المائلين نحو الأعلى", en: "Lean the side panels in", t: 0.88 },
-    { ar: "لصق المقبضين معاً", en: "Glue the handles together", t: 1 },
-  ],
-  boxSteps: 7,
-  boxEnd: 0.66,
-  views: { angle: [44, 52, 70], top: [0, 90, 0.01], front: [0, 16, 80] },
-  build(scene, m) {
-    const MP = 72 / 25.4;
-    const pt = (pts: [number, number][]) => pts.map(([x, y]) => [x * MP, y * MP] as [number, number]);
-    const rc = (a: number, b: number, c: number, d: number): Rect => [a * MP, b * MP, c * MP, d * MP];
-    const B = netTools({ pw: 486 * MP, ph: 445 * MP, cx: 243 * MP, cy: 305 * MP, outer: m.boxOut, inner: m.boxIn });
-    const { pivot: pv, attach: A, attachPoly: AP } = B;
-    const R = (x: number, y: number) => B.R(x * MP, y * MP);
-    const mir = (pts: [number, number][]) => pts.map(([x, y]) => [486 - x, y] as [number, number]);
-    const boxRoot = B.root();
-    scene.add(boxRoot);
-    A(boxRoot, rc(144, 238, 342, 372));                                          // base 198 × 134
-    const back = pv(boxRoot, R(243, 238)); A(back, rc(144, 165, 342, 238));       // back wall 73
-    const earB: [number, number][] = [[144, 166], [84, 174], [84, 235], [144, 237]];
-    const earBL = pv(back, R(144, 201.5)); AP(earBL, pt(earB), 0.11);
-    const earBR = pv(back, R(342, 201.5)); AP(earBR, pt(mir(earB)), 0.11);
-    const lid = pv(back, R(243, 165)); A(lid, rc(143, 30, 343, 165));             // lid 200 × 135
-    const tuck = pv(lid, R(243, 30)); AP(tuck, pt([[145, 30], [145, 10], [155, 0], [331, 0], [341, 10], [341, 30]]));
-    const dust: [number, number][] = [[143, 33], [114, 42], [114, 157], [143, 163]];
-    const dustL = pv(lid, R(143, 97.5)); AP(dustL, pt(dust));
-    const dustR = pv(lid, R(343, 97.5)); AP(dustR, pt(mir(dust)));
-    const front = pv(boxRoot, R(243, 372)); A(front, rc(144, 372, 342, 445));     // front wall 73
-    const earF: [number, number][] = [[144, 373], [84, 381], [84, 442], [144, 444]];
-    const earFL = pv(front, R(144, 408.5)); AP(earFL, pt(earF), 0.11);
-    const earFR = pv(front, R(342, 408.5)); AP(earFR, pt(mir(earF)), 0.11);
-    const left = pv(boxRoot, R(144, 305)); A(left, rc(71, 238, 144, 372));        // side walls 73
-    const right = pv(boxRoot, R(342, 305)); A(right, rc(342, 238, 415, 372));
-    const inner: [number, number][] = [[71, 238], [0, 242], [0, 258], [-4, 258], [-4, 272], [0, 272], [0, 338], [-4, 338], [-4, 352], [0, 352], [0, 368], [71, 372]];
-    const innerL = pv(left, R(71, 305)); AP(innerL, pt(inner), -0.05);           // rolled inner wall with lock tabs
-    const innerR = pv(right, R(415, 305)); AP(innerR, pt(mir(inner)), -0.05);
+      // Sleeve: handle 75 · panel · label H+1 · base D+2 · label H+1 · panel · handle 75.
+      const SEG = [75, c.panel, H + 1, D + 2, H + 1, c.panel, 75];
+      const SY = SEG.reduce((a, v) => [...a, a[a.length - 1]! + v], [0]);
+      const sw = c.sleeveW * MP, sh = SY[7]! * MP, HO = ((c.sleeveW - 116) / 2) * MP;
+      const Ys = SY.map((v) => v * MP);
+      const S = netTools({ pw: sw, ph: sh, cx: sw / 2, cy: (Ys[3]! + Ys[4]!) / 2, outer: m.slvOut, inner: m.slvIn });
+      const slvRoot = S.root();
+      slvRoot.rotation.y = PI;
+      scene.add(slvRoot);
+      const sc = sw / 2;
+      S.attach(slvRoot, [0, Ys[3]!, sw, Ys[4]!]);
+      const lblF = S.pivot(slvRoot, S.R(sc, Ys[3]!)); S.attach(lblF, [0, Ys[2]!, sw, Ys[3]!]);
+      const panF = S.pivot(lblF, S.R(sc, Ys[2]!)); S.attach(panF, [0, Ys[1]!, sw, Ys[2]!]);
+      const hdlF = S.pivot(panF, S.R(sc, Ys[1]!)); S.attach(hdlF, [HO, 0, sw - HO, Ys[1]!]);
+      const lblB = S.pivot(slvRoot, S.R(sc, Ys[4]!)); S.attach(lblB, [0, Ys[4]!, sw, Ys[5]!]);
+      const panB = S.pivot(lblB, S.R(sc, Ys[5]!)); S.attach(panB, [0, Ys[5]!, sw, Ys[6]!]);
+      const hdlB = S.pivot(panB, S.R(sc, Ys[6]!)); S.attach(hdlB, [HO, Ys[6]!, sw - HO, sh]);
+      const LEAN = Math.asin(((D + 2) / 2 - 1.5) / c.panel);
 
-    // Sleeve 200 × 586 mm: handle 75 · panel 76 · label 74 · base 136 · label 74 · panel 76 · handle 75.
-    const sw = 200 * MP, sh = 586 * MP, HO = 42 * MP;
-    const Yr = [0, 75, 151, 225, 361, 435, 511, 586].map((v) => v * MP);
-    const S = netTools({ pw: sw, ph: sh, cx: sw / 2, cy: (Yr[3]! + Yr[4]!) / 2, outer: m.slvOut, inner: m.slvIn });
-    const slvRoot = S.root();
-    slvRoot.rotation.y = PI;
-    scene.add(slvRoot);
-    const c = sw / 2;
-    S.attach(slvRoot, [0, Yr[3]!, sw, Yr[4]!]);
-    const lblF = S.pivot(slvRoot, S.R(c, Yr[3]!)); S.attach(lblF, [0, Yr[2]!, sw, Yr[3]!]);
-    const panF = S.pivot(lblF, S.R(c, Yr[2]!)); S.attach(panF, [0, Yr[1]!, sw, Yr[2]!]);
-    const hdlF = S.pivot(panF, S.R(c, Yr[1]!)); S.attach(hdlF, [HO, 0, sw - HO, Yr[1]!]);
-    const lblB = S.pivot(slvRoot, S.R(c, Yr[4]!)); S.attach(lblB, [0, Yr[4]!, sw, Yr[5]!]);
-    const panB = S.pivot(lblB, S.R(c, Yr[5]!)); S.attach(panB, [0, Yr[5]!, sw, Yr[6]!]);
-    const hdlB = S.pivot(panB, S.R(c, Yr[6]!)); S.attach(hdlB, [HO, Yr[6]!, sw - HO, sh]);
-    const LEAN = Math.asin(66.5 / 76);
+      return {
+        apply(b, s, sleeveOn) {
+          const f1 = ease(seg(b, 0, 0.12));
+          boxRoot.rotation.z = PI * (1 - f1);
+          boxRoot.position.y = 6 * Math.sin(PI * f1) + 0.06;
+          const f2 = ease(seg(b, 0.15, 0.3)); back.rotation.x = HP * f2; front.rotation.x = -HP * f2;
+          const fe = ease(seg(b, 0.29, 0.4));
+          earBL.rotation.z = HP * fe; earBR.rotation.z = -HP * fe; earFL.rotation.z = HP * fe; earFR.rotation.z = -HP * fe;
+          const f3 = ease(seg(b, 0.33, 0.45)); left.rotation.z = HP * f3; right.rotation.z = -HP * f3;
+          const fi = ease(seg(b, 0.46, 0.6)) * (PI - 0.04); innerL.rotation.z = fi; innerR.rotation.z = -fi;
+          const fd = ease(seg(b, 0.6, 0.7)); dustL.rotation.z = HP * fd; dustR.rotation.z = -HP * fd;
+          const ft = ease(seg(b, 0.64, 0.74)); tuck.rotation.x = (HP + 0.12) * ft;
+          lid.rotation.x = HP * ease(seg(b, 0.75, 1));
+          slvRoot.visible = sleeveOn && s >= 0;
+          const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
+          lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
+          lblB.rotation.x = -HP * s1; panB.rotation.x = -LEAN * s2; hdlB.rotation.x = LEAN * s3;
+        },
+      };
+    },
+  };
+}
 
-    return {
-      apply(b, s, sleeveOn) {
-        const f1 = ease(seg(b, 0, 0.12));
-        boxRoot.rotation.z = PI * (1 - f1);
-        boxRoot.position.y = 6 * Math.sin(PI * f1) + 0.06;
-        const f2 = ease(seg(b, 0.15, 0.3)); back.rotation.x = HP * f2; front.rotation.x = -HP * f2;
-        const fe = ease(seg(b, 0.29, 0.4));
-        earBL.rotation.z = HP * fe; earBR.rotation.z = -HP * fe; earFL.rotation.z = HP * fe; earFR.rotation.z = -HP * fe;
-        const f3 = ease(seg(b, 0.33, 0.45)); left.rotation.z = HP * f3; right.rotation.z = -HP * f3;
-        const fi = ease(seg(b, 0.46, 0.6)) * (PI - 0.04); innerL.rotation.z = fi; innerR.rotation.z = -fi;
-        const fd = ease(seg(b, 0.6, 0.7)); dustL.rotation.z = HP * fd; dustR.rotation.z = -HP * fd;
-        const ft = ease(seg(b, 0.64, 0.74)); tuck.rotation.x = (HP + 0.12) * ft;
-        lid.rotation.x = HP * ease(seg(b, 0.75, 1));
-        slvRoot.visible = sleeveOn && s >= 0;
-        const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
-        lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
-        lblB.rotation.x = -HP * s1; panB.rotation.x = -LEAN * s2; hdlB.rotation.x = LEAN * s3;
-      },
-    };
-  },
-};
-
+/** CROGG 4 pieces: inside 262 × 70 × 78 mm (flat 570 × 327) + sleeve 264 × 480 mm. */
+const crogg4 = croggKit({ pieces: 4, L: 262, D: 70, H: 78, dust: [25, 10, 6], tabs: [14, 28], sleeveW: 264, panel: 50 });
+/** CROGG 6 pieces (2 rows × 3): inside 198 × 134 × 78 mm (flat 506 × 455) + sleeve 200 × 596 mm. */
+const crogg6 = croggKit({ pieces: 6, L: 198, D: 134, H: 78, dust: [29, 12, 8], tabs: [20, 34], sleeveW: 200, panel: 76 });
 
 export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox, crogg4, crogg6 };
 
