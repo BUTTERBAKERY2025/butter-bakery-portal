@@ -128,7 +128,7 @@ const honeycake: Kit = {
     { ar: "رفع الجانبين وطيّ الأركان للداخل", en: "Raise sides, tuck the corners", t: 0.32 },
     { ar: "طيّ ألسنة القفل الجانبية مرتين", en: "Roll the side lock flaps", t: 0.44 },
     { ar: "ثني لسان الغطاء", en: "Bend the lid tuck", t: 0.51 },
-    { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة", en: "Close the lid, tuck behind the front", t: 0.66 },
+    { ar: "إغلاق الغطاء وإدخال اللسان خلف الواجهة ولسان القفل في الشق", en: "Close the lid: tuck inside, front tab into the lid slit", t: 0.66 },
     { ar: "رفع ليبل السليف على الواجهة والظهر", en: "Sleeve labels up the front and back", t: 0.78 },
     { ar: "ضمّ اللوحين المائلين نحو الأعلى", en: "Lean the side panels in", t: 0.88 },
     { ar: "لصق المقبضين معاً", en: "Glue the handles together", t: 1 },
@@ -289,15 +289,16 @@ const orangebox: Kit = {
 };
 
 /** CROGG boxes: roll-end tuck-front box (double side walls, lid dust flaps) + one-piece carry sleeve,
- *  built from the print die-line in mm (converted to points for the net). Sized for a baked croissant ≈ 54 × 67 mm. */
+ *  built from the print die-line in mm (converted to points for the net). Sized from the CROGG mould: baked piece ≈ 50 × 61 mm.
+ *  Hidden lid lock: tuck shoulders catch the dust flaps and a 26 × 10 mm tab on the front edge goes in through a 22 mm slit on the tuck crease. */
 type CroggSpec = {
-  pieces: 4 | 6; L: number; D: number; H: number;
+  pieces: 3 | 4 | 6; L: number; D: number; H: number;
   dust: [number, number, number]; // dust-flap depth, top inset, bottom inset
   tabs: [number, number];         // lock-tab offsets from the base edges
   sleeveW: number; panel: number; // sleeve width, leaning panel length
 };
 function croggKit(c: CroggSpec): Kit {
-  const n = c.pieces === 6 ? "٦" : "٤";
+  const n = ({ 3: "٣", 4: "٤", 6: "٦" } as const)[c.pieces];
   return {
     title: { ar: `علبة CROGG ${n} قطع مع السليف`, en: `CROGG box, ${c.pieces} pieces, with sleeve` },
     steps: [
@@ -320,7 +321,8 @@ function croggKit(c: CroggSpec): Kit {
       const IW = H - 2, TUCK = 30, LID = D + 1, EAR = 60;
       const X = [0, IW, IW + H, IW + H + L, IW + 2 * H + L, 2 * IW + 2 * H + L];
       const Yr = [0, TUCK, TUCK + LID, TUCK + LID + H, TUCK + LID + H + D, TUCK + LID + 2 * H + D];
-      const BW = X[5]!, BH = Yr[5]!, x0 = X[2]!, x1 = X[3]!, cx = BW / 2, cy = (Yr[3]! + Yr[4]!) / 2;
+      const FTAB = 10; // lock tab on the front wall edge (the print sheet includes it)
+      const BW = X[5]!, BH = Yr[5]! + FTAB, x0 = X[2]!, x1 = X[3]!, cx = BW / 2, cy = (Yr[3]! + Yr[4]!) / 2;
       const MP = 72 / 25.4;
       const pt = (pts: [number, number][]) => pts.map(([x, y]) => [x * MP, y * MP] as [number, number]);
       const rc = (a: number, b: number, cc: number, d: number): Rect => [a * MP, b * MP, cc * MP, d * MP];
@@ -338,7 +340,8 @@ function croggKit(c: CroggSpec): Kit {
       const earBR = pv(back, R(x1, yb)); AP(earBR, pt(mir(ear(Yr[2]!, Yr[3]!))), 0.11);
       const lid = pv(back, R(cx, Yr[2]!)); A(lid, rc(x0 - 1, Yr[1]!, x1 + 1, Yr[2]!)); // lid = depth + 1
       const tuck = pv(lid, R(cx, Yr[1]!));
-      AP(tuck, pt([[x0 + 1, TUCK], [x0 + 1, 10], [x0 + 11, 0], [x1 - 11, 0], [x1 - 1, 10], [x1 - 1, TUCK]]));
+      AP(tuck, pt([[x0 - 0.5, TUCK], [x0 - 0.5, TUCK - 6], [x0 + 1, TUCK - 6], [x0 + 1, 10], [x0 + 11, 0], [x1 - 11, 0], [x1 - 1, 10],
+        [x1 - 1, TUCK - 6], [x1 + 0.5, TUCK - 6], [x1 + 0.5, TUCK]])); // shoulders lock behind the dust flaps
       const [dw, da, db] = c.dust;
       const dust: [number, number][] = [[x0 - 1, Yr[1]! + 3], [x0 - 1 - dw, Yr[1]! + da], [x0 - 1 - dw, Yr[2]! - db], [x0 - 1, Yr[2]! - 2]];
       const yl = (Yr[1]! + Yr[2]!) / 2;
@@ -346,6 +349,9 @@ function croggKit(c: CroggSpec): Kit {
       const dustR = pv(lid, R(x1 + 1, yl)); AP(dustR, pt(mir(dust)));
       const front = pv(boxRoot, R(cx, Yr[4]!)); A(front, rc(x0, Yr[4]!, x1, Yr[5]!)); // front wall
       const yf = (Yr[4]! + Yr[5]!) / 2;
+      const ftab = pv(front, R(cx, Yr[5]!));
+      AP(ftab, pt([[cx - 9, Yr[5]!], [cx - 9, Yr[5]! + 4.5], [cx - 13, Yr[5]! + 5], [cx - 13, Yr[5]! + 8], [cx - 10, Yr[5]! + FTAB],
+        [cx + 10, Yr[5]! + FTAB], [cx + 13, Yr[5]! + 8], [cx + 13, Yr[5]! + 5], [cx + 9, Yr[5]! + 4.5], [cx + 9, Yr[5]!]]));
       const earFL = pv(front, R(x0, yf)); AP(earFL, pt(ear(Yr[4]!, Yr[5]!)), 0.11);
       const earFR = pv(front, R(x1, yf)); AP(earFR, pt(mir(ear(Yr[4]!, Yr[5]!))), 0.11);
       const left = pv(boxRoot, R(x0, cy)); A(left, rc(X[1]!, Yr[3]!, x0, Yr[4]!));   // side walls
@@ -389,6 +395,7 @@ function croggKit(c: CroggSpec): Kit {
           const fd = ease(seg(b, 0.6, 0.7)); dustL.rotation.z = HP * fd; dustR.rotation.z = -HP * fd;
           const ft = ease(seg(b, 0.64, 0.74)); tuck.rotation.x = (HP + 0.12) * ft;
           lid.rotation.x = HP * ease(seg(b, 0.75, 1));
+          ftab.rotation.x = -HP * ease(seg(b, 0.92, 1)); // tab bends in through the slit as the lid shuts
           slvRoot.visible = sleeveOn && s >= 0;
           const s1 = ease(seg(s, 0, 0.35)), s2 = ease(seg(s, 0.35, 0.7)), s3 = ease(seg(s, 0.7, 1));
           lblF.rotation.x = HP * s1; panF.rotation.x = LEAN * s2; hdlF.rotation.x = -LEAN * s3;
@@ -399,12 +406,14 @@ function croggKit(c: CroggSpec): Kit {
   };
 }
 
-/** CROGG 4 pieces: inside 262 × 70 × 78 mm (flat 570 × 327) + sleeve 264 × 480 mm. */
-const crogg4 = croggKit({ pieces: 4, L: 262, D: 70, H: 78, dust: [25, 10, 6], tabs: [14, 28], sleeveW: 264, panel: 50 });
-/** CROGG 6 pieces (2 rows × 3): inside 198 × 134 × 78 mm (flat 506 × 455) + sleeve 200 × 596 mm. */
-const crogg6 = croggKit({ pieces: 6, L: 198, D: 134, H: 78, dust: [29, 12, 8], tabs: [20, 34], sleeveW: 200, panel: 76 });
+/** CROGG 3 pieces: inside 197 × 70 × 72 mm (flat 481 × 325) + sleeve 199 × 468 mm. */
+const crogg3 = croggKit({ pieces: 3, L: 197, D: 70, H: 72, dust: [25, 10, 6], tabs: [14, 28], sleeveW: 199, panel: 50 });
+/** CROGG 4 pieces: inside 262 × 70 × 72 mm (flat 546 × 325) + sleeve 264 × 468 mm. */
+const crogg4 = croggKit({ pieces: 4, L: 262, D: 70, H: 72, dust: [25, 10, 6], tabs: [14, 28], sleeveW: 264, panel: 50 });
+/** CROGG 6 pieces (2 rows × 3): inside 198 × 134 × 72 mm (flat 482 × 453) + sleeve 200 × 584 mm. */
+const crogg6 = croggKit({ pieces: 6, L: 198, D: 134, H: 72, dust: [29, 12, 8], tabs: [20, 34], sleeveW: 200, panel: 76 });
 
-export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox, crogg4, crogg6 };
+export const FOLD_KITS: Record<string, Kit> = { honeycake, orangebox, crogg3, crogg4, crogg6 };
 
 const T = {
   ar: { loading: "جارٍ تجهيز النموذج…", failed: "تعذّر تحميل النموذج.", noWebgl: "يحتاج العرض ثلاثي الأبعاد إلى WebGL، وهو معطّل في هذا المتصفح.", play: "تشغيل التجميع", pause: "إيقاف", open: "فتح العلبة", reset: "فرد", withSleeve: "مع السليف", boxOnly: "العلبة فقط", angle: "مائلة", top: "من أعلى", front: "من الأمام", stage: "مرحلة التجميع", prev: "الخطوة السابقة", next: "الخطوة التالية", hint: "اسحب للتدوير · كبّر بالعجلة أو بإصبعين" },
